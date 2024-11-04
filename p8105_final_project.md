@@ -15,8 +15,19 @@ authors can also help explore cultural trends that resonate with the
 general public while identifying lesser-read genres to create
 opportunities for re-engagement.
 
-**The intended final products**: Website with: About Analysis Dashboard
-Report – Hypothesis Testing Results Recommendations page
+**The intended final products**:
+
+A Website with:
+
+- About
+
+- Analysis
+
+- Dashboard
+
+- Report – Hypothesis Testing Results
+
+- Recommendations page
 
 **The anticipated data sources**: We plan to use open source data from
 GoodReads: (<https://github.com/zygmuntz/goodbooks-10k>)
