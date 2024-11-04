@@ -1,0 +1,18 @@
+P8105 Final Project
+================
+
+Authors: Jasmin Martinez (jrm2319), Samiha Reza (sr4081), Kamiah Brown
+(kab2310), Erynne Jackson (ej2520), Elliot Kim (ek3376)
+
+**The motivation for this project**: For this project, we would like to
+better understand reader’s genre and author preferences in the United
+States. By identifying which genres and authors are most and less read,
+as well as frequently kept/unkept, we can gain insights into trends of
+literary engagement. This information could provide publishers, authors,
+and libraries insight into tailoring their offerings to meet reader’s
+demand and promoting less-read genres. Understanding popular genres and
+authors can also help explore cultural trends that resonate with the
+general public while identifying lesser-read genres to create
+opportunities for re-engagement.
+
+example
