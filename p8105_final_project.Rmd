@@ -1,0 +1,13 @@
+--- 
+title: "P8105 Final Project"
+output: github_document
+Name: Jasmin Martinez (jrm2319), Samiha Reza (sr4081), Kamiah Brown (kab2310), Erynne Jackson (ej2520), Elliot Kim (ek3376)
+Date: 11/04/24
+---
+
+example
+```{r}
+
+
+```
+
