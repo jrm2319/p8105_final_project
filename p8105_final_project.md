@@ -15,4 +15,17 @@ authors can also help explore cultural trends that resonate with the
 general public while identifying lesser-read genres to create
 opportunities for re-engagement.
 
-example
+**The intended final products**: Website with: About Analysis Dashboard
+Report – Hypothesis Testing Results Recommendations page
+
+**The anticipated data sources**: We plan to use open source data from
+GoodReads: (<https://github.com/zygmuntz/goodbooks-10k>)
+
+**The planned analyses/visualizations/ coding challenges**: Planned
+analyses include finding the most read/least read/most to-be-read
+genres, and statistics on the top ten users. Planned visualization on
+types of books, timelines for reading and adding books, book ratings,
+and top ten users. We will use analyses and visualizations to create a
+data-based recommendation list.
+
+test
