@@ -4,6 +4,8 @@ P8105 Final Project
 Authors: Jasmin Martinez (jrm2319), Samiha Reza (sr4081), Kamiah Brown
 (kab2310), Erynne Jackson (ej2520), Elliot Kim (ek3376)
 
+**The tentative project Title**: To Be Read or Not To Be Read
+
 **The motivation for this project**: For this project, we would like to
 better understand reader’s genre and author preferences in the United
 States. By identifying which genres and authors are most and less read,
