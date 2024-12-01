@@ -1,0 +1,22 @@
+---
+title: "DATA"
+author: "Erynne Jackson"
+date: "2024-12-01"
+output: github_document
+---
+
+```{r}
+
+library(readxl)
+library(tidyverse)
+library(readr)
+
+```
+
+```{r}
+
+url = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/books.csv"
+books = read_csv(url)
+
+view(books)
+```
