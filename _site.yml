@@ -14,7 +14,7 @@ navbar:
     - text: "Recommendations page"
       href: reccomendations.html
       menu:  
-    -menu: # Create a dropdown menu for this tab
+    menu: # Create a dropdown menu for this tab
         - text: "Most Read Authors"
           href: most_read_authors.html
         - text: "Least Read Authors"
