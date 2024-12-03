@@ -13,8 +13,7 @@ navbar:
       href: report.html
     - text: "Recommendations page"
       href: reccomendations.html
-      menu:  
-    menu:
+     menu: 
         - text: "Most Read Authors"
           href: most_read_authors.html
         - text: "Least Read Authors"
