@@ -23,15 +23,6 @@ summary(books)
 
 ## Summarizing Read Counts by Author 
 
-```{r pressure, echo=FALSE}
-author_summary <- books %>%
-  group_by(authors) %>%
-  summarize(
-    total_reads = sum(read_count, na.rm = TRUE),
-    num_books = n() 
-  ) %>%
-  arrange(desc(total_reads))
-
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
