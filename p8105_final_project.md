@@ -86,17 +86,6 @@ library(readr)
 library(dplyr)
 ```
 
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
 Import data (JM):
 
 ``` r
@@ -104,7 +93,7 @@ book_data = read_csv("Books.csv")
 ```
 
     ## Rows: 10000 Columns: 23
-    ## ── Column specification ────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────────────────────
     ## Delimiter: ","
     ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
     ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...

@@ -1,0 +1,27 @@
+name: "To Be Read or Not To Be Read"
+output_dir: "."
+navbar:
+  title: "Placeholder"
+  left:
+    - text: "About"
+      href: index.html
+    - text: "Analysis"
+      href: analysis.html
+    - text: "Dashboard"
+      href: dashboard.html 
+    - text: "Report – Hypothesis Testing Results"
+      href: index.html
+    - text: "Recommendations page"
+      href: reccomendations.html
+    - text: "Most to Less Read Authors"
+      href: authors.html 
+    - text: "Most to Less Read Genres"
+      href: genres.html 
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/jrm2319/p8105_final_project.git
+    - icon: fa-envelope fa-lg
+      href: mailto:kab2310@cumc.columbia.edu
+output:
+  html_document:
+    theme: cerulean
