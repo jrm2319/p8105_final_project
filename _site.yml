@@ -13,10 +13,18 @@ navbar:
       href: report.html
     - text: "Recommendations page"
       href: reccomendations.html
+      menu:  
+    -menu: # Create a dropdown menu for this tab
+        - text: "Most Read Authors"
+          href: most_read_authors.html
+        - text: "Least Read Authors"
+          href: least_read_authors.html
+        - text: "Popular Authors"
+          href: popular_authors.html
     - text: "Most to Less Read Authors"
-      href: authors.html 
+      href: authors.html
     - text: "Most to Less Read Genres"
-      href: genres.html 
+      href: genres.html
   right:
     - icon: fa-github fa-lg
       href: https://github.com/jrm2319/p8105_final_project.git
