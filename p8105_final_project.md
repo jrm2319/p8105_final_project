@@ -79,11 +79,27 @@ to create a data-based recommendation list.
 **Dec 7, 11:59pm**: Peer Assessment due  
 **Dec 12**:In-Class Discussion of Projects
 
-Import data (JM):
+Set Up (KB):
 
 ``` r
 library(readr)
+library(dplyr)
+```
 
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+Import data (JM):
+
+``` r
 book_data = read_csv("Books.csv")
 ```
 
@@ -117,21 +133,6 @@ head(book_data)
     ## #   small_image_url <chr>
 
 Remove unnecessary variables (JM):
-
-``` r
-library(dplyr)
-```
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
 
 ``` r
 book_data = book_data %>%
