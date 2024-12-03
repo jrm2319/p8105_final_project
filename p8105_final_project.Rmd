@@ -86,3 +86,7 @@ Dec 7, 11:59pm: Peer Assessment due
 
 Dec 12:In-Class Discussion of Projects
 >>>>>>> ab9939072c25f02221e024055d2a18dd5263eb2f
+```
+
+--- 
+library(readr)
