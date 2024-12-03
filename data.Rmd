@@ -73,6 +73,7 @@ Remove unnecessary variables (JM):
 ```{r}
 book_data = book_data %>%
   select(
+    book_id,
     goodreads_book_id,  
     isbn,                
     authors,             
