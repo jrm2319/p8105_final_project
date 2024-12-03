@@ -1,4 +1,4 @@
---- 
+---
 title: "P8105 Final Project"
 output: github_document
 date: "2024-11-04"
@@ -56,3 +56,54 @@ Planned analyses include finding the most read/least read/most to-be-read genres
 **Dec 7, 11:59pm**: Webpage and screencast due  
 **Dec 7, 11:59pm**: Peer Assessment due  
 **Dec 12**:In-Class Discussion of Projects
+
+Import data (JM): 
+```{r}
+library(readr)
+
+book_data = read_csv("Books.csv")
+head(book_data)
+```
+
+Remove unnecessary variables (JM): 
+```{r}
+library(dplyr)
+
+book_data = book_data %>%
+  select(
+    goodreads_book_id,  
+    isbn,                
+    authors,             
+    title,               
+    average_rating,      
+    ratings_count,       
+    work_ratings_count,  
+    work_text_reviews_count, 
+    ratings_1,           
+    ratings_2,           
+    ratings_3,           
+    ratings_4,           
+    ratings_5            
+  )
+```
+
+Check for missing (JM): 
+```{r}
+missing_summary = book_data %>%
+  summarise(across(everything(), ~ sum(is.na(.)), .names = "missing_{.col}"))
+
+print(missing_summary)
+```
+There are 700 entries missing from the 'missing_isbn' variable. 
+
+Removing missing values (JM): 
+```{r}
+book_data_complete = book_data %>%
+  filter(!is.na(isbn))
+```
+
+Creating new csv file for use (JM): 
+```{r}
+write.csv(book_data_complete, "book_data_complete.csv", row.names = FALSE)
+```
+

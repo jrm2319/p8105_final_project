@@ -78,3 +78,110 @@ to create a data-based recommendation list.
 **Dec 7, 11:59pm**: Webpage and screencast due  
 **Dec 7, 11:59pm**: Peer Assessment due  
 **Dec 12**:In-Class Discussion of Projects
+
+Import data (JM):
+
+``` r
+library(readr)
+
+book_data = read_csv("Books.csv")
+```
+
+    ## Rows: 10000 Columns: 23
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
+    ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+head(book_data)
+```
+
+    ## # A tibble: 6 × 23
+    ##   book_id goodreads_book_id best_book_id  work_id books_count isbn        isbn13
+    ##     <dbl>             <dbl>        <dbl>    <dbl>       <dbl> <chr>        <dbl>
+    ## 1       1           2767052      2767052  2792775         272 439023483  9.78e12
+    ## 2       2                 3            3  4640799         491 439554934  9.78e12
+    ## 3       3             41865        41865  3212258         226 316015849  9.78e12
+    ## 4       4              2657         2657  3275794         487 61120081   9.78e12
+    ## 5       5              4671         4671   245494        1356 743273567  9.78e12
+    ## 6       6          11870085     11870085 16827462         226 525478817  9.78e12
+    ## # ℹ 16 more variables: authors <chr>, original_publication_year <dbl>,
+    ## #   original_title <chr>, title <chr>, language_code <chr>,
+    ## #   average_rating <dbl>, ratings_count <dbl>, work_ratings_count <dbl>,
+    ## #   work_text_reviews_count <dbl>, ratings_1 <dbl>, ratings_2 <dbl>,
+    ## #   ratings_3 <dbl>, ratings_4 <dbl>, ratings_5 <dbl>, image_url <chr>,
+    ## #   small_image_url <chr>
+
+Remove unnecessary variables (JM):
+
+``` r
+library(dplyr)
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
+book_data = book_data %>%
+  select(
+    goodreads_book_id,  
+    isbn,                
+    authors,             
+    title,               
+    average_rating,      
+    ratings_count,       
+    work_ratings_count,  
+    work_text_reviews_count, 
+    ratings_1,           
+    ratings_2,           
+    ratings_3,           
+    ratings_4,           
+    ratings_5            
+  )
+```
+
+Check for missing (JM):
+
+``` r
+missing_summary = book_data %>%
+  summarise(across(everything(), ~ sum(is.na(.)), .names = "missing_{.col}"))
+
+print(missing_summary)
+```
+
+    ## # A tibble: 1 × 13
+    ##   missing_goodreads_book_id missing_isbn missing_authors missing_title
+    ##                       <int>        <int>           <int>         <int>
+    ## 1                         0          700               0             0
+    ## # ℹ 9 more variables: missing_average_rating <int>,
+    ## #   missing_ratings_count <int>, missing_work_ratings_count <int>,
+    ## #   missing_work_text_reviews_count <int>, missing_ratings_1 <int>,
+    ## #   missing_ratings_2 <int>, missing_ratings_3 <int>, missing_ratings_4 <int>,
+    ## #   missing_ratings_5 <int>
+
+There are 700 entries missing from the ‘missing_isbn’ variable.
+
+Removing missing values (JM):
+
+``` r
+book_data_complete = book_data %>%
+  filter(!is.na(isbn))
+```
+
+Creating new csv file for use (JM):
+
+``` r
+write.csv(book_data_complete, "book_data_complete.csv", row.names = FALSE)
+```
