@@ -38,8 +38,15 @@ avg_rat <-top_ratings %>%
 
 top_users <- left_join(top_user_ids_rat, avg_rat, by = c("user_id"))
 
-top_ratings_genres <- semi_join(top_ratings, books_with_tags, by = c("book_id")) %>%
-  select(book_id, user_id, rating, title, average_rating, top_1, top_2, top_3, top_4, top_5)
+top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id")) %>%
+  group_by(user_id) %>% 
+  pivot_longer(cols = starts_with("top"),
+               names_to = "tag_type",
+              values_to = "tag") %>%
+  group_by(user_id, tag) %>%
+  summarise(tag_count = n(), .groups = "drop") %>%
+  arrange(user_id,tag_count) %>%
+  filter(!tag %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club"))
 ```
 
 ```{r to_read_users}
