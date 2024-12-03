@@ -10,5 +10,19 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-top_users <- ratings
+users_ratings <- ratings %>%
+  group_by(user_id) %>%
+  summarize(total_ratings = n(), .groups = 'drop') %>%
+  arrange(desc(total_ratings))
 
+
+top_users_ratings <- users_ratings %>%
+    head(50)
+
+to_read_counts <- to_read %>%
+  group_by(user_id) %>%
+  summarize(total_to_read = n(), .groups = 'drop') %>%
+  arrange(desc(total_to_read))
+
+total_ratings_info <- left_join(users_ratings, to_read_counts, by = c("user_id"))
+```

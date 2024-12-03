@@ -118,6 +118,7 @@ merged_tags =
   arrange(desc(count)) %>%
   slice_head(n = 5) %>%
   ungroup()
+  
 
 pivoted_data <- merged_tags %>%
   mutate(rank = row_number(), .by = goodreads_book_id) %>% # Add rank for top tags
