@@ -11,7 +11,7 @@ navbar:
       href: dashboard.html
     - text: "Report – Hypothesis Testing Results"
       href: report.html
-    - text: "Recommendations page"
+    - text: "Authors"
       menu:
         - text: "Most Read Authors"
           href: most_read_authors.html
@@ -19,8 +19,8 @@ navbar:
           href: least_read_authors.html
         - text: "Popular Authors"
           href: popular_authors.html
-    - text: "Most to Less Read Authors"
-      href: authors.html
+    - text: "Reccomendations"
+      href: reccomendations.html
     - text: "Most to Less Read Genres"
       href: genres.html
   right:
