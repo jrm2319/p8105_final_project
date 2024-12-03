@@ -8,12 +8,11 @@ navbar:
     - text: "Analysis"
       href: analysis.html
     - text: "Dashboard"
-      href: dashboard.html 
+      href: dashboard.html
     - text: "Report – Hypothesis Testing Results"
       href: report.html
     - text: "Recommendations page"
-      href: reccomendations.html
-     menu: 
+      menu:
         - text: "Most Read Authors"
           href: most_read_authors.html
         - text: "Least Read Authors"
@@ -26,7 +25,7 @@ navbar:
       href: genres.html
   right:
     - icon: fa-github fa-lg
-      href: https://github.com/jrm2319/p8105_final_project.io.git 
+      href: https://github.com/jrm2319/p8105_final_project.io.git
     - icon: fa-envelope fa-lg
       href: mailto:kab2310@cumc.columbia.edu
 output:
