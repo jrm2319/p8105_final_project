@@ -40,10 +40,19 @@ book_tag = read_csv(url3)
 view(book_tag)
 ```
 
+
+Cleaning the Tags file. 
+```{r}
+
+url4 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/tags.csv"
+tags = read_csv(url4)
+
+```
+
 Cleaning the To Read file. 
 ```{r}
-url4 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv"
-to_read = read_csv(url4)
+url5 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv"
+to_read = read_csv(url5)
 
 view(to_read)
 

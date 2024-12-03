@@ -81,11 +81,27 @@ book_tag = read_csv(url3)
 view(book_tag)
 ```
 
+Cleaning the Tags file.
+
+``` r
+url4 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/tags.csv"
+tags = read_csv(url4)
+```
+
+    ## Rows: 34252 Columns: 2
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (1): tag_name
+    ## dbl (1): tag_id
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
 Cleaning the To Read file.
 
 ``` r
-url4 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv"
-to_read = read_csv(url4)
+url5 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv"
+to_read = read_csv(url5)
 ```
 
     ## Rows: 912705 Columns: 2
