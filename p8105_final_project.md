@@ -156,20 +156,18 @@ Check for missing (JM):
 
 ``` r
 missing_summary = book_data %>%
-  summarise(across(everything(), ~ sum(is.na(.)), .names = "missing_{.col}"))
+  summarise(across(everything(), ~ sum(is.na(.)), .names = "{.col}"))
 
 print(missing_summary)
 ```
 
     ## # A tibble: 1 × 13
-    ##   missing_goodreads_book_id missing_isbn missing_authors missing_title
-    ##                       <int>        <int>           <int>         <int>
-    ## 1                         0          700               0             0
-    ## # ℹ 9 more variables: missing_average_rating <int>,
-    ## #   missing_ratings_count <int>, missing_work_ratings_count <int>,
-    ## #   missing_work_text_reviews_count <int>, missing_ratings_1 <int>,
-    ## #   missing_ratings_2 <int>, missing_ratings_3 <int>, missing_ratings_4 <int>,
-    ## #   missing_ratings_5 <int>
+    ##   goodreads_book_id  isbn authors title average_rating ratings_count
+    ##               <int> <int>   <int> <int>          <int>         <int>
+    ## 1                 0   700       0     0              0             0
+    ## # ℹ 7 more variables: work_ratings_count <int>, work_text_reviews_count <int>,
+    ## #   ratings_1 <int>, ratings_2 <int>, ratings_3 <int>, ratings_4 <int>,
+    ## #   ratings_5 <int>
 
 There are 700 entries missing from the ‘missing_isbn’ variable.
 

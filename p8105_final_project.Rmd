@@ -90,7 +90,7 @@ book_data = book_data %>%
 Check for missing (JM): 
 ```{r}
 missing_summary = book_data %>%
-  summarise(across(everything(), ~ sum(is.na(.)), .names = "missing_{.col}"))
+  summarise(across(everything(), ~ sum(is.na(.)), .names = "{.col}"))
 
 print(missing_summary)
 ```
