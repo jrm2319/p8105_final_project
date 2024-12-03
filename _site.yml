@@ -10,7 +10,7 @@ navbar:
     - text: "Dashboard"
       href: dashboard.html 
     - text: "Report – Hypothesis Testing Results"
-      href: index.html
+      href: report.html
     - text: "Recommendations page"
       href: reccomendations.html
     - text: "Most to Less Read Authors"
