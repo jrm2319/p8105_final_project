@@ -30,4 +30,4 @@ navbar:
       href: mailto:kab2310@cumc.columbia.edu
 output:
   html_document:
-    theme: cerulean
+    theme: red
