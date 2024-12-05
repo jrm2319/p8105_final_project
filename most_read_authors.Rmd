@@ -19,7 +19,7 @@ library(ggplot2)
 books <- read.csv("books.csv")
 ```
 
-## Summarizing Read Counts by Author 
+### Summarizing Read Counts by Author 
 ```{r most read authors}
 most_read_authors <- books %>%
   group_by(authors) %>%

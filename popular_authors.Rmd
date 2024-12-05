@@ -19,7 +19,7 @@ library(ggplot2)
 books <- read.csv("books.csv")
 ```
 
-## Summarizing Read Counts by Author 
+### Summarizing Read Counts by Author 
 ```{r most read authors}
 most_read_authors <- books %>%
   group_by(authors) %>%
@@ -32,7 +32,7 @@ most_read_authors <- books %>%
   ) %>%
   head(10) #
 ```
-## Displaying  Popular Authors
+### Displaying  Popular Authors
 ```{r Dislaying Popular Authors}
 ggplot(most_read_authors, aes(x = reorder(authors, -percentage), y = percentage)) +
   geom_bar(stat = "identity", fill = "steelblue") +

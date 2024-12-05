@@ -310,9 +310,8 @@ $(document).ready(function () {
 
 <div id="data-import" class="section level2">
 <h2>Data Import</h2>
-</div>
-<div id="summarizing-read-counts-by-author" class="section level2">
-<h2>Summarizing Read Counts by Author</h2>
+<div id="summarizing-read-counts-by-author" class="section level3">
+<h3>Summarizing Read Counts by Author</h3>
 <pre class="r"><code>most_read_authors &lt;- books %&gt;%
   group_by(authors) %&gt;%
   summarize(
@@ -324,8 +323,8 @@ $(document).ready(function () {
   ) %&gt;%
   head(10) #</code></pre>
 </div>
-<div id="displaying-popular-authors" class="section level2">
-<h2>Displaying Popular Authors</h2>
+<div id="displaying-popular-authors" class="section level3">
+<h3>Displaying Popular Authors</h3>
 <pre class="r"><code>ggplot(most_read_authors, aes(x = reorder(authors, -percentage), y = percentage)) +
   geom_bar(stat = &quot;identity&quot;, fill = &quot;steelblue&quot;) +
   geom_text(aes(label = sprintf(&quot;%.1f%%&quot;, percentage)), vjust = -0.5, size = 4) + # Add percentage labels
@@ -344,6 +343,7 @@ $(document).ready(function () {
   scale_y_continuous(labels = scales::percent_format(scale = 1)) # Format Y-axis as percentage</code></pre>
 <p><img src="popular_authors_files/figure-html/Dislaying%20Popular%20Authors-1.png" width="672" /></p>
 <p>The top 10 most read</p>
+</div>
 </div>
 
 

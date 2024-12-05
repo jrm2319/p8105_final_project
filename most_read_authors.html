@@ -310,9 +310,8 @@ $(document).ready(function () {
 
 <div id="data-import" class="section level2">
 <h2>Data Import</h2>
-</div>
-<div id="summarizing-read-counts-by-author" class="section level2">
-<h2>Summarizing Read Counts by Author</h2>
+<div id="summarizing-read-counts-by-author" class="section level3">
+<h3>Summarizing Read Counts by Author</h3>
 <pre class="r"><code>most_read_authors &lt;- books %&gt;%
   group_by(authors) %&gt;%
   summarize(
@@ -358,6 +357,7 @@ head(most_read_authors, 50)</code></pre>
 <p>Note that the <code>echo = FALSE</code> parameter was added to the
 code chunk to prevent printing of the R code that generated the
 plot.</p>
+</div>
 </div>
 
 
