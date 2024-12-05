@@ -315,10 +315,10 @@ $(document).ready(function () {
 <pre class="r"><code>least_read_authors &lt;- books %&gt;%
   group_by(authors) %&gt;%
   summarize(
-    total_ratings = sum(work_ratings_count, na.rm = TRUE), # Summing ratings for each author
-    num_books = n() # Counting the number of books per author
+    total_ratings = sum(work_ratings_count, na.rm = TRUE), 
+    num_books = n() 
   ) %&gt;%
-  arrange(total_ratings) # Arrange in ascending order</code></pre>
+  arrange(total_ratings) </code></pre>
 </div>
 <div id="displaying-top-10-least-read-authors" class="section level3">
 <h3>Displaying Top 10 Least Read Authors</h3>
@@ -329,14 +329,14 @@ $(document).ready(function () {
     x = &quot;Total Ratings Count&quot;,
     y = &quot;Authors&quot;
   ) +
-  scale_fill_gradient(low = &quot;red&quot;, high = &quot;darkred&quot;) + # Gradient color for least read
+  scale_fill_gradient(low = &quot;red&quot;, high = &quot;darkred&quot;) +
   theme_minimal() +
   theme(
-    plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5), # Center and bold title
-    axis.text.y = element_text(size = 10), # Adjust font size for 10 authors
+    plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5),  
+    axis.text.y = element_text(size = 10),
     axis.text.x = element_text(size = 12),
-    axis.title = element_text(size = 14, face = &quot;bold&quot;), # Bold axis labels
-    panel.grid.major.y = element_blank() # Remove y-axis gridlines
+    axis.title = element_text(size = 14, face = &quot;bold&quot;), 
+    panel.grid.major.y = element_blank() 
   ) +
   scale_x_continuous(labels = scales::comma)</code></pre>
 <p><img src="least_read_authors_files/figure-html/Dislaying%20Top%2010%20Least%20Read%20Authors-1.png" width="672" /></p>
