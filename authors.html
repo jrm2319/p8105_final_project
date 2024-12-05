@@ -390,10 +390,47 @@ str(books)</code></pre>
 ## </code></pre>
 <div id="summarizing-read-counts-by-author" class="section level2">
 <h2>Summarizing Read Counts by Author</h2>
-<p>```</p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the
-code chunk to prevent printing of the R code that generated the
-plot.</p>
+<pre class="r"><code>most_read_authors &lt;- books %&gt;%
+  group_by(authors) %&gt;%
+  summarize(
+    total_ratings = sum(work_ratings_count, na.rm = TRUE), 
+    num_books = n() #Count the number of books per author
+  ) %&gt;%
+  arrange(desc(total_ratings))
+
+head(most_read_authors, 50)</code></pre>
+<pre><code>## # A tibble: 50 × 3
+##    authors                     total_ratings num_books
+##    &lt;chr&gt;                               &lt;int&gt;     &lt;int&gt;
+##  1 J.K. Rowling, Mary GrandPré      14126791         8
+##  2 Suzanne Collins                   9161124         9
+##  3 Stephenie Meyer                   8631937        11
+##  4 Stephen King                      7297834        60
+##  5 Rick Riordan                      5717999        22
+##  6 J.R.R. Tolkien                    5602790         6
+##  7 Dan Brown                         5332589         7
+##  8 Cassandra Clare                   4631019        13
+##  9 Nicholas Sparks                   4501871        19
+## 10 John Green                        4312589         4
+## # ℹ 40 more rows</code></pre>
+<pre class="r"><code>ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
+  geom_bar(stat = &quot;identity&quot;, aes(fill = total_ratings), show.legend = FALSE) +
+  labs(
+    title = &quot;Top 10 Most Read Authors&quot;,
+    x = &quot;Total Ratings Count&quot;,
+    y = &quot;Authors&quot;
+  ) +
+  scale_fill_gradient(low = &quot;skyblue&quot;, high = &quot;steelblue&quot;) + # Gradient color
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5), # Center and bold title
+    axis.text.y = element_text(size = 10), # Adjust font size for 10 authors
+    axis.text.x = element_text(size = 12),
+    axis.title = element_text(size = 14, face = &quot;bold&quot;), # Bold axis labels
+    panel.grid.major.y = element_blank() # Remove y-axis gridlines
+  ) +
+  scale_x_continuous(labels = scales::comma)</code></pre>
+<p><img src="authors_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 
 

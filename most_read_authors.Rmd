@@ -1,30 +1,56 @@
 ---
-title: "most_read_authors"
-author: "Kamiah Brown"
-date: "2024-12-03"
+title: "Most Read Authors"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(plotly)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(janitor)
+library(ggplot2)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+## Data Import
+```{r books, echo=FALSE}
+#Read CSV file 
+books <- read.csv("books.csv")
 ```
 
-## Including Plots
+## Summarizing Read Counts by Author 
+```{r most read authors}
+most_read_authors <- books %>%
+  group_by(authors) %>%
+  summarize(
+    total_ratings = sum(work_ratings_count, na.rm = TRUE), 
+    num_books = n() #Counting the number of books per author
+  ) %>%
+  arrange(desc(total_ratings))
 
-You can also embed plots, for example:
+head(most_read_authors, 50)
+```
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r Dislaying Top 10 Most Read Authors}
+ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
+  geom_bar(stat = "identity", aes(fill = total_ratings), show.legend = FALSE) +
+  labs(
+    title = "Top 10 Most Read Authors",
+    x = "Total Ratings Count",
+    y = "Authors"
+  ) +
+  scale_fill_gradient(low = "skyblue", high = "steelblue") + # Gradient color
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), # Center and bold title
+    axis.text.y = element_text(size = 10), # Adjust font size for 10 authors
+    axis.text.x = element_text(size = 12),
+    axis.title = element_text(size = 14, face = "bold"), # Bold axis labels
+    panel.grid.major.y = element_blank() # Remove y-axis gridlines
+  ) +
+  scale_x_continuous(labels = scales::comma)
+```
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

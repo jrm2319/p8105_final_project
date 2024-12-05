@@ -12,6 +12,7 @@ library(dplyr)
 library(tidyr)
 library(lubridate)
 library(janitor)
+library(ggplot2)
 ```
 
 ```{r books}
@@ -22,7 +23,35 @@ summary(books)
 ```
 
 ## Summarizing Read Counts by Author 
+```{r}
+most_read_authors <- books %>%
+  group_by(authors) %>%
+  summarize(
+    total_ratings = sum(work_ratings_count, na.rm = TRUE), 
+    num_books = n() #Count the number of books per author
+  ) %>%
+  arrange(desc(total_ratings))
 
+head(most_read_authors, 50)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
+  geom_bar(stat = "identity", aes(fill = total_ratings), show.legend = FALSE) +
+  labs(
+    title = "Top 10 Most Read Authors",
+    x = "Total Ratings Count",
+    y = "Authors"
+  ) +
+  scale_fill_gradient(low = "skyblue", high = "steelblue") + # Gradient color
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), # Center and bold title
+    axis.text.y = element_text(size = 10), # Adjust font size for 10 authors
+    axis.text.x = element_text(size = 12),
+    axis.title = element_text(size = 14, face = "bold"), # Bold axis labels
+    panel.grid.major.y = element_blank() # Remove y-axis gridlines
+  ) +
+  scale_x_continuous(labels = scales::comma)
+```
+
