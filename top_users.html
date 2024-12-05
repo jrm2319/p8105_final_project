@@ -15,7 +15,7 @@
 
 <title>top_users</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -34,6 +34,14 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -242,7 +250,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Placeholder</a>
+      <a class="navbar-brand" href="index.html">To Be Read or Not To Be Read</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -324,27 +332,10 @@ to_read_counts &lt;- to_read %&gt;%
   arrange(desc(total_to_read))
 
 total_ratings_info &lt;- left_join(users_ratings, to_read_counts, by = c(&quot;user_id&quot;))</code></pre>
-<pre class="r"><code>top_user_ids_rat &lt;- users_ratings %&gt;%
-  head(15)
-
-top_ratings &lt;- semi_join(ratings, top_user_ids_rat, by = c(&quot;user_id&quot;))
-# Things to do: Look at average rating for top 15 users, look at most common genres rated for each user (use pie chart)
-
-avg_rat &lt;-top_ratings %&gt;%
-  group_by(user_id) %&gt;%  
-  summarize(avg_rating = mean(rating, na.rm = TRUE))
-
-top_users &lt;- left_join(top_user_ids_rat, avg_rat, by = c(&quot;user_id&quot;))
-
-top_ratings_genres &lt;- left_join(top_ratings, books_with_tags, by = c(&quot;book_id&quot;)) %&gt;%
-  group_by(user_id) %&gt;% 
-  pivot_longer(cols = starts_with(&quot;top&quot;),
-               names_to = &quot;tag_type&quot;,
-              values_to = &quot;tag&quot;) %&gt;%
-  group_by(user_id, tag) %&gt;%
-  summarise(tag_count = n(), .groups = &quot;drop&quot;) %&gt;%
-  arrange(user_id,tag_count) %&gt;%
-  filter(!tag %in% c(&quot;owned&quot;, &quot;to-read&quot;, &quot;favorites&quot;, &quot;owned&quot;, &quot;books-i-own&quot;, &quot;currently-reading&quot;, &quot;library&quot;, &quot;owned-books&quot;, &quot;to-buy&quot;, &quot;kindle&quot;, &quot;default&quot;, &quot;ebook&quot;, &quot;audiobook&quot;, &quot;ebooks&quot;, &quot;wish-list&quot;, &quot;my-library&quot;, &quot;audiobooks&quot;, &quot;i-own&quot;, &quot;book-club&quot;))</code></pre>
+<pre class="r"><code>genres_count %&gt;%
+  plot_ly(labels = ~tag, values = ~n, type = &quot;pie&quot;, colors = &quot;viridis&quot;)</code></pre>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-97156dbbe252d7af931e" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-97156dbbe252d7af931e">{"x":{"visdat":{"637e60e327d5":["function () ","plotlyVisDat"]},"cur_data":"637e60e327d5","attrs":{"637e60e327d5":{"labels":{},"values":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["childrens","classic","classics","fantasy","fiction","historical-fiction","horror","humor","mystery","non-fiction","nonfiction","science-fiction","young-adult"],"values":[4,6,14,8,15,9,1,1,2,6,1,2,6],"type":"pie","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(255,255,255,1)"}},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code># Things to do: look at most common genres for each of the top 15 users (use pie chart?), common to_read books among top 50 users</code></pre>
 
 

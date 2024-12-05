@@ -132,4 +132,6 @@ pivoted_data <- merged_tags %>%
 
 
 books_with_tags <- left_join(book_data_complete, pivoted_data, by = c("goodreads_book_id"))
+
+write.csv(books_with_tags, "books_with_tags.csv", row.names = FALSE)
 ```

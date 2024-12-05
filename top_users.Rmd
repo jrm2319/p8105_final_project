@@ -8,6 +8,12 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
+library(plotly)
+library(readr)
+library(tidyverse)
+ratings <- read_csv("./ratings.csv")
+to_read <- read_csv("./to_read.csv")
+books_with_tags <- read_csv("./books_with_tags.csv")
 ```
 
 ```{r data_1}
@@ -25,7 +31,7 @@ to_read_counts <- to_read %>%
 total_ratings_info <- left_join(users_ratings, to_read_counts, by = c("user_id"))
 ```
 
-```{r ratings_users}
+```{r ratings_users, echo = FALSE}
 
 top_user_ids_rat <- users_ratings %>%
   head(15)
@@ -46,15 +52,24 @@ top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id"))
               values_to = "tag") %>%
   group_by(user_id, tag) %>%
   summarise(tag_count = n(), .groups = "drop") %>%
-  filter(!tag %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club")) %>%
+  filter(!tag %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club", "discworld")) %>%
     group_by(user_id) %>%
+    drop_na(tag) %>%
     slice_max(order_by = tag_count, n = 5, with_ties = FALSE) %>%
   ungroup()
 
-genre_counts <- top_ratings_genres %>%
+genres_count <- top_ratings_genres %>%
   count(tag)
   
+
 ```
+
+```{r plot}
+genres_count %>%
+  plot_ly(labels = ~tag, values = ~n, type = "pie", colors = "viridis")
+  
+```
+
 
 ```{r to_read_users}
 # Things to do: look at most common genres for each of the top 15 users (use pie chart?), common to_read books among top 50 users
