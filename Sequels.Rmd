@@ -18,7 +18,7 @@ library(broom)
 ```
 ### Load and clean the datasets
 ```{r}
-sequel = read_csv("./data/book_data_complete copy.csv")
+sequel = read.csv("book_data_complete.csv")
 
 sequel_data <- sequel |>
   mutate(series = str_extract(title, "\\(.*\\)"), 
