@@ -335,6 +335,9 @@ head(most_read_authors, 50)</code></pre>
 ##  9 Nicholas Sparks                   4501871        19
 ## 10 John Green                        4312589         4
 ## # ℹ 40 more rows</code></pre>
+</div>
+<div id="displaying-top-10-most-read-authors" class="section level3">
+<h3>Displaying Top 10 Most Read Authors</h3>
 <pre class="r"><code>ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = &quot;identity&quot;, aes(fill = total_ratings), show.legend = FALSE) +
   labs(

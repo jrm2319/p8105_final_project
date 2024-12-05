@@ -32,6 +32,7 @@ most_read_authors <- books %>%
 head(most_read_authors, 50)
 ```
 
+### Displaying  Top 10 Most Read Authors
 ```{r Dislaying Top 10 Most Read Authors}
 ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = "identity", aes(fill = total_ratings), show.legend = FALSE) +
