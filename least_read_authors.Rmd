@@ -1,7 +1,5 @@
 ---
-title: "least_read_authors"
-author: "Kamiah Brown"
-date: "2024-12-03"
+title: "Least Read Authors"
 output: html_document
 ---
 
