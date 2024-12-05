@@ -32,6 +32,7 @@ most_read_authors <- books %>%
   ) %>%
   head(10) #
 ```
+
 ### Displaying  Popular Authors
 ```{r Dislaying Popular Authors}
 ggplot(most_read_authors, aes(x = reorder(authors, -percentage), y = percentage)) +
