@@ -17,7 +17,7 @@ books = read_csv(url)
 ```
 
     ## Rows: 10000 Columns: 23
-    ## ── Column specification ────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
     ## Delimiter: ","
     ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
     ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
@@ -37,7 +37,7 @@ ratings = read_csv(url2)
 ```
 
     ## Rows: 5976479 Columns: 3
-    ## ── Column specification ────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
     ## Delimiter: ","
     ## dbl (3): user_id, book_id, rating
     ## 
@@ -56,7 +56,7 @@ book_tag = read_csv(url3)
 ```
 
     ## Rows: 999912 Columns: 3
-    ## ── Column specification ────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
     ## Delimiter: ","
     ## dbl (3): goodreads_book_id, tag_id, count
     ## 
@@ -75,7 +75,7 @@ tags = read_csv(url4)
 ```
 
     ## Rows: 34252 Columns: 2
-    ## ── Column specification ────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
     ## Delimiter: ","
     ## chr (1): tag_name
     ## dbl (1): tag_id
@@ -91,7 +91,7 @@ to_read = read_csv(url5)
 ```
 
     ## Rows: 912705 Columns: 2
-    ## ── Column specification ────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
     ## Delimiter: ","
     ## dbl (2): user_id, book_id
     ## 
@@ -116,7 +116,7 @@ book_data = read_csv("Books.csv")
 ```
 
     ## Rows: 10000 Columns: 23
-    ## ── Column specification ────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
     ## Delimiter: ","
     ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
     ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...

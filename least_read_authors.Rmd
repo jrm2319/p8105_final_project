@@ -30,6 +30,7 @@ least_read_authors <- books %>%
   arrange(total_ratings) # Arrange in ascending order
 
 ```
+
 ### Displaying Top 10 Least Read Authors
 ```{r Dislaying Top 10 Least Read Authors}
 ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
@@ -39,7 +40,7 @@ ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors,
     x = "Total Ratings Count",
     y = "Authors"
   ) +
-  scale_fill_gradient(low = "lightblue", high = "darkblue") + # Gradient color for least read
+  scale_fill_gradient(low = "red", high = "darkred") + # Gradient color for least read
   theme_minimal() +
   theme(
     plot.title = element_text(size = 16, face = "bold", hjust = 0.5), # Center and bold title
@@ -50,7 +51,5 @@ ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors,
   ) +
   scale_x_continuous(labels = scales::comma)
 ```
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
