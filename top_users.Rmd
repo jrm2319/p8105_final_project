@@ -1,5 +1,5 @@
 ---
-title: "top_users"
+title: "Top Users By Ratings"
 author: "Samiha Reza"
 date: "2024-12-03"
 output: html_document
@@ -22,13 +22,6 @@ users_ratings <- ratings %>%
   summarize(total_ratings = n(), .groups = 'drop') %>%
   arrange(desc(total_ratings))
 
-
-to_read_counts <- to_read %>%
-  group_by(user_id) %>%
-  summarize(total_to_read = n(), .groups = 'drop') %>%
-  arrange(desc(total_to_read))
-
-total_ratings_info <- left_join(users_ratings, to_read_counts, by = c("user_id"))
 ```
 
 ```{r ratings_users, echo = FALSE}
@@ -70,8 +63,3 @@ genres_count %>%
   
 ```
 
-
-```{r to_read_users}
-# Things to do: look at most common genres for each of the top 15 users (use pie chart?), common to_read books among top 50 users
-
-```
