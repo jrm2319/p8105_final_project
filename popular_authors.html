@@ -326,7 +326,7 @@ $(document).ready(function () {
 <div id="displaying-popular-authors" class="section level3">
 <h3>Displaying Popular Authors</h3>
 <pre class="r"><code>ggplot(most_read_authors, aes(x = reorder(authors, -percentage), y = percentage)) +
-  geom_bar(stat = &quot;identity&quot;, fill = &quot;steelblue&quot;) +
+  geom_bar(stat = &quot;identity&quot;, fill = &quot;darkred&quot;) +
   geom_text(aes(label = sprintf(&quot;%.1f%%&quot;, percentage)), vjust = -0.5, size = 4) + # Add percentage labels
   labs(
     title = &quot;Top 10 Popular Authors by Percentage&quot;,
