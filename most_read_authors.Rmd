@@ -40,14 +40,14 @@ ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, 
     x = "Total Ratings Count",
     y = "Authors"
   ) +
-  scale_fill_gradient(low = "skyblue", high = "steelblue") + # Gradient color
+  scale_fill_gradient(low = "red", high = "darkred") + 
   theme_minimal() +
   theme(
-    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), # Center and bold title
-    axis.text.y = element_text(size = 10), # Adjust font size for 10 authors
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), 
+    axis.text.y = element_text(size = 10), 
     axis.text.x = element_text(size = 12),
-    axis.title = element_text(size = 14, face = "bold"), # Bold axis labels
-    panel.grid.major.y = element_blank() # Remove y-axis gridlines
+    axis.title = element_text(size = 14, face = "bold"), 
+    panel.grid.major.y = element_blank() 
   ) +
   scale_x_continuous(labels = scales::comma)
 ```
