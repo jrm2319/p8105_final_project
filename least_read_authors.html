@@ -329,7 +329,7 @@ $(document).ready(function () {
     x = &quot;Total Ratings Count&quot;,
     y = &quot;Authors&quot;
   ) +
-  scale_fill_gradient(low = &quot;lightblue&quot;, high = &quot;darkblue&quot;) + # Gradient color for least read
+  scale_fill_gradient(low = &quot;red&quot;, high = &quot;darkred&quot;) + # Gradient color for least read
   theme_minimal() +
   theme(
     plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5), # Center and bold title
@@ -339,11 +339,7 @@ $(document).ready(function () {
     panel.grid.major.y = element_blank() # Remove y-axis gridlines
   ) +
   scale_x_continuous(labels = scales::comma)</code></pre>
-<p><img src="least_read_authors_files/figure-html/Dislaying%20Top%2010%20Least%20Read%20Authors-1.png" width="672" />
-```</p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the
-code chunk to prevent printing of the R code that generated the
-plot.</p>
+<p><img src="least_read_authors_files/figure-html/Dislaying%20Top%2010%20Least%20Read%20Authors-1.png" width="672" /></p>
 </div>
 </div>
 
