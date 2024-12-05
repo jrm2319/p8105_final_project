@@ -46,8 +46,14 @@ top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id"))
               values_to = "tag") %>%
   group_by(user_id, tag) %>%
   summarise(tag_count = n(), .groups = "drop") %>%
-  arrange(user_id,tag_count) %>%
-  filter(!tag %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club"))
+  filter(!tag %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club")) %>%
+    group_by(user_id) %>%
+    slice_max(order_by = tag_count, n = 5, with_ties = FALSE) %>%
+  ungroup()
+
+genre_counts <- top_ratings_genres %>%
+  count(tag)
+  
 ```
 
 ```{r to_read_users}
