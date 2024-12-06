@@ -27,7 +27,7 @@ navbar:
           href: popular_authors.html
     - text: "Reccomendations"
       href: reccomendations.html
-    - text: "Most to Less Read Genres"
+    - text: "Most to Least Read Genres"
       href: genres.html
   right:
     - icon: fa-github fa-lg
