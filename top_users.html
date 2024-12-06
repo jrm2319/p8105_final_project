@@ -13,9 +13,9 @@
 
 <meta name="date" content="2024-12-03" />
 
-<title>top_users</title>
+<title>Top Users By Ratings</title>
 
-<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -268,6 +268,21 @@ $(document).ready(function () {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Top Users
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Authors
      
     <span class="caret"></span>
@@ -288,7 +303,7 @@ $(document).ready(function () {
   <a href="reccomendations.html">Reccomendations</a>
 </li>
 <li>
-  <a href="genres.html">Most to Less Read Genres</a>
+  <a href="genres.html">Most to Least Read Genres</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -313,30 +328,23 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">top_users</h1>
+<h1 class="title toc-ignore">Top Users By Ratings</h1>
 <h4 class="author">Samiha Reza</h4>
 <h4 class="date">2024-12-03</h4>
 
 </div>
 
 
-<pre class="r"><code>users_ratings &lt;- ratings %&gt;%
+<pre class="r"><code># Count the number of ratings per user
+users_ratings &lt;- ratings %&gt;%
   group_by(user_id) %&gt;%
   summarize(total_ratings = n(), .groups = &#39;drop&#39;) %&gt;%
-  arrange(desc(total_ratings))
-
-
-to_read_counts &lt;- to_read %&gt;%
-  group_by(user_id) %&gt;%
-  summarize(total_to_read = n(), .groups = &#39;drop&#39;) %&gt;%
-  arrange(desc(total_to_read))
-
-total_ratings_info &lt;- left_join(users_ratings, to_read_counts, by = c(&quot;user_id&quot;))</code></pre>
-<pre class="r"><code>genres_count %&gt;%
+  arrange(desc(total_ratings))</code></pre>
+<pre class="r"><code># create a pie chart to show all genres
+genres_count %&gt;%
   plot_ly(labels = ~tag, values = ~n, type = &quot;pie&quot;, colors = &quot;viridis&quot;)</code></pre>
-<div class="plotly html-widget html-fill-item" id="htmlwidget-97156dbbe252d7af931e" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-97156dbbe252d7af931e">{"x":{"visdat":{"637e60e327d5":["function () ","plotlyVisDat"]},"cur_data":"637e60e327d5","attrs":{"637e60e327d5":{"labels":{},"values":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["childrens","classic","classics","fantasy","fiction","historical-fiction","horror","humor","mystery","non-fiction","nonfiction","science-fiction","young-adult"],"values":[4,6,14,8,15,9,1,1,2,6,1,2,6],"type":"pie","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(255,255,255,1)"}},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-<pre class="r"><code># Things to do: look at most common genres for each of the top 15 users (use pie chart?), common to_read books among top 50 users</code></pre>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-10d183760c3d724b54eb" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-10d183760c3d724b54eb">{"x":{"visdat":{"6bf52feb71aa":["function () ","plotlyVisDat"]},"cur_data":"6bf52feb71aa","attrs":{"6bf52feb71aa":{"labels":{},"values":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"pie"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"labels":["classic","classics","contemporary","fantasy","fiction","historical-fiction","mystery","thriller","young-adult"],"values":[5,14,1,5,15,3,1,1,2],"type":"pie","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(255,255,255,1)"}},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 
 
 
