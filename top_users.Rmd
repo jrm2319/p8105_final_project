@@ -17,6 +17,7 @@ books_with_tags <- read_csv("./books_with_tags.csv")
 ```
 
 ```{r data_1}
+# Count the number of ratings per user
 users_ratings <- ratings %>%
   group_by(user_id) %>%
   summarize(total_ratings = n(), .groups = 'drop') %>%
@@ -25,19 +26,26 @@ users_ratings <- ratings %>%
 ```
 
 ```{r ratings_users, echo = FALSE}
-
+# Select the top 15 users by number of ratings
 top_user_ids_rat <- users_ratings %>%
   head(15)
 
+# Compile all ratings done by the top 15 users
 top_ratings <- semi_join(ratings, top_user_ids_rat, by = c("user_id"))
-# Things to do: Look at average rating for top 15 users, look at most common genres rated for each user (use pie chart)
 
+# Find the average rating of each user
 avg_rat <-top_ratings %>%
   group_by(user_id) %>%  
   summarize(avg_rating = mean(rating, na.rm = TRUE))
 
+# Include number of ratings per user with the average rating
 top_users <- left_join(top_user_ids_rat, avg_rat, by = c("user_id"))
 
+# Print table of average ratings
+
+
+
+# Creates a data frame that includes the book information for each of the ratings in top_ratings. Then found the three most rated genres for the top 15 users. 
 top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id")) %>%
   group_by(user_id) %>% 
   pivot_longer(cols = starts_with("top"),
@@ -49,25 +57,17 @@ top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id"))
   group_by(user_id) %>%
   slice_max(order_by = tag_count, n = 3) %>%
   ungroup()
-#top 3 genres for top 15 raters
 
+# Counted how many of the 15 users rated a genre out of the groups top three's
 genres_count <- top_ratings_genres %>%
   count(tag)
 
 ```
 
 ```{r plot}
+# create a pie chart to show all genres
 genres_count %>%
   plot_ly(labels = ~tag, values = ~n, type = "pie", colors = "viridis")
   
 ```
   
-
-```
-
-```{r plot}
-genres_count %>%
-  plot_ly(labels = ~tag, values = ~n, type = "pie", colors = "viridis")
-  
-```
-

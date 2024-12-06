@@ -16,7 +16,7 @@ navbar:
         - text: "Top Users by Ratings"
           href: top_users.html
         - text: "Top Users by Most To-Read"
-          href: top_users_to_read
+          href: top_users_to_read.html
     - text: "Authors"
       menu:
         - text: "Most Read Authors"
