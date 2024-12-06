@@ -59,4 +59,6 @@ top_to_read_genres <- left_join(top_to_read, books_with_tags, by = c("book_id"))
   slice_max(order_by = tag_count, n = 3) %>%
   ungroup()
 
+unique_data <- !duplicated(top_to_read$book_id)
+
 ```
