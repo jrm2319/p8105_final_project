@@ -205,6 +205,8 @@ merged_tags =
   left_join(book_tag, tags, by = c("tag_id")) %>%
   group_by(goodreads_book_id) %>%
   arrange(desc(count)) %>%
+  filter(!tag_name %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club", "discworld")) %>%
+  drop_na(tag_name) %>%
   slice_head(n = 5) %>%
   ungroup()
   
@@ -220,4 +222,6 @@ pivoted_data <- merged_tags %>%
 
 
 books_with_tags <- left_join(book_data_complete, pivoted_data, by = c("goodreads_book_id"))
+
+write.csv(books_with_tags, "books_with_tags.csv", row.names = FALSE)
 ```

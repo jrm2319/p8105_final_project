@@ -15,7 +15,7 @@
 
 <title>Top Users by To Read</title>
 
-<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -253,9 +253,6 @@ $(document).ready(function () {
   <a href="Analysis.html">Analysis</a>
 </li>
 <li>
-  <a href="dashboard.html">Dashboard</a>
-</li>
-<li>
   <a href="Report.html">Report – Hypothesis Testing Results</a>
 </li>
 <li class="dropdown">
@@ -327,24 +324,124 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>to_read_counts &lt;- to_read %&gt;%
+<pre class="r"><code>#Count how many to-reads each user has
+to_read_counts &lt;- to_read %&gt;%
   group_by(user_id) %&gt;%
   summarize(total_to_read = n(), .groups = &#39;drop&#39;) %&gt;%
   arrange(desc(total_to_read))
 
-
+#Select the top 15 users with the most to-reads
 top_user_ids_to_read &lt;- to_read_counts %&gt;%
   head(15)
 
+#Create dataframe with all the books the top 15 users said they wanted to read. Count how many times these books were selected by users. Select the top 15 to-read books by the top 15 users
 top_to_read &lt;- semi_join(to_read, top_user_ids_to_read, by = c(&quot;user_id&quot;))
+
 top_to_read_count &lt;- top_to_read %&gt;%
   count(book_id) %&gt;%
   arrange(desc(n)) %&gt;%
-  head(15)
-#top 15 books to read
+  head(15) 
 
+#Add book information to the 15 books
+top_ratings_titles &lt;- left_join(top_to_read_count, books_with_tags, by = c(&quot;book_id&quot;)) %&gt;%
+  select(title, authors, n)
 
-top_ratings_titles &lt;- left_join(top_to_read_count, books_with_tags, by = c(&quot;book_id&quot;))</code></pre>
+kable(top_ratings_titles, caption = &quot;Sample Table&quot;, align = &quot;c&quot;)</code></pre>
+<table>
+<caption>Sample Table</caption>
+<colgroup>
+<col width="46%" />
+<col width="52%" />
+<col width="1%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">title</th>
+<th align="center">authors</th>
+<th align="center">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">The Catcher in the Rye</td>
+<td align="center">J.D. Salinger</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">The Fault in Our Stars</td>
+<td align="center">John Green</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">A Tale of Two Cities</td>
+<td align="center">Charles Dickens, Richard Maxwell, Hablot Knight
+Browne</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">Miss Peregrine’s Home for Peculiar Children (Miss
+Peregrine’s Peculiar Children, #1)</td>
+<td align="center">Ransom Riggs</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">Much Ado About Nothing</td>
+<td align="center">William Shakespeare, Barbara A. Mowat, Paul Werstine,
+Gail Kern Paster, Robert Jackson</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">The Great Gatsby</td>
+<td align="center">F. Scott Fitzgerald</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">The Hobbit</td>
+<td align="center">J.R.R. Tolkien</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">The Girl with the Dragon Tattoo (Millennium, #1)</td>
+<td align="center">Stieg Larsson, Reg Keeland</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">Lord of the Flies</td>
+<td align="center">William Golding</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">Memoirs of a Geisha</td>
+<td align="center">Arthur Golden</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">A Game of Thrones (A Song of Ice and Fire, #1)</td>
+<td align="center">George R.R. Martin</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">Jane Eyre</td>
+<td align="center">Charlotte Brontë, Michael Mason</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">The Notebook (The Notebook, #1)</td>
+<td align="center">Nicholas Sparks</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">Life of Pi</td>
+<td align="center">Yann Martel</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">The Book Thief</td>
+<td align="center">Markus Zusak</td>
+<td align="center">4</td>
+</tr>
+</tbody>
+</table>
 
 
 

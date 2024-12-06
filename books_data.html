@@ -238,7 +238,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Placeholder</a>
+      <a class="navbar-brand" href="index.html">To Be Read or Not To Be Read</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -249,10 +249,22 @@ $(document).ready(function () {
   <a href="Analysis.html">Analysis</a>
 </li>
 <li>
-  <a href="dashboard.html">Dashboard</a>
-</li>
-<li>
   <a href="Report.html">Report – Hypothesis Testing Results</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Top Users
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -276,7 +288,7 @@ $(document).ready(function () {
   <a href="reccomendations.html">Reccomendations</a>
 </li>
 <li>
-  <a href="genres.html">Most to Less Read Genres</a>
+  <a href="genres.html">Most to Least Read Genres</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -305,9 +317,7 @@ $(document).ready(function () {
 </div>
 
 
-<div id="data" class="section level1">
-<h1>DATA</h1>
-<p>Erynne Jackson 2024-12-01</p>
+<p>================ Erynne Jackson 2024-12-01</p>
 <pre class="r"><code>library(readxl)
 library(tidyverse)
 library(readr)</code></pre>
@@ -367,7 +377,6 @@ to_read = read_csv(url5)</code></pre>
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>view(to_read)</code></pre>
-</div>
 
 
 

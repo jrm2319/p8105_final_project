@@ -10,7 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 library(plotly)
 library(readr)
+library(knitr)
 library(tidyverse)
+library(ggplot2)
 ratings <- read_csv("./ratings.csv")
 to_read <- read_csv("./to_read.csv")
 books_with_tags <- read_csv("./books_with_tags.csv")
@@ -39,10 +41,33 @@ avg_rat <-top_ratings %>%
   summarize(avg_rating = mean(rating, na.rm = TRUE))
 
 # Include number of ratings per user with the average rating
-top_users <- left_join(top_user_ids_rat, avg_rat, by = c("user_id"))
+top_users <- left_join(top_user_ids_rat, avg_rat, by = c("user_id")) %>%
+  rename("User ID" = user_id) %>%
+  rename("Total Ratings" = total_ratings) %>%
+  rename("Average Rating" = avg_rating)
 
+  
 # Print table of average ratings
+kable(top_users, caption = "Average Ratings and Number of Ratings for Top 15 Raters", align = "c")
 
+
+
+over_avg_rat <-ratings %>%
+  group_by(user_id) %>%  
+  summarize(avg_rating = mean(rating, na.rm = TRUE))
+
+
+# Overlay density plots
+ggplot() +
+  geom_density(data = top_users, aes(x = `Average Rating`), fill = "blue", alpha = 0.5) +
+  geom_density(data = over_avg_rat, aes(x = avg_rating), fill = "red", alpha = 0.5) +
+  labs(title = "Average Ratings Distribution for All Raters vs Top 15 Raters",
+       x = "Rating", y = "Density") +
+  theme_minimal() +
+  theme(legend.title = element_text(size = 14, face = "bold"),
+    legend.text = element_text(size = 12),
+    legend.background = element_rect(fill = "gray90"),
+    legend.position = "top")
 
 
 # Creates a data frame that includes the book information for each of the ratings in top_ratings. Then found the three most rated genres for the top 15 users. 
@@ -57,6 +82,7 @@ top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id"))
   group_by(user_id) %>%
   slice_max(order_by = tag_count, n = 3) %>%
   ungroup()
+
 
 # Counted how many of the 15 users rated a genre out of the groups top three's
 genres_count <- top_ratings_genres %>%

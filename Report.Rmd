@@ -1,30 +1,107 @@
 ---
-title: "report"
-author: "Kamiah Brown"
-date: "2024-12-03"
+title: "Sequels"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r, include = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(broom)
+sequel = read.csv("book_data_complete.csv")
 ```
 
-## Including Plots
+## Exploring sequels: Are They Worth Reading?
 
-You can also embed plots, for example:
+In this page, we will explore book sequels and analyze whether they live up to the original works. First let's take a look at how many books have a series. 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+
+### Distribution of series lengths
+
+```{r}
+series_length <- sequel |>
+  mutate(series = str_extract(title, "\\(.*\\)"), 
+         series_number = as.numeric(str_sub(str_extract(series, ', #[0-9]+\\)$'),4,-2)),
+         series_name = str_sub(str_extract(series, '\\(.*,'),2,-2)) |>
+  filter(!is.na(series_number)) |>
+  group_by(series_name) |>
+  summarise(max_series_number = max(series_number, na.rm = TRUE)) |>
+  count(max_series_number, name = "n_series")
+
+ggplot(series_length, aes(x = max_series_number, y = n_series)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(
+    x = "Series Length (Number of Books)",
+    y = "Number of Series",
+    title = "Distribution of Series Lengths"
+  ) +
+  theme_minimal()
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### Comparing Average Ratings: First vs Second Books
+
+```{r avg ratings}
+#Select books that have a sequel
+sequel_data <- sequel |>
+  mutate(series = str_extract(title, "\\(.*\\)"), 
+         series_number = as.numeric(str_sub(str_extract(series, ', #[0-9]+\\)$'),4,-2)),
+         series_name = str_sub(str_extract(series, '\\(.*,'),2,-2)) |>
+  filter(series_number %in% c(1, 2))
+
+#Boxplot of average ratings of first vs second book
+ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = factor(series_number))) +
+  geom_boxplot() +
+  coord_cartesian(ylim = c(3, 5)) +
+  labs(x = "Book in Series", y = "Average Rating") +
+  scale_color_manual(values = c('blue', 'red')) +
+  theme_minimal() +
+  theme(legend.position = "none") 
+```
+
+Based off of average ratings, good reads users generally rate the sequel higher than the original book.
+
+### Table of First vs Second Book Ratings
+
+```{r}
+sequel_performance <- sequel_data |>
+  group_by(series_name) |>
+  arrange(series_number) |>
+  summarise(
+    rating_diff = diff(average_rating),
+    .groups = "drop" 
+  )
+
+prop_sequel_higher <- mean(sequel_performance$rating_diff > 0, na.rm = TRUE)
+
+
+cat(sprintf("In %.1f%% of cases, the sequel is rated higher than the first book.", 
+            prop_sequel_higher * 100))
+```
+
+
+### Hypothesis Test
+
+While the visualizations suggest that sequels may outperform the original book in terms of average ratings, let's apply statistical techniques to formally test this hypothesis. 
+
+
+```{r}
+t_test_result <- t.test(average_rating ~ series_number, data = sequel_data)
+
+t_test_table <- t_test_result |>
+  tidy() |>
+  knitr::kable(caption = "T-Test Results: Comparing Ratings of First and Second Books")
+
+print(t_test_table)
+```
+
+### Regression Models
+
+```{r}
+lm_sequel <- lm(average_rating ~ factor(series_number) + factor(series_name), data = sequel_data)
+
+```
+

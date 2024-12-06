@@ -114,13 +114,60 @@ merged_tags =
   left_join(book_tag, tags, by = c("tag_id")) %>%
   group_by(goodreads_book_id) %>%
   arrange(desc(count)) %>%
-  filter(!tag_name %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club", "discworld")) %>%
+  filter(!tag_name %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club", "discworld", "harry-potter", "tolkien", "series",
+"all-time-favorites", "1001", "1001-books", "	
+1001-books-to-read", "1001-books-to-read-before-you-die", "1001-import", "abandoned", "pulitzer-prize", "dune", "unfinished", "19th-century", "novels", "time-100", "paul-auster", "favourites", "ayn-rand", "anne-tyler", "ux", "dan-brown", "john-grisham", "grisham", "books-about-books", "shakespeare", "read-for-school", "nelson-demille", "paulo-coelho", "jane-austen", "pulitzer", "steve-martini", "	
+terry-pratchett", "middle-earth")) %>%
   drop_na(tag_name) %>%
   slice_head(n = 5) %>%
   ungroup()
   
 
-pivoted_data <- merged_tags %>%
+  
+#Cleaning up genres
+
+genres <- list(
+  "young adult" = c("young-adult", "ya"),
+  "children" = c("children", "childrens", "childhood", "children-s", "childrens-books", "children-s-books", "kids", "kids-books", "baby"),
+  "fantasy" = c("fantasy", "fantasy-fiction"), 
+  "science fiction" = c("sci-fi", "science-fiction", "sci-fi-fantasy", "scifi", "sf", "cyberpunk", "epic-fantasy", "high-fantasy"),
+  "dystopian" = c("dystopia", "dystopian"),
+  "non-fiction" = c("non-fiction", "nonfiction"),
+  "classics" = c("classic", "classics", "clàssics"),
+  "mystery" = c("mystery", "mysteries", "detective", "mystery-thriller"),
+  "romance" = c("historical-romance", "paranormal-romance", "historical romance", "romance-suspense"),
+  "poetry" = c("poetry", "poem"),
+  "biography" = c("biography", "biographies"),
+  "spirituality" = c("spiritual", "spirtuality"),
+  "self-help" = c("self-improvement", "self-help", "personal-development"),
+  "art" = c("art", "art-books"),
+  "finance" = c("personal-finance", "finance", "money"),
+  "business" = c("management", "leadership", "productivity", "entrepreneurship"),
+  "graphic novels" = c("graphic-novels", "manga" ),
+  "food" = c("food", "cooking", "cookbooks", "cookbook"), 
+  "lgbtq" = c("lgbt", "gay", "queer", "glbt"),
+  "christianity" = c("christian-living", "christian")
+)
+
+# Create a function to standardize tags
+standardize_tag <- function(tag) {
+  # Check each genre list for a match
+  for (genre in names(genres)) {
+    if (tag %in% genres[[genre]]) {
+      return(genre)
+    }
+  }
+  # If no match, return the original tag
+  return(tag)
+}
+
+# Apply the function to the tag_name column
+rename_tags <- merged_tags %>%
+  mutate(tag_name = sapply(tag_name, standardize_tag))
+
+
+
+pivoted_data <- rename_tags %>%
   mutate(rank = row_number(), .by = goodreads_book_id) %>% # Add rank for top tags
   pivot_wider(
     id_cols = goodreads_book_id, 
