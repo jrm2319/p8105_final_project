@@ -1,7 +1,5 @@
 ---
 title: "Top Users by To Read"
-author: "Samiha Reza"
-date: "2024-12-05"
 output: html_document
 ---
 
@@ -45,5 +43,20 @@ top_ratings_titles <- left_join(top_to_read_count, books_with_tags, by = c("book
 
 
 kable(top_ratings_titles, caption = "Top 15 To-Read books for Top 15 Users", align = "c")
+
+```
+
+```{r}
+top_to_read_genres <- left_join(top_to_read, books_with_tags, by = c("book_id")) %>%
+  group_by(user_id) %>% 
+  pivot_longer(cols = starts_with("top"),
+               names_to = "tag_type",
+              values_to = "tag") %>%
+  group_by(user_id, tag) %>%
+  summarise(tag_count = n(), .groups = "drop") %>%
+  drop_na(tag) %>%
+  group_by(user_id) %>%
+  slice_max(order_by = tag_count, n = 3) %>%
+  ungroup()
 
 ```

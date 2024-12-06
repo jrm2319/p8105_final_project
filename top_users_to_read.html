@@ -9,13 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Samiha Reza" />
 
-<meta name="date" content="2024-12-05" />
 
 <title>Top Users by To Read</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -318,8 +316,6 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Top Users by To Read</h1>
-<h4 class="author">Samiha Reza</h4>
-<h4 class="date">2024-12-05</h4>
 
 </div>
 
@@ -344,21 +340,25 @@ top_to_read_count &lt;- top_to_read %&gt;%
 
 #Add book information to the 15 books
 top_ratings_titles &lt;- left_join(top_to_read_count, books_with_tags, by = c(&quot;book_id&quot;)) %&gt;%
-  select(title, authors, n)
+  select(title, authors, n) %&gt;%
+  rename(&quot;Number of Top Users&quot; = n) %&gt;%
+  rename(&quot;Title&quot; = title) %&gt;%
+  rename(&quot;Authors&quot; = authors)
 
-kable(top_ratings_titles, caption = &quot;Sample Table&quot;, align = &quot;c&quot;)</code></pre>
-<table>
-<caption>Sample Table</caption>
+
+kable(top_ratings_titles, caption = &quot;Top 15 To-Read books for Top 15 Users&quot;, align = &quot;c&quot;)</code></pre>
+<table style="width:100%;">
+<caption>Top 15 To-Read books for Top 15 Users</caption>
 <colgroup>
-<col width="46%" />
-<col width="52%" />
-<col width="1%" />
+<col width="42%" />
+<col width="47%" />
+<col width="10%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center">title</th>
-<th align="center">authors</th>
-<th align="center">n</th>
+<th align="center">Title</th>
+<th align="center">Authors</th>
+<th align="center">Number of Top Users</th>
 </tr>
 </thead>
 <tbody>
@@ -442,6 +442,17 @@ Gail Kern Paster, Robert Jackson</td>
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>top_to_read_genres &lt;- left_join(top_to_read, books_with_tags, by = c(&quot;book_id&quot;)) %&gt;%
+  group_by(user_id) %&gt;% 
+  pivot_longer(cols = starts_with(&quot;top&quot;),
+               names_to = &quot;tag_type&quot;,
+              values_to = &quot;tag&quot;) %&gt;%
+  group_by(user_id, tag) %&gt;%
+  summarise(tag_count = n(), .groups = &quot;drop&quot;) %&gt;%
+  drop_na(tag) %&gt;%
+  group_by(user_id) %&gt;%
+  slice_max(order_by = tag_count, n = 3) %&gt;%
+  ungroup()</code></pre>
 
 
 
