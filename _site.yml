@@ -7,15 +7,15 @@ navbar:
       href: index.html
     - text: "Analysis"
       href: Analysis.html
-    - text: "Report – Hypothesis Testing Results"
+    - text: "Report - Hypothesis Testing Results"
       href: Report.html
     - text: "Top Users"
-      menu: 
+      menu:
         - text: "Top Users by Ratings"
           href: top_users.html
         - text: "Top Users by Most To-Read"
           href: top_users_to_read.html
-    - text: "Authors"
+    - text: "Authors & Genres"
       menu:
         - text: "Most Read Authors"
           href: most_read_authors.html
@@ -23,11 +23,12 @@ navbar:
           href: least_read_authors.html
         - text: "Popular Authors"
           href: popular_authors.html
-    - text: "Reccomendations"
-      href: reccomendations.html
-    - text: "Most to Least Read Genres"
-      href: genres.html
-  right:
+        - text: "Most to Least Read Genres"
+          href: genres.html
+    - text: "Recommendations"
+      menu:
+        - text: "Recommendations"
+          href: reccomendations.html
     - icon: fa-github fa-lg
       href: https://github.com/jrm2319/p8105_final_project.io.git
     - icon: fa-envelope fa-lg
@@ -35,3 +36,5 @@ navbar:
 output:
   html_document:
     theme: yeti
+
+
