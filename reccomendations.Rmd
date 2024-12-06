@@ -4,6 +4,10 @@ output: html_document
 runtime: shiny
 ---
 
+Welcome to our recommendations page! Looking for a new romance story? Want to get into some classics? Looking to read some other books by your favorite author? Fear not! You can get some book recommendations right here. You can search by your favorite genre, by author, and include the rating of the book your want. 
+
+Have fun reading! 
+
 ```{r setup, include=FALSE}
 
 library(tidyverse)
@@ -17,18 +21,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, include=FALSE}
 
-books = read_csv("books_with_tags.csv", 
-            na = c("NA", ".", ""))
+books = read_csv("books_with_tags.csv")
 
 books_clean = books |> 
-  select(-isbn)
+  select(-isbn, ratings_count, work_ratings_count, work_text_reviews_count)
 
-rate = read_csv("ratings.csv", 
-        na = c("NA", ".", ""))
+rate = read_csv("ratings.csv")
 
 rate_clean = rate |> 
   select(-user_id)
-
 
 
 rec_data <- merge(books_clean, rate_clean, by = "book_id", all = TRUE)
@@ -36,14 +37,16 @@ rec_data <- merge(books_clean, rate_clean, by = "book_id", all = TRUE)
 ```
 
 ```{r, echo=FALSE, warning=FALSE}
-# Define UI
+
+authors <- unique(rec_data$authors)
+
+  titlePanel("Book Recommendations")
+
 ui <- fluidPage(
-  # Dropdown for choosing search criteria
   selectInput("search_by", 
               label = "Search by:", 
-              choices = c("Select", "Author", "Genre", "Book Title")),
-  
-  # Conditionally display search options for Author
+              choices = c("Select", "Author", "Genre")),
+
   conditionalPanel(
     condition = "input.search_by == 'Author'",
     selectizeInput("authors", 
@@ -55,49 +58,34 @@ ui <- fluidPage(
                      maxItems = 1,
                      highlight = TRUE))
   ),
-  
-  # Conditionally display search options for Genre
+
   conditionalPanel(
     condition = "input.search_by == 'Genre'",
     selectInput("search_genre", 
                 label = "Choose Genre(s):", 
                 choices = unique(c(rec_data$top_1, rec_data$top_2, rec_data$top_3, rec_data$top_4, rec_data$top_5)), 
-                multiple = TRUE)  # Allow multiple selections for genre
+                multiple = TRUE)  
   ),
   
-  # Conditionally display search options for Book Title
-  conditionalPanel(
-    condition = "input.search_by == 'Book Title'",
-    textInput("title", 
-              label = "Enter your favorite book title:", 
-              value = "")
-  ),
-  
-  # Conditionally display the Rating filter
   conditionalPanel( 
-    condition = "input.search_by == 'Book Title' || input.search_by == 'Genre' || input.search_by == 'Author'",
+    condition = "input.search_by == 'Genre' || input.search_by == 'Author'",
     selectInput("rating", 
                 label = "Choose Rating:", 
                 choices = unique(rec_data$rating), 
                 selected = NULL)
   ),
   
-  # Action Button for recommendations
   actionButton("recommend", "Get Recommendations"),
   
-  # Section to show recommended books
   h3("Recommended Books"),
   uiOutput("book_list")
 )
 
-# Define server logic
 server <- function(input, output, session) {
   
-  # Reactive function to filter books based on the selected search criteria
   filtered_books <- reactive({
     booktok <- rec_data
     
-    # If genres are selected, filter based on genres
     if (length(input$search_genre) > 0) {
       booktok <- booktok %>%
         filter(
@@ -109,40 +97,30 @@ server <- function(input, output, session) {
         )
     }
     
-    # Filter based on author
     if (input$search_by == "Author" && input$authors != "") {
       booktok <- booktok %>% filter(authors == input$authors)
     }
     
-    # Filter based on book title
-    if (input$search_by == "Book Title" && input$title != "") {
-      booktok <- booktok %>% filter(grepl(input$title, title, ignore.case = TRUE))
-    }
     
-    # Further filter by rating if selected
     if (!is.null(input$rating) && input$rating != "") {
       booktok <- booktok %>% filter(rating == as.numeric(input$rating))
     }
     
-    # Remove duplicate books by title
     booktok %>% distinct(title, .keep_all = TRUE)
   })
   
-  # Show the filtered recommendations when the button is clicked
   observeEvent(input$recommend, {
     output$book_list <- renderUI({
       booktok <- filtered_books()
       
-      # Limit to the top 5 books
       books_to_show <- head(booktok, 5)
       
       if (nrow(books_to_show) > 0) {
         tagList(
           lapply(1:nrow(books_to_show), function(i) {
             div(
-              # Book title with image
               img(src = books_to_show$image_url[i], width = "250px", height = "300px"),  
-              strong(books_to_show$title[i])  # Book name
+              strong(books_to_show$title[i])
             )
           })
         )
@@ -153,7 +131,6 @@ server <- function(input, output, session) {
   })
 }
 
-# Run the application
 shinyApp(ui = ui, server = server)
 
 
