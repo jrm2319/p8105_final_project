@@ -332,39 +332,79 @@ $(document).ready(function () {
 
 <div id="data-import" class="section level2">
 <h2>Data Import</h2>
-<div id="summarizing-read-counts-by-author" class="section level3">
-<h3>Summarizing Read Counts by Author</h3>
-<pre class="r"><code>most_read_authors &lt;- books %&gt;%
-  group_by(authors) %&gt;%
-  summarize(
-    total_ratings = sum(work_ratings_count, na.rm = TRUE) # Summing up ratings for each author
-  ) %&gt;%
-  arrange(desc(total_ratings)) %&gt;%
-  mutate(
-    percentage = (total_ratings / sum(total_ratings)) * 100 # Calculate percentage of total ratings
-  ) %&gt;%
-  head(10) #</code></pre>
-</div>
 <div id="displaying-popular-authors" class="section level3">
-<h3>Displaying Popular Authors</h3>
-<pre class="r"><code>ggplot(most_read_authors, aes(x = reorder(authors, -percentage), y = percentage)) +
-  geom_bar(stat = &quot;identity&quot;, fill = &quot;darkred&quot;) +
-  geom_text(aes(label = sprintf(&quot;%.1f%%&quot;, percentage)), vjust = -0.5, size = 4) + 
-  labs(
-    title = &quot;Top 10 Popular Authors by Percentage&quot;,
-    x = &quot;Authors&quot;,
-    y = &quot;Percentage of Total Ratings&quot;
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5), 
-    axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-    axis.text.y = element_text(size = 10),
-    axis.title = element_text(size = 12, face = &quot;bold&quot;)
-  ) +
-  scale_y_continuous(labels = scales::percent_format(scale = 1)) </code></pre>
+<h3><em>Displaying Popular Authors</em></h3>
 <p><img src="popular_authors_files/figure-html/Dislaying%20Popular%20Authors-1.png" width="672" /></p>
-<p>The top 10 most read</p>
+<p>This bar chart, “Top 10 Popular Authors by Percentage of Total
+Ratingss” depicts the percentage of total ratings each popular author
+received relative to the dataset.</p>
+<table>
+<caption>Top 10 Popular Authors by Percentage of Total Ratings</caption>
+<colgroup>
+<col width="40%" />
+<col width="20%" />
+<col width="40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Author</th>
+<th align="right">Total Ratings</th>
+<th align="right">Percentage of Total Ratings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">J.K. Rowling, Mary GrandPré</td>
+<td align="right">14126791</td>
+<td align="right">2.3667993</td>
+</tr>
+<tr class="even">
+<td align="left">Suzanne Collins</td>
+<td align="right">9161124</td>
+<td align="right">1.5348526</td>
+</tr>
+<tr class="odd">
+<td align="left">Stephenie Meyer</td>
+<td align="right">8631937</td>
+<td align="right">1.4461927</td>
+</tr>
+<tr class="even">
+<td align="left">Stephen King</td>
+<td align="right">7297834</td>
+<td align="right">1.2226774</td>
+</tr>
+<tr class="odd">
+<td align="left">Rick Riordan</td>
+<td align="right">5717999</td>
+<td align="right">0.9579922</td>
+</tr>
+<tr class="even">
+<td align="left">J.R.R. Tolkien</td>
+<td align="right">5602790</td>
+<td align="right">0.9386901</td>
+</tr>
+<tr class="odd">
+<td align="left">Dan Brown</td>
+<td align="right">5332589</td>
+<td align="right">0.8934207</td>
+</tr>
+<tr class="even">
+<td align="left">Cassandra Clare</td>
+<td align="right">4631019</td>
+<td align="right">0.7758798</td>
+</tr>
+<tr class="odd">
+<td align="left">Nicholas Sparks</td>
+<td align="right">4501871</td>
+<td align="right">0.7542424</td>
+</tr>
+<tr class="even">
+<td align="left">John Green</td>
+<td align="right">4312589</td>
+<td align="right">0.7225302</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
