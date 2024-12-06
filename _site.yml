@@ -2,7 +2,7 @@ name: "To Be Read or Not To Be Read"
 output_dir: "."
 navbar:
   title: "To Be Read or Not To Be Read"
-  left:
+  right:
     - text: "About"
       href: index.html
     - text: "Analysis"

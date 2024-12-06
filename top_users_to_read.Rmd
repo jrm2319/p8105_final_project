@@ -59,6 +59,18 @@ top_to_read_genres <- left_join(top_to_read, books_with_tags, by = c("book_id"))
   slice_max(order_by = tag_count, n = 3) %>%
   ungroup()
 
-unique_data <- !duplicated(top_to_read$book_id)
+genres_count_to_read <- top_to_read_genres %>%
+  count(tag)
+
+genres_count_to_read %>%
+ plot_ly(x = tag, y = n, type = "bar")
+
+distinct_to_read_books <- left_join(top_to_read, books_with_tags, by = c("book_id")) %>%
+  group_by(user_id) %>% 
+  pivot_longer(cols = starts_with("top"),
+               names_to = "tag_type",
+              values_to = "tag") %>%
+  distinct(book_id, .keep_all= TRUE)
+  
 
 ```
