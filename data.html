@@ -732,21 +732,25 @@ padding-top: 0px;
 <span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>  <span class="fu">left_join</span>(book_tag, tags, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;tag_id&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>  <span class="fu">group_by</span>(goodreads_book_id) <span class="sc">%&gt;%</span></span>
 <span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a>  </span>
-<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a>pivoted_data <span class="ot">&lt;-</span> merged_tags <span class="sc">%&gt;%</span></span>
-<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>(), <span class="at">.by =</span> goodreads_book_id) <span class="sc">%&gt;%</span> <span class="co"># Add rank for top tags</span></span>
-<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a>    <span class="at">id_cols =</span> goodreads_book_id, </span>
-<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a>    <span class="at">names_from =</span> rank, </span>
-<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(tag_name), </span>
-<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">&quot;top_&quot;</span></span>
-<span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a>  )</span>
-<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a></span>
-<span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a></span>
-<span id="cb26-19"><a href="#cb26-19" tabindex="-1"></a>books_with_tags <span class="ot">&lt;-</span> <span class="fu">left_join</span>(book_data_complete, pivoted_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;goodreads_book_id&quot;</span>))</span></code></pre></div>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>tag_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;owned&quot;</span>, <span class="st">&quot;to-read&quot;</span>, <span class="st">&quot;favorites&quot;</span>, <span class="st">&quot;owned&quot;</span>, <span class="st">&quot;books-i-own&quot;</span>, <span class="st">&quot;currently-reading&quot;</span>, <span class="st">&quot;library&quot;</span>, <span class="st">&quot;owned-books&quot;</span>, <span class="st">&quot;to-buy&quot;</span>, <span class="st">&quot;kindle&quot;</span>, <span class="st">&quot;default&quot;</span>, <span class="st">&quot;ebook&quot;</span>, <span class="st">&quot;audiobook&quot;</span>, <span class="st">&quot;ebooks&quot;</span>, <span class="st">&quot;wish-list&quot;</span>, <span class="st">&quot;my-library&quot;</span>, <span class="st">&quot;audiobooks&quot;</span>, <span class="st">&quot;i-own&quot;</span>, <span class="st">&quot;book-club&quot;</span>, <span class="st">&quot;discworld&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(tag_name) <span class="sc">%&gt;%</span></span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a>  </span>
+<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a>pivoted_data <span class="ot">&lt;-</span> merged_tags <span class="sc">%&gt;%</span></span>
+<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>(), <span class="at">.by =</span> goodreads_book_id) <span class="sc">%&gt;%</span> <span class="co"># Add rank for top tags</span></span>
+<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a>    <span class="at">id_cols =</span> goodreads_book_id, </span>
+<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a>    <span class="at">names_from =</span> rank, </span>
+<span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(tag_name), </span>
+<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">&quot;top_&quot;</span></span>
+<span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a>  )</span>
+<span id="cb26-19"><a href="#cb26-19" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" tabindex="-1"></a></span>
+<span id="cb26-21"><a href="#cb26-21" tabindex="-1"></a>books_with_tags <span class="ot">&lt;-</span> <span class="fu">left_join</span>(book_data_complete, pivoted_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;goodreads_book_id&quot;</span>))</span>
+<span id="cb26-22"><a href="#cb26-22" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" tabindex="-1"></a><span class="fu">write.csv</span>(books_with_tags, <span class="st">&quot;books_with_tags.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 
 </body>
 </html>

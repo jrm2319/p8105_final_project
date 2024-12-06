@@ -7,8 +7,6 @@ navbar:
       href: index.html
     - text: "Analysis"
       href: Analysis.html
-    - text: "Dashboard"
-      href: dashboard.html
     - text: "Report – Hypothesis Testing Results"
       href: Report.html
     - text: "Top Users"
