@@ -45,14 +45,22 @@ top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id"))
               values_to = "tag") %>%
   group_by(user_id, tag) %>%
   summarise(tag_count = n(), .groups = "drop") %>%
-  filter(!tag %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club", "discworld")) %>%
-    group_by(user_id) %>%
-    drop_na(tag) %>%
-    slice_max(order_by = tag_count, n = 5, with_ties = FALSE) %>%
+  drop_na(tag) %>%
+  group_by(user_id) %>%
+  slice_max(order_by = tag_count, n = 3) %>%
   ungroup()
+#top 3 genres for top 15 raters
 
 genres_count <- top_ratings_genres %>%
   count(tag)
+
+```
+
+```{r plot}
+genres_count %>%
+  plot_ly(labels = ~tag, values = ~n, type = "pie", colors = "viridis")
+  
+```
   
 
 ```

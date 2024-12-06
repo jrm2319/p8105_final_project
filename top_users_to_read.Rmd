@@ -29,9 +29,13 @@ top_user_ids_to_read <- to_read_counts %>%
 top_to_read <- semi_join(to_read, top_user_ids_to_read, by = c("user_id"))
 top_to_read_count <- top_to_read %>%
   count(book_id) %>%
-  arrange(desc(n))
+  arrange(desc(n)) %>%
+  head(15)
+#top 15 books to read
 
-top_to_read_count |>
-  head(21)
+
+top_ratings_titles <- left_join(top_to_read_count, books_with_tags, by = c("book_id"))
+
+
 
 ```
