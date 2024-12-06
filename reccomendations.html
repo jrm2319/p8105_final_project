@@ -15,7 +15,7 @@
 
 <title>reccomendations</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -242,7 +242,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Placeholder</a>
+      <a class="navbar-brand" href="index.html">To Be Read or Not To Be Read</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -257,6 +257,21 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="Report.html">Report – Hypothesis Testing Results</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Top Users
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -280,7 +295,7 @@ $(document).ready(function () {
   <a href="reccomendations.html">Reccomendations</a>
 </li>
 <li>
-  <a href="genres.html">Most to Less Read Genres</a>
+  <a href="genres.html">Most to Least Read Genres</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -312,33 +327,100 @@ $(document).ready(function () {
 </div>
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting
-syntax for authoring HTML, PDF, and MS Word documents. For more details
-on using R Markdown see <a href="http://rmarkdown.rstudio.com"
-class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be
-generated that includes both content as well as the output of any
-embedded R code chunks within the document. You can embed an R code
-chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="reccomendations_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the
-code chunk to prevent printing of the R code that generated the
-plot.</p>
-</div>
+<pre class="r"><code>books = read_csv(&quot;books_with_tags.csv&quot;, 
+            na = c(&quot;NA&quot;, &quot;.&quot;, &quot;&quot;)) |&gt; 
+  mutate( 
+    Genre1 = &quot;&quot;)</code></pre>
+<pre><code>## Rows: 9300 Columns: 20
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr  (9): isbn, authors, title, image_url, top_1, top_2, top_3, top_4, top_5
+## dbl (11): book_id, goodreads_book_id, average_rating, ratings_count, work_ra...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>books_clean = books |&gt; 
+  select(-isbn)
+
+rate = read_csv(&quot;ratings.csv&quot;, 
+        na = c(&quot;NA&quot;, &quot;.&quot;, &quot;&quot;))</code></pre>
+<pre><code>## Rows: 5976479 Columns: 3
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (3): user_id, book_id, rating
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>rate_clean = rate |&gt; 
+  select(-user_id)
+
+
+
+rec_data &lt;- merge(books_clean, rate_clean, by = &quot;book_id&quot;, all = TRUE)</code></pre>
+<pre class="r"><code>authors &lt;- unique(rec_data$authors)
+
+genres &lt;- unique(rec_data$top_1)
+
+
+ui &lt;- fluidPage(
+  titlePanel(&quot;Book Recommendations&quot;),
+  
+  sidebarLayout(
+    sidebarPanel(
+      selectizeInput(&quot;authors&quot;, 
+                     label = &quot;Start typing an author&#39;s name:&quot;, 
+                     choices = authors, 
+                     options = list(
+                       placeholder = &#39;Select an author...&#39;,
+                       create = FALSE, 
+                       maxItems = 1,
+                       highlight = TRUE)),
+      
+      selectInput(&quot;top_1&quot;, &quot;Choose Genre:&quot;, 
+                  choices = unique(rec_data$top_1), selected = NULL),
+      
+      selectInput(&quot;rating&quot;, &quot;Choose Ratings:&quot;, 
+                  choices = unique(rec_data$rating), selected = NULL),
+      
+      actionButton(&quot;recommend&quot;, &quot;Get Recommendations&quot;)
+    ),
+    
+    mainPanel(
+      h3(&quot;Recommended Books&quot;),
+      DT::dataTableOutput(&quot;book_table&quot;)
+    )
+  )
+)</code></pre>
+<pre><code>## Warning: The select input &quot;authors&quot; contains a large number of options;
+## consider using server-side selectize for massively improved performance. See
+## the Details section of the ?selectizeInput help topic.</code></pre>
+<pre class="r"><code>server &lt;- function(input, output, session) {
+  
+  output$selected_author &lt;- renderText({
+    paste(&quot;You selected:&quot;, input$authors)
+  })
+  
+
+  filtered_books &lt;- reactive({
+    rec_data %&gt;%
+      filter(
+        (authors == input$authors | input$authors == &quot;&quot;) &amp;
+        (top_1 == input$top_1 | input$top_1 == &quot;&quot;) &amp;
+        (rating == input$rating | input$rating == &quot;&quot;)
+      )
+  })
+  
+
+  observeEvent(input$recommend, {
+    output$book_table &lt;- DT::renderDataTable({
+      filtered_books()
+    })
+  })
+}
+
+
+shinyApp(ui = ui, server = server)</code></pre>
+<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
 
 
 
