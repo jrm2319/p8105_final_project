@@ -17,8 +17,6 @@ navbar:
           href: popular_authors.html
         - text: "Most to Least Read Genres"
           href: genres.html
-    - text: "Top Users"
-      menu:
         - text: "Top Users by Ratings"
           href: top_users.html
         - text: "Top Users by Most To-Read"
