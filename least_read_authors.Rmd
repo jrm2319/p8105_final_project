@@ -1,5 +1,5 @@
 ---
-title: "Least Read Authors"
+title: "<b>Least Read Authors</b>"
 output: html_document
 ---
 
@@ -19,7 +19,7 @@ library(ggplot2)
 books <- read.csv("books.csv")
 ```
 
-### Summarizing Read Counts by Author 
+### *Summarizing Read Counts by Author*
 ```{r most read authors}
 least_read_authors <- books %>%
   group_by(authors) %>%
@@ -31,7 +31,7 @@ least_read_authors <- books %>%
 
 ```
 
-### Displaying Top 10 Least Read Authors
+### *Displaying  Top 10 Least Read Authors*
 ```{r Dislaying Top 10 Least Read Authors}
 ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = "identity", aes(fill = total_ratings), show.legend = FALSE) +
