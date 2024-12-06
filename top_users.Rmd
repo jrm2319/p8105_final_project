@@ -52,7 +52,7 @@ top_users <- left_join(top_user_ids_rat, avg_rat, by = c("user_id")) %>%
 kable(top_users, caption = "Average Ratings and Number of Ratings for Top 15 Raters", align = "c")
 
 ```
-It looks like the Top 15 raters are on average a little less generous with their scores than the general GoodReads community. Blue
+What about in comparison to the general GoodReads community?
 
 ```{r, echo = FALSE}
 
@@ -78,8 +78,9 @@ ggplot() +
     legend.background = element_rect(fill = "gray90"),
     legend.position = "top"
   )
-
-
+```
+It looks like the Top 15 raters are on average a little less generous with their scores than the general GoodReads community.
+```{r}
 # Creates a data frame that includes the book information for each of the ratings in top_ratings. Then found the three most rated genres for the top 15 users. 
 top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id")) %>%
   group_by(user_id) %>% 

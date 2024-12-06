@@ -117,7 +117,7 @@ merged_tags =
   filter(!tag_name %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club", "discworld", "harry-potter", "tolkien", "series",
 "all-time-favorites", "1001", "1001-books", "	
 1001-books-to-read", "1001-books-to-read-before-you-die", "1001-import", "abandoned", "pulitzer-prize", "dune", "unfinished", "19th-century", "novels", "time-100", "paul-auster", "favourites", "ayn-rand", "anne-tyler", "ux", "dan-brown", "john-grisham", "grisham", "books-about-books", "shakespeare", "read-for-school", "nelson-demille", "paulo-coelho", "jane-austen", "pulitzer", "steve-martini", "	
-terry-pratchett", "middle-earth","stephen-king", "lee-child", "preston-child", "NA", "sophie-kinsella", "read-in-2014", "read-in-2012", "nicholas-sparks", "hunger-games", "jodi-picoult", "nora-roberts")) %>%
+terry-pratchett", "middle-earth","stephen-king", "lee-child", "preston-child", "NA", "sophie-kinsella", "read-in-2014", "read-in-2012", "nicholas-sparks", "hunger-games", "jodi-picoult", "nora-roberts", "patricia-cornwell", "pretty-little-liars")) %>%
   drop_na(tag_name) %>%
   slice_head(n = 5) %>%
   ungroup()
@@ -147,7 +147,7 @@ genres <- list(
   "manga" = c("mangá"),
   "food" = c("food", "cooking", "cookbooks", "cookbook"), 
   "lgbtq" = c("lgbt", "gay", "queer", "glbt"),
-  "christianity" = c("christian-living", "christian")
+  "christianity" = c("christian-living", "christian", "christian-literature", "christian-fiction")
 )
 
 # Create a function to standardize tags

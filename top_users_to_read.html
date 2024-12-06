@@ -13,7 +13,7 @@
 
 <title>Top Users by To Read</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -32,6 +32,14 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -320,33 +328,12 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>#Count how many to-reads each user has
-to_read_counts &lt;- to_read %&gt;%
-  group_by(user_id) %&gt;%
-  summarize(total_to_read = n(), .groups = &#39;drop&#39;) %&gt;%
-  arrange(desc(total_to_read))
-
-#Select the top 15 users with the most to-reads
-top_user_ids_to_read &lt;- to_read_counts %&gt;%
-  head(15)
-
-#Create dataframe with all the books the top 15 users said they wanted to read. Count how many times these books were selected by users. Select the top 15 to-read books by the top 15 users
-top_to_read &lt;- semi_join(to_read, top_user_ids_to_read, by = c(&quot;user_id&quot;))
-
-top_to_read_count &lt;- top_to_read %&gt;%
-  count(book_id) %&gt;%
-  arrange(desc(n)) %&gt;%
-  head(15) 
-
-#Add book information to the 15 books
-top_ratings_titles &lt;- left_join(top_to_read_count, books_with_tags, by = c(&quot;book_id&quot;)) %&gt;%
-  select(title, authors, n) %&gt;%
-  rename(&quot;Number of Top Users&quot; = n) %&gt;%
-  rename(&quot;Title&quot; = title) %&gt;%
-  rename(&quot;Authors&quot; = authors)
-
-
-kable(top_ratings_titles, caption = &quot;Top 15 To-Read books for Top 15 Users&quot;, align = &quot;c&quot;)</code></pre>
+<p>In this section, we’ll be looking at the top users on GoodReads who
+have the most “to-read” books.</p>
+<div id="most-wanted-to-read-books" class="section level3">
+<h3>Most Wanted-To-Read Books</h3>
+<p>Let’s first look at the most popular books our top 15 users want to
+read.</p>
 <table style="width:100%;">
 <caption>Top 15 To-Read books for Top 15 Users</caption>
 <colgroup>
@@ -442,19 +429,161 @@ Gail Kern Paster, Robert Jackson</td>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>top_to_read_genres &lt;- left_join(top_to_read, books_with_tags, by = c(&quot;book_id&quot;)) %&gt;%
-  group_by(user_id) %&gt;% 
-  pivot_longer(cols = starts_with(&quot;top&quot;),
-               names_to = &quot;tag_type&quot;,
-              values_to = &quot;tag&quot;) %&gt;%
-  group_by(user_id, tag) %&gt;%
-  summarise(tag_count = n(), .groups = &quot;drop&quot;) %&gt;%
-  drop_na(tag) %&gt;%
-  group_by(user_id) %&gt;%
-  slice_max(order_by = tag_count, n = 3) %&gt;%
-  ungroup()
-
-unique_data &lt;- !duplicated(top_to_read$book_id)</code></pre>
+<p>The books that the most of the top 15 users wanted to read is “The
+Catcher in the Rye” by J.D. Salinger, followed by “The Fault in Our
+Stars” by John Green and “A Tale of Two Cities” by Charles Dickens.</p>
+</div>
+<div id="top-genres" class="section level3">
+<h3>Top Genres</h3>
+<p>Now, let’s look at the top genres for the 15 Users using distinct
+book titles.</p>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-30bdaa727c83cf039c05" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-30bdaa727c83cf039c05">{"x":{"visdat":{"cefa21e66f14":["function () ","plotlyVisDat"]},"cur_data":"cefa21e66f14","attrs":{"cefa21e66f14":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Top Genres for Top 15 Users","xaxis":{"domain":[0,1],"automargin":true,"title":"Genres","type":"category","categoryorder":"array","categoryarray":["children","classics","fantasy","fiction","horror","lgbtq","non-fiction","romance","science fiction","self-help","thriller","young adult"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Values"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["fiction","young adult","fantasy","classics","non-fiction","romance","children","horror","lgbtq","science fiction","self-help","thriller"],"y":[13,9,8,5,4,2,1,1,1,1,1,1],"type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Now let’s look at the top genres of the top users’ books.</p>
+<table>
+<caption>Top To-Read genres for Top 15 Users</caption>
+<thead>
+<tr class="header">
+<th align="center">tag</th>
+<th align="center">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">young adult</td>
+<td align="center">177</td>
+</tr>
+<tr class="even">
+<td align="center">classics</td>
+<td align="center">151</td>
+</tr>
+<tr class="odd">
+<td align="center">fiction</td>
+<td align="center">124</td>
+</tr>
+<tr class="even">
+<td align="center">fantasy</td>
+<td align="center">116</td>
+</tr>
+<tr class="odd">
+<td align="center">non-fiction</td>
+<td align="center">99</td>
+</tr>
+<tr class="even">
+<td align="center">romance</td>
+<td align="center">52</td>
+</tr>
+<tr class="odd">
+<td align="center">horror</td>
+<td align="center">47</td>
+</tr>
+<tr class="even">
+<td align="center">mystery</td>
+<td align="center">45</td>
+</tr>
+<tr class="odd">
+<td align="center">graphic novels</td>
+<td align="center">33</td>
+</tr>
+<tr class="even">
+<td align="center">historical-fiction</td>
+<td align="center">26</td>
+</tr>
+<tr class="odd">
+<td align="center">manga</td>
+<td align="center">21</td>
+</tr>
+<tr class="even">
+<td align="center">science fiction</td>
+<td align="center">18</td>
+</tr>
+<tr class="odd">
+<td align="center">christianity</td>
+<td align="center">17</td>
+</tr>
+<tr class="even">
+<td align="center">humor</td>
+<td align="center">17</td>
+</tr>
+<tr class="odd">
+<td align="center">memoir</td>
+<td align="center">16</td>
+</tr>
+<tr class="even">
+<td align="center">plays</td>
+<td align="center">16</td>
+</tr>
+<tr class="odd">
+<td align="center">chick-lit</td>
+<td align="center">13</td>
+</tr>
+<tr class="even">
+<td align="center">vampires</td>
+<td align="center">13</td>
+</tr>
+<tr class="odd">
+<td align="center">poetry</td>
+<td align="center">12</td>
+</tr>
+<tr class="even">
+<td align="center">history</td>
+<td align="center">11</td>
+</tr>
+<tr class="odd">
+<td align="center">self-help</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center">comics</td>
+<td align="center">9</td>
+</tr>
+<tr class="odd">
+<td align="center">biography</td>
+<td align="center">7</td>
+</tr>
+<tr class="even">
+<td align="center">children</td>
+<td align="center">7</td>
+</tr>
+<tr class="odd">
+<td align="center">contemporary</td>
+<td align="center">7</td>
+</tr>
+<tr class="even">
+<td align="center">lgbtq</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">art</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">dystopian</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">philosophy</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">psychology</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">short-stories</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">travel</td>
+<td align="center">5</td>
+</tr>
+</tbody>
+</table>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-a84c46ee888944ecb9da" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-a84c46ee888944ecb9da">{"x":{"visdat":{"cefafdf107d":["function () ","plotlyVisDat"]},"cur_data":"cefafdf107d","attrs":{"cefafdf107d":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Top Genres for Top 15 To-Read Users","xaxis":{"domain":[0,1],"automargin":true,"title":"Genres","type":"category","categoryorder":"array","categoryarray":["art","biography","chick-lit","children","christianity","classics","comics","contemporary","dystopian","fantasy","fiction","graphic novels","historical-fiction","history","horror","humor","lgbtq","manga","memoir","mystery","non-fiction","philosophy","plays","poetry","psychology","romance","science fiction","self-help","short-stories","travel","vampires","young adult"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Values"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["young adult","classics","fiction","fantasy","non-fiction","romance","horror","mystery","graphic novels","historical-fiction","manga","science fiction","christianity","humor","memoir","plays","chick-lit","vampires","poetry","history","self-help","comics","biography","children","contemporary","lgbtq","art","dystopian","philosophy","psychology","short-stories","travel"],"y":[177,151,124,116,99,52,47,45,33,26,21,18,17,17,16,16,13,13,12,11,10,9,7,7,7,6,5,5,5,5,5,5],"type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>The most popular to-read genre among the top 15 users is young adult.
+The next most popular genres are classics and fiction.</p>
+</div>
 
 
 
