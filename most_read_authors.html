@@ -315,7 +315,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Most Read Authors</h1>
+<h1 class="title toc-ignore"><b>Most Read Authors</b></h1>
 
 </div>
 
@@ -323,7 +323,7 @@ $(document).ready(function () {
 <div id="data-import" class="section level2">
 <h2>Data Import</h2>
 <div id="summarizing-read-counts-by-author" class="section level3">
-<h3>Summarizing Read Counts by Author</h3>
+<h3><em>Summarizing Read Counts by Author</em></h3>
 <pre class="r"><code>most_read_authors &lt;- books %&gt;%
   group_by(authors) %&gt;%
   summarize(
@@ -349,11 +349,11 @@ head(most_read_authors, 50)</code></pre>
 ## # ℹ 40 more rows</code></pre>
 </div>
 <div id="displaying-top-10-most-read-authors" class="section level3">
-<h3>Displaying Top 10 Most Read Authors</h3>
+<h3><em>Displaying Top 10 Most Read Authors</em></h3>
 <pre class="r"><code>ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = &quot;identity&quot;, aes(fill = total_ratings), show.legend = FALSE) +
   labs(
-    title = &quot;Top 10 Most Read Authors&quot;,
+    title = &quot;Top 10 Most Read Authors by Rating&quot;,
     x = &quot;Total Ratings Count&quot;,
     y = &quot;Authors&quot;
   ) +
@@ -367,11 +367,21 @@ head(most_read_authors, 50)</code></pre>
     panel.grid.major.y = element_blank() 
   ) +
   scale_x_continuous(labels = scales::comma)</code></pre>
-<p><img src="most_read_authors_files/figure-html/Dislaying%20Top%2010%20Most%20Read%20Authors-1.png" width="672" />
-```</p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the
-code chunk to prevent printing of the R code that generated the
-plot.</p>
+<p><img src="most_read_authors_files/figure-html/Dislaying%20Top%2010%20Most%20Read%20Authors-1.png" width="672" /></p>
+<p><strong>Top 10 Most Read Authors</strong></p>
+<p>This bar chart, “Top 10 Most Read Authors by Rating” depicts the
+percentage of total ratings each author received relative to the
+dataset. The top 10 most read authors are:</p>
+<p>J.K. Rowling &amp; Mary GrandPré: 14,126,791 ratings<br />
+Suzanne Collins: 9,161,124 ratings<br />
+Stephenie Meyer: 8,631,937 ratings<br />
+Stephen King: 7,297,834 ratings<br />
+Rick Riordan: 5,717,999 ratings<br />
+J.R.R. Tolkien: 5,602,790 ratings<br />
+Dan Brown: 5,332,589 ratings<br />
+Cassandra Clare: 4,631,019 ratings<br />
+Nicholas Sparks: 4,501,871 ratings<br />
+John Green: 4,312,589 ratings</p>
 </div>
 </div>
 

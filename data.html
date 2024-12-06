@@ -610,41 +610,38 @@ padding-top: 0px;
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>url <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/books.csv&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>books <span class="ot">=</span> <span class="fu">read_csv</span>(url)</span></code></pre></div>
 <pre><code>## Rows: 10000 Columns: 23
-## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
 ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">view</span>(books)</span></code></pre></div>
 <p>Cleaning the Ratings file.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>url2 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/ratings.csv&quot;</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>ratings <span class="ot">=</span> <span class="fu">read_csv</span>(url2)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>url2 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/ratings.csv&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>ratings <span class="ot">=</span> <span class="fu">read_csv</span>(url2)</span></code></pre></div>
 <pre><code>## Rows: 5976479 Columns: 3
-## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (3): user_id, book_id, rating
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">view</span>(ratings)</span></code></pre></div>
 <p>Cleaning the Book Tags file.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>url3 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/book_tags.csv&quot;</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>book_tag <span class="ot">=</span> <span class="fu">read_csv</span>(url3)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>url3 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/book_tags.csv&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>book_tag <span class="ot">=</span> <span class="fu">read_csv</span>(url3)</span></code></pre></div>
 <pre><code>## Rows: 999912 Columns: 3
-## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (3): goodreads_book_id, tag_id, count
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">view</span>(book_tag)</span></code></pre></div>
 <p>Cleaning the Tags file.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>url4 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/tags.csv&quot;</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>tags <span class="ot">=</span> <span class="fu">read_csv</span>(url4)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>url4 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/tags.csv&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>tags <span class="ot">=</span> <span class="fu">read_csv</span>(url4)</span></code></pre></div>
 <pre><code>## Rows: 34252 Columns: 2
-## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (1): tag_name
 ## dbl (1): tag_id
@@ -652,30 +649,29 @@ padding-top: 0px;
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>Cleaning the To Read file.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>url5 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv&quot;</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>to_read <span class="ot">=</span> <span class="fu">read_csv</span>(url5)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>url5 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv&quot;</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>to_read <span class="ot">=</span> <span class="fu">read_csv</span>(url5)</span></code></pre></div>
 <pre><code>## Rows: 912705 Columns: 2
-## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (2): user_id, book_id
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">view</span>(to_read)</span></code></pre></div>
 <p>Set Up (KB):</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <p>Import data (JM):</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>book_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;Books.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>book_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;Books.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 10000 Columns: 23
-## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ───────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
 ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">head</span>(book_data)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">head</span>(book_data)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 23
 ##   book_id goodreads_book_id best_book_id  work_id books_count isbn        isbn13
 ##     &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -692,65 +688,114 @@ padding-top: 0px;
 ## #   ratings_3 &lt;dbl&gt;, ratings_4 &lt;dbl&gt;, ratings_5 &lt;dbl&gt;, image_url &lt;chr&gt;,
 ## #   small_image_url &lt;chr&gt;</code></pre>
 <p>Remove unnecessary variables (JM):</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>book_data <span class="ot">=</span> book_data <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>    book_id,</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>    goodreads_book_id,  </span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>    isbn,                </span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>    authors,             </span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>    title,               </span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>    average_rating,      </span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>    ratings_count,       </span>
-<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>    work_ratings_count,  </span>
-<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>    work_text_reviews_count, </span>
-<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>    ratings_1,           </span>
-<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>    ratings_2,           </span>
-<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a>    ratings_3,           </span>
-<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>    ratings_4,           </span>
-<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a>    ratings_5            </span>
-<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>book_data <span class="ot">=</span> book_data <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>    book_id,</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>    goodreads_book_id,  </span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>    isbn,                </span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>    authors,             </span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>    title,               </span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>    average_rating,      </span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>    ratings_count,       </span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>    work_ratings_count,  </span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>    work_text_reviews_count, </span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a>    ratings_1,           </span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>    ratings_2,           </span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>    ratings_3,           </span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>    ratings_4,           </span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>    ratings_5, </span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a>    image_url</span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Check for missing (JM):</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>missing_summary <span class="ot">=</span> book_data <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.)), <span class="at">.names =</span> <span class="st">&quot;{.col}&quot;</span>))</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="fu">print</span>(missing_summary)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 14
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>missing_summary <span class="ot">=</span> book_data <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.)), <span class="at">.names =</span> <span class="st">&quot;{.col}&quot;</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="fu">print</span>(missing_summary)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 15
 ##   book_id goodreads_book_id  isbn authors title average_rating ratings_count
 ##     &lt;int&gt;             &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt;          &lt;int&gt;         &lt;int&gt;
 ## 1       0                 0   700       0     0              0             0
-## # ℹ 7 more variables: work_ratings_count &lt;int&gt;, work_text_reviews_count &lt;int&gt;,
+## # ℹ 8 more variables: work_ratings_count &lt;int&gt;, work_text_reviews_count &lt;int&gt;,
 ## #   ratings_1 &lt;int&gt;, ratings_2 &lt;int&gt;, ratings_3 &lt;int&gt;, ratings_4 &lt;int&gt;,
-## #   ratings_5 &lt;int&gt;</code></pre>
+## #   ratings_5 &lt;int&gt;, image_url &lt;int&gt;</code></pre>
 <p>There are 700 entries missing from the ‘missing_isbn’ variable.</p>
 <p>Removing missing values (JM):</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>book_data_complete <span class="ot">=</span> book_data <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(isbn))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>book_data_complete <span class="ot">=</span> book_data <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(isbn))</span></code></pre></div>
 <p>Creating new csv file for use (JM):</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">write.csv</span>(book_data_complete, <span class="st">&quot;book_data_complete.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">write.csv</span>(book_data_complete, <span class="st">&quot;book_data_complete.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Creating merged tag file (SR)</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>merged_tags <span class="ot">=</span> </span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>  <span class="fu">left_join</span>(book_tag, tags, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;tag_id&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>  <span class="fu">group_by</span>(goodreads_book_id) <span class="sc">%&gt;%</span></span>
-<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>tag_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;owned&quot;</span>, <span class="st">&quot;to-read&quot;</span>, <span class="st">&quot;favorites&quot;</span>, <span class="st">&quot;owned&quot;</span>, <span class="st">&quot;books-i-own&quot;</span>, <span class="st">&quot;currently-reading&quot;</span>, <span class="st">&quot;library&quot;</span>, <span class="st">&quot;owned-books&quot;</span>, <span class="st">&quot;to-buy&quot;</span>, <span class="st">&quot;kindle&quot;</span>, <span class="st">&quot;default&quot;</span>, <span class="st">&quot;ebook&quot;</span>, <span class="st">&quot;audiobook&quot;</span>, <span class="st">&quot;ebooks&quot;</span>, <span class="st">&quot;wish-list&quot;</span>, <span class="st">&quot;my-library&quot;</span>, <span class="st">&quot;audiobooks&quot;</span>, <span class="st">&quot;i-own&quot;</span>, <span class="st">&quot;book-club&quot;</span>, <span class="st">&quot;discworld&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>  <span class="fu">drop_na</span>(tag_name) <span class="sc">%&gt;%</span></span>
-<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a>  </span>
-<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a>pivoted_data <span class="ot">&lt;-</span> merged_tags <span class="sc">%&gt;%</span></span>
-<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>(), <span class="at">.by =</span> goodreads_book_id) <span class="sc">%&gt;%</span> <span class="co"># Add rank for top tags</span></span>
-<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a>    <span class="at">id_cols =</span> goodreads_book_id, </span>
-<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a>    <span class="at">names_from =</span> rank, </span>
-<span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(tag_name), </span>
-<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">&quot;top_&quot;</span></span>
-<span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a>  )</span>
-<span id="cb26-19"><a href="#cb26-19" tabindex="-1"></a></span>
-<span id="cb26-20"><a href="#cb26-20" tabindex="-1"></a></span>
-<span id="cb26-21"><a href="#cb26-21" tabindex="-1"></a>books_with_tags <span class="ot">&lt;-</span> <span class="fu">left_join</span>(book_data_complete, pivoted_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;goodreads_book_id&quot;</span>))</span>
-<span id="cb26-22"><a href="#cb26-22" tabindex="-1"></a></span>
-<span id="cb26-23"><a href="#cb26-23" tabindex="-1"></a><span class="fu">write.csv</span>(books_with_tags, <span class="st">&quot;books_with_tags.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>merged_tags <span class="ot">=</span> </span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>  <span class="fu">left_join</span>(book_tag, tags, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;tag_id&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>  <span class="fu">group_by</span>(goodreads_book_id) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>tag_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;owned&quot;</span>, <span class="st">&quot;to-read&quot;</span>, <span class="st">&quot;favorites&quot;</span>, <span class="st">&quot;owned&quot;</span>, <span class="st">&quot;books-i-own&quot;</span>, <span class="st">&quot;currently-reading&quot;</span>, <span class="st">&quot;library&quot;</span>, <span class="st">&quot;owned-books&quot;</span>, <span class="st">&quot;to-buy&quot;</span>, <span class="st">&quot;kindle&quot;</span>, <span class="st">&quot;default&quot;</span>, <span class="st">&quot;ebook&quot;</span>, <span class="st">&quot;audiobook&quot;</span>, <span class="st">&quot;ebooks&quot;</span>, <span class="st">&quot;wish-list&quot;</span>, <span class="st">&quot;my-library&quot;</span>, <span class="st">&quot;audiobooks&quot;</span>, <span class="st">&quot;i-own&quot;</span>, <span class="st">&quot;book-club&quot;</span>, <span class="st">&quot;discworld&quot;</span>, <span class="st">&quot;harry-potter&quot;</span>, <span class="st">&quot;tolkien&quot;</span>, <span class="st">&quot;series&quot;</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="st">&quot;all-time-favorites&quot;</span>, <span class="st">&quot;1001&quot;</span>, <span class="st">&quot;1001-books&quot;</span>, <span class="st">&quot;   </span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="st">1001-books-to-read&quot;</span>, <span class="st">&quot;1001-books-to-read-before-you-die&quot;</span>, <span class="st">&quot;1001-import&quot;</span>, <span class="st">&quot;abandoned&quot;</span>, <span class="st">&quot;pulitzer-prize&quot;</span>, <span class="st">&quot;dune&quot;</span>, <span class="st">&quot;unfinished&quot;</span>, <span class="st">&quot;19th-century&quot;</span>, <span class="st">&quot;novels&quot;</span>, <span class="st">&quot;time-100&quot;</span>, <span class="st">&quot;paul-auster&quot;</span>, <span class="st">&quot;favourites&quot;</span>, <span class="st">&quot;ayn-rand&quot;</span>, <span class="st">&quot;anne-tyler&quot;</span>, <span class="st">&quot;ux&quot;</span>, <span class="st">&quot;dan-brown&quot;</span>, <span class="st">&quot;john-grisham&quot;</span>, <span class="st">&quot;grisham&quot;</span>, <span class="st">&quot;books-about-books&quot;</span>, <span class="st">&quot;shakespeare&quot;</span>, <span class="st">&quot;read-for-school&quot;</span>, <span class="st">&quot;nelson-demille&quot;</span>, <span class="st">&quot;paulo-coelho&quot;</span>, <span class="st">&quot;jane-austen&quot;</span>, <span class="st">&quot;pulitzer&quot;</span>, <span class="st">&quot;steve-martini&quot;</span>, <span class="st">&quot; </span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="st">terry-pratchett&quot;</span>, <span class="st">&quot;middle-earth&quot;</span>,<span class="st">&quot;stephen-king&quot;</span>, <span class="st">&quot;lee-child&quot;</span>, <span class="st">&quot;preston-child&quot;</span>, <span class="st">&quot;NA&quot;</span>, <span class="st">&quot;sophie-kinsella&quot;</span>, <span class="st">&quot;read-in-2014&quot;</span>, <span class="st">&quot;read-in-2012&quot;</span>, <span class="st">&quot;nicholas-sparks&quot;</span>, <span class="st">&quot;hunger-games&quot;</span>, <span class="st">&quot;jodi-picoult&quot;</span>, <span class="st">&quot;nora-roberts&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>  <span class="fu">drop_na</span>(tag_name) <span class="sc">%&gt;%</span></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>  </span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a>  </span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a><span class="co">#Cleaning up genres</span></span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>genres <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a>  <span class="st">&quot;young adult&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;young-adult&quot;</span>, <span class="st">&quot;ya&quot;</span>),</span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a>  <span class="st">&quot;children&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;children&quot;</span>, <span class="st">&quot;childrens&quot;</span>, <span class="st">&quot;childhood&quot;</span>, <span class="st">&quot;children-s&quot;</span>, <span class="st">&quot;childrens-books&quot;</span>, <span class="st">&quot;children-s-books&quot;</span>, <span class="st">&quot;kids&quot;</span>, <span class="st">&quot;kids-books&quot;</span>, <span class="st">&quot;baby&quot;</span>, <span class="st">&quot;children-s-lit&quot;</span>, <span class="st">&quot;children-books&quot;</span>, <span class="st">&quot;childhood-books&quot;</span>, <span class="st">&quot;childhood-favorites&quot;</span>, <span class="st">&quot;children-s-literature&quot;</span>),</span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>  <span class="st">&quot;fantasy&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;fantasy&quot;</span>, <span class="st">&quot;fantasy-fiction&quot;</span>, <span class="st">&quot;epic-fantasy&quot;</span>, <span class="st">&quot;high-fantasy&quot;</span>), </span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a>  <span class="st">&quot;science fiction&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;sci-fi&quot;</span>, <span class="st">&quot;science-fiction&quot;</span>, <span class="st">&quot;sci-fi-fantasy&quot;</span>, <span class="st">&quot;scifi&quot;</span>, <span class="st">&quot;sf&quot;</span>, <span class="st">&quot;cyberpunk&quot;</span>, <span class="st">&quot;space-opera&quot;</span>),</span>
+<span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a>  <span class="st">&quot;dystopian&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;dystopia&quot;</span>, <span class="st">&quot;dystopian&quot;</span>),</span>
+<span id="cb22-23"><a href="#cb22-23" tabindex="-1"></a>  <span class="st">&quot;non-fiction&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;non-fiction&quot;</span>, <span class="st">&quot;nonfiction&quot;</span>),</span>
+<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a>  <span class="st">&quot;classics&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;classic&quot;</span>, <span class="st">&quot;classics&quot;</span>, <span class="st">&quot;clàssics&quot;</span>),</span>
+<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a>  <span class="st">&quot;mystery&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;mystery&quot;</span>, <span class="st">&quot;mysteries&quot;</span>, <span class="st">&quot;detective&quot;</span>, <span class="st">&quot;mystery-thriller&quot;</span>),</span>
+<span id="cb22-26"><a href="#cb22-26" tabindex="-1"></a>  <span class="st">&quot;romance&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;historical-romance&quot;</span>, <span class="st">&quot;paranormal-romance&quot;</span>, <span class="st">&quot;historical romance&quot;</span>, <span class="st">&quot;romance-suspense&quot;</span>),</span>
+<span id="cb22-27"><a href="#cb22-27" tabindex="-1"></a>  <span class="st">&quot;poetry&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;poetry&quot;</span>, <span class="st">&quot;poem&quot;</span>),</span>
+<span id="cb22-28"><a href="#cb22-28" tabindex="-1"></a>  <span class="st">&quot;biography&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;biography&quot;</span>, <span class="st">&quot;biographies&quot;</span>),</span>
+<span id="cb22-29"><a href="#cb22-29" tabindex="-1"></a>  <span class="st">&quot;spirituality&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;spiritual&quot;</span>, <span class="st">&quot;spirtuality&quot;</span>, <span class="st">&quot;faith&quot;</span>),</span>
+<span id="cb22-30"><a href="#cb22-30" tabindex="-1"></a>  <span class="st">&quot;self-help&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;self-improvement&quot;</span>, <span class="st">&quot;self-help&quot;</span>, <span class="st">&quot;personal-development&quot;</span>),</span>
+<span id="cb22-31"><a href="#cb22-31" tabindex="-1"></a>  <span class="st">&quot;art&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;art&quot;</span>, <span class="st">&quot;art-books&quot;</span>),</span>
+<span id="cb22-32"><a href="#cb22-32" tabindex="-1"></a>  <span class="st">&quot;finance&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;personal-finance&quot;</span>, <span class="st">&quot;finance&quot;</span>, <span class="st">&quot;money&quot;</span>),</span>
+<span id="cb22-33"><a href="#cb22-33" tabindex="-1"></a>  <span class="st">&quot;business&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;management&quot;</span>, <span class="st">&quot;leadership&quot;</span>, <span class="st">&quot;productivity&quot;</span>, <span class="st">&quot;entrepreneurship&quot;</span>, <span class="st">&quot;business-books&quot;</span>),</span>
+<span id="cb22-34"><a href="#cb22-34" tabindex="-1"></a>  <span class="st">&quot;graphic novels&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;graphic-novels&quot;</span>, <span class="st">&quot;cómics&quot;</span> ),</span>
+<span id="cb22-35"><a href="#cb22-35" tabindex="-1"></a>  <span class="st">&quot;manga&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;mangá&quot;</span>),</span>
+<span id="cb22-36"><a href="#cb22-36" tabindex="-1"></a>  <span class="st">&quot;food&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;food&quot;</span>, <span class="st">&quot;cooking&quot;</span>, <span class="st">&quot;cookbooks&quot;</span>, <span class="st">&quot;cookbook&quot;</span>), </span>
+<span id="cb22-37"><a href="#cb22-37" tabindex="-1"></a>  <span class="st">&quot;lgbtq&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;lgbt&quot;</span>, <span class="st">&quot;gay&quot;</span>, <span class="st">&quot;queer&quot;</span>, <span class="st">&quot;glbt&quot;</span>),</span>
+<span id="cb22-38"><a href="#cb22-38" tabindex="-1"></a>  <span class="st">&quot;christianity&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;christian-living&quot;</span>, <span class="st">&quot;christian&quot;</span>)</span>
+<span id="cb22-39"><a href="#cb22-39" tabindex="-1"></a>)</span>
+<span id="cb22-40"><a href="#cb22-40" tabindex="-1"></a></span>
+<span id="cb22-41"><a href="#cb22-41" tabindex="-1"></a><span class="co"># Create a function to standardize tags</span></span>
+<span id="cb22-42"><a href="#cb22-42" tabindex="-1"></a>standardize_tag <span class="ot">&lt;-</span> <span class="cf">function</span>(tag) {</span>
+<span id="cb22-43"><a href="#cb22-43" tabindex="-1"></a>  <span class="co"># Check each genre list for a match</span></span>
+<span id="cb22-44"><a href="#cb22-44" tabindex="-1"></a>  <span class="cf">for</span> (genre <span class="cf">in</span> <span class="fu">names</span>(genres)) {</span>
+<span id="cb22-45"><a href="#cb22-45" tabindex="-1"></a>    <span class="cf">if</span> (tag <span class="sc">%in%</span> genres[[genre]]) {</span>
+<span id="cb22-46"><a href="#cb22-46" tabindex="-1"></a>      <span class="fu">return</span>(genre)</span>
+<span id="cb22-47"><a href="#cb22-47" tabindex="-1"></a>    }</span>
+<span id="cb22-48"><a href="#cb22-48" tabindex="-1"></a>  }</span>
+<span id="cb22-49"><a href="#cb22-49" tabindex="-1"></a>  <span class="co"># If no match, return the original tag</span></span>
+<span id="cb22-50"><a href="#cb22-50" tabindex="-1"></a>  <span class="fu">return</span>(tag)</span>
+<span id="cb22-51"><a href="#cb22-51" tabindex="-1"></a>}</span>
+<span id="cb22-52"><a href="#cb22-52" tabindex="-1"></a></span>
+<span id="cb22-53"><a href="#cb22-53" tabindex="-1"></a><span class="co"># Apply the function to the tag_name column</span></span>
+<span id="cb22-54"><a href="#cb22-54" tabindex="-1"></a>rename_tags <span class="ot">&lt;-</span> merged_tags <span class="sc">%&gt;%</span></span>
+<span id="cb22-55"><a href="#cb22-55" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tag_name =</span> <span class="fu">sapply</span>(tag_name, standardize_tag))</span>
+<span id="cb22-56"><a href="#cb22-56" tabindex="-1"></a></span>
+<span id="cb22-57"><a href="#cb22-57" tabindex="-1"></a></span>
+<span id="cb22-58"><a href="#cb22-58" tabindex="-1"></a></span>
+<span id="cb22-59"><a href="#cb22-59" tabindex="-1"></a>pivoted_data <span class="ot">&lt;-</span> rename_tags <span class="sc">%&gt;%</span></span>
+<span id="cb22-60"><a href="#cb22-60" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>(), <span class="at">.by =</span> goodreads_book_id) <span class="sc">%&gt;%</span> <span class="co"># Add rank for top tags</span></span>
+<span id="cb22-61"><a href="#cb22-61" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb22-62"><a href="#cb22-62" tabindex="-1"></a>    <span class="at">id_cols =</span> goodreads_book_id, </span>
+<span id="cb22-63"><a href="#cb22-63" tabindex="-1"></a>    <span class="at">names_from =</span> rank, </span>
+<span id="cb22-64"><a href="#cb22-64" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(tag_name), </span>
+<span id="cb22-65"><a href="#cb22-65" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">&quot;top_&quot;</span></span>
+<span id="cb22-66"><a href="#cb22-66" tabindex="-1"></a>  )</span>
+<span id="cb22-67"><a href="#cb22-67" tabindex="-1"></a></span>
+<span id="cb22-68"><a href="#cb22-68" tabindex="-1"></a></span>
+<span id="cb22-69"><a href="#cb22-69" tabindex="-1"></a>books_with_tags <span class="ot">&lt;-</span> <span class="fu">left_join</span>(book_data_complete, pivoted_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;goodreads_book_id&quot;</span>))</span>
+<span id="cb22-70"><a href="#cb22-70" tabindex="-1"></a></span>
+<span id="cb22-71"><a href="#cb22-71" tabindex="-1"></a><span class="fu">write.csv</span>(books_with_tags, <span class="st">&quot;books_with_tags.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 
 </body>
 </html>

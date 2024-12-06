@@ -1,5 +1,5 @@
 ---
-title: "Most Read Authors"
+title: "<b>Most Read Authors</b>"
 output: html_document
 ---
 
@@ -19,7 +19,7 @@ library(ggplot2)
 books <- read.csv("books.csv")
 ```
 
-### Summarizing Read Counts by Author 
+### *Summarizing Read Counts by Author*
 ```{r most read authors}
 most_read_authors <- books %>%
   group_by(authors) %>%
@@ -32,12 +32,13 @@ most_read_authors <- books %>%
 head(most_read_authors, 50)
 ```
 
-### Displaying  Top 10 Most Read Authors
+
+### *Displaying  Top 10 Most Read Authors*
 ```{r Dislaying Top 10 Most Read Authors}
 ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = "identity", aes(fill = total_ratings), show.legend = FALSE) +
   labs(
-    title = "Top 10 Most Read Authors",
+    title = "Top 10 Most Read Authors by Rating",
     x = "Total Ratings Count",
     y = "Authors"
   ) +
@@ -52,6 +53,22 @@ ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, 
   ) +
   scale_x_continuous(labels = scales::comma)
 ```
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+**Top 10 Most Read Authors**
+
+This bar chart, "Top 10 Most Read Authors by Rating" depicts the percentage of total ratings each author received relative to the dataset.
+The top 10 most read authors are:
+
+
+J.K. Rowling & Mary GrandPré: 14,126,791 ratings  
+Suzanne Collins: 9,161,124 ratings  
+Stephenie Meyer: 8,631,937 ratings  
+Stephen King: 7,297,834 ratings  
+Rick Riordan: 5,717,999 ratings  
+J.R.R. Tolkien: 5,602,790 ratings  
+Dan Brown: 5,332,589 ratings  
+Cassandra Clare: 4,631,019 ratings  
+Nicholas Sparks: 4,501,871 ratings  
+John Green: 4,312,589 ratings 
+
+

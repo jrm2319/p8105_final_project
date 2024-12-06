@@ -17,17 +17,13 @@ books = read_csv(url)
 ```
 
     ## Rows: 10000 Columns: 23
-    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────
     ## Delimiter: ","
     ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
     ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
-view(books)
-```
 
 Cleaning the Ratings file.
 
@@ -37,16 +33,12 @@ ratings = read_csv(url2)
 ```
 
     ## Rows: 5976479 Columns: 3
-    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────
     ## Delimiter: ","
     ## dbl (3): user_id, book_id, rating
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
-view(ratings)
-```
 
 Cleaning the Book Tags file.
 
@@ -56,16 +48,12 @@ book_tag = read_csv(url3)
 ```
 
     ## Rows: 999912 Columns: 3
-    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────
     ## Delimiter: ","
     ## dbl (3): goodreads_book_id, tag_id, count
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
-view(book_tag)
-```
 
 Cleaning the Tags file.
 
@@ -75,7 +63,7 @@ tags = read_csv(url4)
 ```
 
     ## Rows: 34252 Columns: 2
-    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────
     ## Delimiter: ","
     ## chr (1): tag_name
     ## dbl (1): tag_id
@@ -91,16 +79,12 @@ to_read = read_csv(url5)
 ```
 
     ## Rows: 912705 Columns: 2
-    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────
     ## Delimiter: ","
     ## dbl (2): user_id, book_id
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
-``` r
-view(to_read)
-```
 
 Set Up (KB):
 
@@ -116,7 +100,7 @@ book_data = read_csv("Books.csv")
 ```
 
     ## Rows: 10000 Columns: 23
-    ## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+    ## ── Column specification ───────────────────────────────────
     ## Delimiter: ","
     ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
     ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
@@ -162,7 +146,8 @@ book_data = book_data %>%
     ratings_2,           
     ratings_3,           
     ratings_4,           
-    ratings_5            
+    ratings_5, 
+    image_url
   )
 ```
 
@@ -175,13 +160,13 @@ missing_summary = book_data %>%
 print(missing_summary)
 ```
 
-    ## # A tibble: 1 × 14
+    ## # A tibble: 1 × 15
     ##   book_id goodreads_book_id  isbn authors title average_rating ratings_count
     ##     <int>             <int> <int>   <int> <int>          <int>         <int>
     ## 1       0                 0   700       0     0              0             0
-    ## # ℹ 7 more variables: work_ratings_count <int>, work_text_reviews_count <int>,
+    ## # ℹ 8 more variables: work_ratings_count <int>, work_text_reviews_count <int>,
     ## #   ratings_1 <int>, ratings_2 <int>, ratings_3 <int>, ratings_4 <int>,
-    ## #   ratings_5 <int>
+    ## #   ratings_5 <int>, image_url <int>
 
 There are 700 entries missing from the ‘missing_isbn’ variable.
 
@@ -205,13 +190,61 @@ merged_tags =
   left_join(book_tag, tags, by = c("tag_id")) %>%
   group_by(goodreads_book_id) %>%
   arrange(desc(count)) %>%
-  filter(!tag_name %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club", "discworld")) %>%
+  filter(!tag_name %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club", "discworld", "harry-potter", "tolkien", "series",
+"all-time-favorites", "1001", "1001-books", "   
+1001-books-to-read", "1001-books-to-read-before-you-die", "1001-import", "abandoned", "pulitzer-prize", "dune", "unfinished", "19th-century", "novels", "time-100", "paul-auster", "favourites", "ayn-rand", "anne-tyler", "ux", "dan-brown", "john-grisham", "grisham", "books-about-books", "shakespeare", "read-for-school", "nelson-demille", "paulo-coelho", "jane-austen", "pulitzer", "steve-martini", " 
+terry-pratchett", "middle-earth","stephen-king", "lee-child", "preston-child", "NA", "sophie-kinsella", "read-in-2014", "read-in-2012", "nicholas-sparks", "hunger-games", "jodi-picoult", "nora-roberts")) %>%
   drop_na(tag_name) %>%
   slice_head(n = 5) %>%
   ungroup()
   
 
-pivoted_data <- merged_tags %>%
+  
+#Cleaning up genres
+
+genres <- list(
+  "young adult" = c("young-adult", "ya"),
+  "children" = c("children", "childrens", "childhood", "children-s", "childrens-books", "children-s-books", "kids", "kids-books", "baby", "children-s-lit", "children-books", "childhood-books", "childhood-favorites", "children-s-literature"),
+  "fantasy" = c("fantasy", "fantasy-fiction", "epic-fantasy", "high-fantasy"), 
+  "science fiction" = c("sci-fi", "science-fiction", "sci-fi-fantasy", "scifi", "sf", "cyberpunk", "space-opera"),
+  "dystopian" = c("dystopia", "dystopian"),
+  "non-fiction" = c("non-fiction", "nonfiction"),
+  "classics" = c("classic", "classics", "clàssics"),
+  "mystery" = c("mystery", "mysteries", "detective", "mystery-thriller"),
+  "romance" = c("historical-romance", "paranormal-romance", "historical romance", "romance-suspense"),
+  "poetry" = c("poetry", "poem"),
+  "biography" = c("biography", "biographies"),
+  "spirituality" = c("spiritual", "spirtuality", "faith"),
+  "self-help" = c("self-improvement", "self-help", "personal-development"),
+  "art" = c("art", "art-books"),
+  "finance" = c("personal-finance", "finance", "money"),
+  "business" = c("management", "leadership", "productivity", "entrepreneurship", "business-books"),
+  "graphic novels" = c("graphic-novels", "cómics" ),
+  "manga" = c("mangá"),
+  "food" = c("food", "cooking", "cookbooks", "cookbook"), 
+  "lgbtq" = c("lgbt", "gay", "queer", "glbt"),
+  "christianity" = c("christian-living", "christian")
+)
+
+# Create a function to standardize tags
+standardize_tag <- function(tag) {
+  # Check each genre list for a match
+  for (genre in names(genres)) {
+    if (tag %in% genres[[genre]]) {
+      return(genre)
+    }
+  }
+  # If no match, return the original tag
+  return(tag)
+}
+
+# Apply the function to the tag_name column
+rename_tags <- merged_tags %>%
+  mutate(tag_name = sapply(tag_name, standardize_tag))
+
+
+
+pivoted_data <- rename_tags %>%
   mutate(rank = row_number(), .by = goodreads_book_id) %>% # Add rank for top tags
   pivot_wider(
     id_cols = goodreads_book_id, 
