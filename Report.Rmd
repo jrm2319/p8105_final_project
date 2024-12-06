@@ -6,7 +6,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-```{r setup, include = FALSE}
+```{r, include = FALSE}
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
@@ -21,54 +21,6 @@ In this page, we will explore book sequels and analyze whether they live up to t
 
 
 ### Distribution of series lengths
-
-```{r}
-duplicate_series <- sequel |>
-  mutate(series = str_extract(title, "\\(.*\\)"), 
-         series_name = str_sub(str_extract(series, '\\(.*,'), 2, -2)) |>
-  group_by(series_name) |>
-  summarise(entries = n()) |>
-  filter(entries > 1)
-
-head(duplicate_series)
-
-sequel_clean <- sequel_data |>
-  mutate(series = str_extract(title, "\\(.*\\)"), 
-         series_name = str_sub(str_extract(series, '\\(.*,'), 2, -2)) |>
-  group_by(series_name, series_number) |>
-  summarise(
-    average_rating = mean(average_rating, na.rm = TRUE), 
-    ratings_count = sum(ratings_count, na.rm = TRUE),
-    .groups = "drop"
-  )
-
-duplicate <- sequel_clean |>
-  group_by(series_name) |>
-  summarise(entries = n()) |>
-  filter(entries > 1)
-
-
-head(duplicate)
-
-
-duplicate_check <- sequel_clean |>
-  group_by(series_name, series_number) |>
-  summarise(entries = n()) |>
-  filter(entries > 1)
-
-# View details of these duplicates
-problem_series <- sequel_clean |>
-  filter(series_name %in% duplicate_check$series_name)
-
-print(problem_series)
-
-sequel_clean <- sequel_clean |>
-  group_by(series_name, series_number) |>
-  slice_max(order_by = ratings_count, n = 1) |>
-  ungroup()
-```
-
-
 
 ```{r}
 series_length <- sequel |>
@@ -115,7 +67,7 @@ Based off of average ratings, good reads users generally rate the sequel higher 
 ### Table of First vs Second Book Ratings
 
 ```{r}
-sequel_performance <- sequel_clean |>
+sequel_performance <- sequel_data |>
   group_by(series_name) |>
   arrange(series_number) |>
   summarise(
@@ -144,5 +96,12 @@ t_test_table <- t_test_result |>
   knitr::kable(caption = "T-Test Results: Comparing Ratings of First and Second Books")
 
 print(t_test_table)
+```
+
+### Regression Models
+
+```{r}
+lm_sequel <- lm(average_rating ~ factor(series_number) + factor(series_name), data = sequel_data)
+
 ```
 
