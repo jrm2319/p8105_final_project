@@ -378,14 +378,13 @@ sequel higher than the original book.</p>
     rating_diff = diff(average_rating),
     .groups = &quot;drop&quot; 
   )</code></pre>
-<pre><code>## Warning: Returning more (or less) than 1 row per `summarise()`
-## group was deprecated in dplyr 1.1.0.
+<pre><code>## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
+## dplyr 1.1.0.
 ## ℹ Please use `reframe()` instead.
-## ℹ When switching from `summarise()` to `reframe()`,
-##   remember that `reframe()` always returns an ungrouped
-##   data frame and adjust accordingly.
-## Call `lifecycle::last_lifecycle_warnings()` to see where
-## this warning was generated.</code></pre>
+## ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
+##   always returns an ungrouped data frame and adjust accordingly.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
 <pre class="r"><code>prop_sequel_higher &lt;- mean(sequel_performance$rating_diff &gt; 0, na.rm = TRUE)
 
 

@@ -610,7 +610,7 @@ padding-top: 0px;
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>url <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/books.csv&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>books <span class="ot">=</span> <span class="fu">read_csv</span>(url)</span></code></pre></div>
 <pre><code>## Rows: 10000 Columns: 23
-## ── Column specification ───────────────────────────────────
+## ── Column specification ──────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
 ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
@@ -621,7 +621,7 @@ padding-top: 0px;
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>url2 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/ratings.csv&quot;</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>ratings <span class="ot">=</span> <span class="fu">read_csv</span>(url2)</span></code></pre></div>
 <pre><code>## Rows: 5976479 Columns: 3
-## ── Column specification ───────────────────────────────────
+## ── Column specification ──────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (3): user_id, book_id, rating
 ## 
@@ -631,7 +631,7 @@ padding-top: 0px;
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>url3 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/book_tags.csv&quot;</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>book_tag <span class="ot">=</span> <span class="fu">read_csv</span>(url3)</span></code></pre></div>
 <pre><code>## Rows: 999912 Columns: 3
-## ── Column specification ───────────────────────────────────
+## ── Column specification ──────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (3): goodreads_book_id, tag_id, count
 ## 
@@ -641,7 +641,7 @@ padding-top: 0px;
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>url4 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/tags.csv&quot;</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>tags <span class="ot">=</span> <span class="fu">read_csv</span>(url4)</span></code></pre></div>
 <pre><code>## Rows: 34252 Columns: 2
-## ── Column specification ───────────────────────────────────
+## ── Column specification ──────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (1): tag_name
 ## dbl (1): tag_id
@@ -652,7 +652,7 @@ padding-top: 0px;
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>url5 <span class="ot">=</span> <span class="st">&quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv&quot;</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>to_read <span class="ot">=</span> <span class="fu">read_csv</span>(url5)</span></code></pre></div>
 <pre><code>## Rows: 912705 Columns: 2
-## ── Column specification ───────────────────────────────────
+## ── Column specification ──────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (2): user_id, book_id
 ## 
