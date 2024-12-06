@@ -117,7 +117,7 @@ merged_tags =
   filter(!tag_name %in% c("owned", "to-read", "favorites", "owned", "books-i-own", "currently-reading", "library", "owned-books", "to-buy", "kindle", "default", "ebook", "audiobook", "ebooks", "wish-list", "my-library", "audiobooks", "i-own", "book-club", "discworld", "harry-potter", "tolkien", "series",
 "all-time-favorites", "1001", "1001-books", "	
 1001-books-to-read", "1001-books-to-read-before-you-die", "1001-import", "abandoned", "pulitzer-prize", "dune", "unfinished", "19th-century", "novels", "time-100", "paul-auster", "favourites", "ayn-rand", "anne-tyler", "ux", "dan-brown", "john-grisham", "grisham", "books-about-books", "shakespeare", "read-for-school", "nelson-demille", "paulo-coelho", "jane-austen", "pulitzer", "steve-martini", "	
-terry-pratchett", "middle-earth")) %>%
+terry-pratchett", "middle-earth","stephen-king")) %>%
   drop_na(tag_name) %>%
   slice_head(n = 5) %>%
   ungroup()
