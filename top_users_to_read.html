@@ -259,29 +259,11 @@ $(document).ready(function () {
   <a href="index.html">About</a>
 </li>
 <li>
-  <a href="Analysis.html">Analysis</a>
-</li>
-<li>
   <a href="Report.html">Report - Hypothesis Testing Results</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Top Users
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="top_users.html">Top Users by Ratings</a>
-    </li>
-    <li>
-      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Authors &amp; Genres
+    Descriptive Analyses
      
     <span class="caret"></span>
   </a>
@@ -297,6 +279,21 @@ $(document).ready(function () {
     </li>
     <li>
       <a href="genres.html">Most to Least Read Genres</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Top Users
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
     </li>
   </ul>
 </li>
@@ -478,7 +475,7 @@ genres_count_to_read &lt;- top_to_read_genres %&gt;%
 genres_count_to_read %&gt;%
  plot_ly(x = tag, y = n, type = &quot;bar&quot;)</code></pre>
 <div class="plotly html-widget html-fill-item" id="htmlwidget-10d183760c3d724b54eb" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-10d183760c3d724b54eb">{"x":{"visdat":{"ddd95fcd80bd":["function () ","plotlyVisDat"]},"cur_data":"ddd95fcd80bd","attrs":{"ddd95fcd80bd":{"x":["function (`_tag_name`, varArgs, .noWS = NULL, .renderHook = NULL) ","{","    validateNoWS(.noWS)","    varArgsNames <- names2(varArgs)","    named_idx <- nzchar(varArgsNames)","    attribs <- dropNullsOrEmpty(varArgs[named_idx])","    children <- unname(varArgs[!named_idx])","    st <- list(name = `_tag_name`, attribs = attribs, children = children)","    if (!is.null(.noWS)) {","        st$.noWS <- .noWS","    }","    if (!is.null(.renderHook)) {","        if (!is.list(.renderHook)) {","            .renderHook <- list(.renderHook)","        }","        st$.renderHooks <- .renderHook","    }","    structure(st, class = \"shiny.tag\")","}"],"y":["function () ","{","    peek_mask()$get_current_group_size()","}"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["structure(function (`_tag_name`, varArgs, .noWS = NULL, .renderHook = NULL) ","{","    validateNoWS(.noWS)","    varArgsNames <- names2(varArgs)","    named_idx <- nzchar(varArgsNames)","    attribs <- dropNullsOrEmpty(varArgs[named_idx])","    children <- unname(varArgs[!named_idx])","    st <- list(name = `_tag_name`, attribs = attribs, children = children)","    if (!is.null(.noWS)) {","        st$.noWS <- .noWS","    }","    if (!is.null(.renderHook)) {","        if (!is.list(.renderHook)) {","            .renderHook <- list(.renderHook)","        }","        st$.renderHooks <- .renderHook","    }","    structure(st, class = \"shiny.tag\")","}, apiSrc = TRUE)"],"y":["structure(function () ","{","    peek_mask()$get_current_group_size()","}, apiSrc = TRUE)"],"type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-10d183760c3d724b54eb">{"x":{"visdat":{"e0ac594f59c7":["function () ","plotlyVisDat"]},"cur_data":"e0ac594f59c7","attrs":{"e0ac594f59c7":{"x":["function (`_tag_name`, varArgs, .noWS = NULL, .renderHook = NULL) ","{","    validateNoWS(.noWS)","    varArgsNames <- names2(varArgs)","    named_idx <- nzchar(varArgsNames)","    attribs <- dropNullsOrEmpty(varArgs[named_idx])","    children <- unname(varArgs[!named_idx])","    st <- list(name = `_tag_name`, attribs = attribs, children = children)","    if (!is.null(.noWS)) {","        st$.noWS <- .noWS","    }","    if (!is.null(.renderHook)) {","        if (!is.list(.renderHook)) {","            .renderHook <- list(.renderHook)","        }","        st$.renderHooks <- .renderHook","    }","    structure(st, class = \"shiny.tag\")","}"],"y":["function () ","{","    peek_mask()$get_current_group_size()","}"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["structure(function (`_tag_name`, varArgs, .noWS = NULL, .renderHook = NULL) ","{","    validateNoWS(.noWS)","    varArgsNames <- names2(varArgs)","    named_idx <- nzchar(varArgsNames)","    attribs <- dropNullsOrEmpty(varArgs[named_idx])","    children <- unname(varArgs[!named_idx])","    st <- list(name = `_tag_name`, attribs = attribs, children = children)","    if (!is.null(.noWS)) {","        st$.noWS <- .noWS","    }","    if (!is.null(.renderHook)) {","        if (!is.list(.renderHook)) {","            .renderHook <- list(.renderHook)","        }","        st$.renderHooks <- .renderHook","    }","    structure(st, class = \"shiny.tag\")","}, apiSrc = TRUE)"],"y":["structure(function () ","{","    peek_mask()$get_current_group_size()","}, apiSrc = TRUE)"],"type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>distinct_to_read_books &lt;- left_join(top_to_read, books_with_tags, by = c(&quot;book_id&quot;)) %&gt;%
   group_by(user_id) %&gt;% 
   pivot_longer(cols = starts_with(&quot;top&quot;),

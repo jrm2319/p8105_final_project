@@ -5,17 +5,9 @@ navbar:
   right:
     - text: "About"
       href: index.html
-    - text: "Analysis"
-      href: Analysis.html
     - text: "Report - Hypothesis Testing Results"
       href: Report.html
-    - text: "Top Users"
-      menu:
-        - text: "Top Users by Ratings"
-          href: top_users.html
-        - text: "Top Users by Most To-Read"
-          href: top_users_to_read.html
-    - text: "Authors & Genres"
+    - text: "Descriptive Analyses"
       menu:
         - text: "Most Read Authors"
           href: most_read_authors.html
@@ -25,6 +17,12 @@ navbar:
           href: popular_authors.html
         - text: "Most to Least Read Genres"
           href: genres.html
+    - text: "Top Users"
+      menu:
+        - text: "Top Users by Ratings"
+          href: top_users.html
+        - text: "Top Users by Most To-Read"
+          href: top_users_to_read.html
     - text: "Recommendations"
       menu:
         - text: "Recommendations"
@@ -36,5 +34,6 @@ navbar:
 output:
   html_document:
     theme: yeti
+
 
 
