@@ -3,7 +3,7 @@ title: "<b>Most Read Authors</b>"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(plotly)
 library(dplyr)
@@ -11,6 +11,7 @@ library(tidyr)
 library(lubridate)
 library(janitor)
 library(ggplot2)
+library(knitr)
 ```
 
 ## Data Import
@@ -20,7 +21,7 @@ books <- read.csv("books.csv")
 ```
 
 ### *Summarizing Read Counts by Author*
-```{r most read authors}
+```{r most read authors, echo=FALSE}
 most_read_authors <- books %>%
   group_by(authors) %>%
   summarize(
@@ -34,11 +35,11 @@ head(most_read_authors, 50)
 
 
 ### *Displaying  Top 10 Most Read Authors*
-```{r Dislaying Top 10 Most Read Authors}
+```{r Dislaying Top 10 Most Read Authors, echo=FALSE}
 ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = "identity", aes(fill = total_ratings), show.legend = FALSE) +
   labs(
-    title = "Top 10 Most Read Authors by Rating",
+    title = "Top 10 Most Read Authors by Ratings",
     x = "Total Ratings Count",
     y = "Authors"
   ) +
@@ -56,19 +57,20 @@ ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, 
 
 **Top 10 Most Read Authors**
 
-This bar chart, "Top 10 Most Read Authors by Rating" depicts the percentage of total ratings each author received relative to the dataset.
-The top 10 most read authors are:
+This bar chart, "Top 10 Most Read Authors by Ratings" depicts the percentage of total ratings each author received relative to the dataset.
 
+```{r echo=FALSE}
+most_read_authors <- data.frame(
+  Author = c("J.K. Rowling, Mary GrandPré", "Suzanne Collins", "Stephenie Meyer",
+             "Stephen King", "Rick Riordan", "J.R.R. Tolkien", "Dan Brown",
+             "Cassandra Clare", "Nicholas Sparks", "John Green"),
+  Total_Ratings = c(14126791, 9161124, 8631937, 7297834, 5717999, 
+                    5602790, 5332589, 4631019, 4501871, 4312589),
+  Number_of_Books = c(8, 9, 11, 60, 22, 6, 7, 13, 19, 4)
+)
 
-J.K. Rowling & Mary GrandPré: 14,126,791 ratings  
-Suzanne Collins: 9,161,124 ratings  
-Stephenie Meyer: 8,631,937 ratings  
-Stephen King: 7,297,834 ratings  
-Rick Riordan: 5,717,999 ratings  
-J.R.R. Tolkien: 5,602,790 ratings  
-Dan Brown: 5,332,589 ratings  
-Cassandra Clare: 4,631,019 ratings  
-Nicholas Sparks: 4,501,871 ratings  
-John Green: 4,312,589 ratings 
-
+# Create a static table with knitr::kable
+most_read_authors |>
+  kable(caption = "Top 10 Most Read Authors by Total Ratings")
+```
 

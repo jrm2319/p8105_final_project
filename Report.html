@@ -244,33 +244,18 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="index.html">About</a>
 </li>
 <li>
-  <a href="Analysis.html">Analysis</a>
-</li>
-<li>
-  <a href="Report.html">Report – Hypothesis Testing Results</a>
+  <a href="Report.html">Report - Hypothesis Testing Results</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Top Users
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="top_users.html">Top Users by Ratings</a>
-    </li>
-    <li>
-      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Authors
+    Descriptive Analyses
      
     <span class="caret"></span>
   </a>
@@ -284,17 +269,30 @@ $(document).ready(function () {
     <li>
       <a href="popular_authors.html">Popular Authors</a>
     </li>
+    <li>
+      <a href="genres.html">Most to Least Read Genres</a>
+    </li>
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Recommendations
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="reccomendations.html">Recommendations</a>
+    </li>
   </ul>
 </li>
 <li>
-  <a href="reccomendations.html">Reccomendations</a>
-</li>
-<li>
-  <a href="genres.html">Most to Least Read Genres</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
   <a href="https://github.com/jrm2319/p8105_final_project.io.git">
     <span class="fa fa-github fa-lg"></span>
      
@@ -378,14 +376,13 @@ sequel higher than the original book.</p>
     rating_diff = diff(average_rating),
     .groups = &quot;drop&quot; 
   )</code></pre>
-<pre><code>## Warning: Returning more (or less) than 1 row per `summarise()`
-## group was deprecated in dplyr 1.1.0.
+<pre><code>## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
+## dplyr 1.1.0.
 ## ℹ Please use `reframe()` instead.
-## ℹ When switching from `summarise()` to `reframe()`,
-##   remember that `reframe()` always returns an ungrouped
-##   data frame and adjust accordingly.
-## Call `lifecycle::last_lifecycle_warnings()` to see where
-## this warning was generated.</code></pre>
+## ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
+##   always returns an ungrouped data frame and adjust accordingly.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
 <pre class="r"><code>prop_sequel_higher &lt;- mean(sequel_performance$rating_diff &gt; 0, na.rm = TRUE)
 
 
