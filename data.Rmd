@@ -2,12 +2,10 @@
 title: "DATA"
 author: "Erynne Jackson"
 date: "2024-12-01"
-output: 
-  github_document
-----
+output: html_document
+---
 
 ```{r}
-
 library(readxl)
 library(tidyverse)
 library(readr)
