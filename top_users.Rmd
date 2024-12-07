@@ -11,9 +11,9 @@ library(readr)
 library(knitr)
 library(tidyverse)
 library(ggplot2)
-ratings <- read_csv("./ratings.csv")
-to_read <- read_csv("./to_read.csv")
-books_with_tags <- read_csv("./books_with_tags.csv")
+ratings <- read_csv("./Data/ratings.csv")
+to_read <- read_csv("./Data/to_read.csv")
+books_with_tags <- read_csv("./Data/books_with_tags.csv")
 ```
 
 ```{r data_1, echo=FALSE}
@@ -98,7 +98,7 @@ kable(top_15_summary, caption = "Descriptive Statistics for Top 15 Users' Rating
 kable(overall_summary, caption = "Descriptive Statistics for Overall GoodReads Community's Ratings", align = "c")
 ```
 It looks like the Top 15 raters are on average a little less generous with their scores than the general GoodReads community.
-```{r}
+```{r, echo = FALSE}
 # Creates a data frame that includes the book information for each of the ratings in top_ratings. Then found the three most rated genres for the top 15 users. 
 top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id")) %>%
   group_by(user_id) %>% 
