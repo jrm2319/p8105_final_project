@@ -244,21 +244,15 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="index.html">About</a>
 </li>
-<li>
-  <a href="Analysis.html">Analysis</a>
-</li>
-<li>
-  <a href="dashboard.html">Dashboard</a>
-</li>
-<li>
-  <a href="Report.html">Report – Hypothesis Testing Results</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Descriptive Analyses
+    Analyses
      
     <span class="caret"></span>
   </a>
@@ -272,24 +266,16 @@ $(document).ready(function () {
     <li>
       <a href="popular_authors.html">Popular Authors</a>
     </li>
+    <li>
+      <a href="genres.html">Most to Least Read Genres</a>
+    </li>
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
   </ul>
-</li>
-<li>
-  <a href="reccomendations.html">Get a Book Recommendation</a>
-</li>
-<li>
-  <a href="genres.html">Most to Least Read Genres</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="genres.html">Most to Least Read Genres</a>
-</li>
-<li>
-  <a href="top_users.html">Top Users by Ratings</a>
-</li>
-<li>
-  <a href="top_users_to_read.html">Top Users by Most To-Read</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -332,84 +318,35 @@ $(document).ready(function () {
 <div id="data-most-and-least-popular-genres-read"
 class="section level2">
 <h2>DATA: Most and Least Popular Genres Read</h2>
-<p>Importing data to use:</p>
-<pre class="r"><code>library(readr)
-genre_data = read_csv (&quot;books_with_tags.csv&quot;, show_col_types = FALSE)</code></pre>
-<p>Tidying data:</p>
-<pre class="r"><code># Load necessary libraries
-library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(tidyr)
-
-# Combine all tags into a single column
-genre_data_longer = genre_data %&gt;%
-  select(top_1:top_5) %&gt;%  # Select the columns with tags
-  pivot_longer(cols = everything(), names_to = &quot;tag_type&quot;, values_to = &quot;tag&quot;) 
-
-# remove fiction and nonfiction from genre list
-genre_data_longer = genre_data_longer %&gt;%
-  filter(!tag %in% c(&quot;fiction&quot;, &quot;non-fiction&quot;))</code></pre>
+<p>Here is a sample of the data after cleaning:</p>
+<pre><code>## # A tibble: 6 × 2
+##   tag_type tag        
+##   &lt;chr&gt;    &lt;chr&gt;      
+## 1 top_1    young adult
+## 2 top_3    dystopian  
+## 3 top_4    dystopian  
+## 4 top_5    fantasy    
+## 5 top_1    fantasy    
+## 6 top_2    young adult</code></pre>
 </div>
 <div id="data-most-and-least-popular-genres-to-be-read"
 class="section level2">
 <h2>DATA: Most and Least Popular Genres To-Be-Read</h2>
-<p>Importing data to use:</p>
-<pre class="r"><code>to_read = read_csv (&quot;to_read.csv&quot;, show_col_types = FALSE)
-head(to_read)</code></pre>
+<p>Here is the sample of the data, after cleaning:</p>
 <pre><code>## # A tibble: 6 × 2
-##   user_id book_id
-##     &lt;dbl&gt;   &lt;dbl&gt;
-## 1       9       8
-## 2      15     398
-## 3      15     275
-## 4      37    7173
-## 5      34     380
-## 6      34     483</code></pre>
-<p>Tidying data:</p>
-<pre class="r"><code># Remove the &#39;user_id&#39; variable
-to_read = to_read %&gt;%
-  select(-user_id)  # Drop the user_id column
-
-# Remove duplicate &#39;book_id&#39; entries
-to_read_cleaned = to_read %&gt;%
-  distinct(book_id, .keep_all = TRUE)
-
-# Merge to_read dataset with genre_data, on book_id
-to_read_merged = to_read_cleaned %&gt;%
-  inner_join(genre_data, by = &quot;book_id&quot;)
-
-# Combine all tags into a single column
-to_read_genre_data_longer = to_read_merged %&gt;%
-  select(top_1:top_5) %&gt;%  # Select the columns with tags
-  pivot_longer(cols = everything(), names_to = &quot;tag_type&quot;, values_to = &quot;tag&quot;) 
-
-# remove fiction and nonfiction from genre list
-to_read_genre_data_longer = to_read_genre_data_longer %&gt;%
-  filter(!tag %in% c(&quot;fiction&quot;, &quot;non-fiction&quot;))
-
-write_csv(to_read_genre_data_longer, &quot;to_read_with_tag.csv&quot;)</code></pre>
+##   tag_type tag        
+##   &lt;chr&gt;    &lt;chr&gt;      
+## 1 top_1    classics   
+## 2 top_3    classics   
+## 3 top_4    young adult
+## 4 top_5    literature 
+## 5 top_3    food       
+## 6 top_4    health</code></pre>
 </div>
 <div id="exploratory-analysis" class="section level2">
 <h2>Exploratory Analysis</h2>
 <div id="most-popular-genres" class="section level3">
 <h3>Most Popular Genres</h3>
-<pre class="r"><code># Count occurrences of each tag, in descending order
-tag_counts = genre_data_longer %&gt;%
-  group_by(tag) %&gt;%
-  summarise(count = n(), .groups = &quot;drop&quot;) %&gt;%
-  arrange(desc(count))
-
-# Display the 10 most popular tags
-top_tags = tag_counts %&gt;%
-  slice_max(count, n = 10)
-print(top_tags)</code></pre>
 <pre><code>## # A tibble: 10 × 2
 ##    tag                count
 ##    &lt;chr&gt;              &lt;int&gt;
@@ -423,28 +360,10 @@ print(top_tags)</code></pre>
 ##  8 historical-fiction  1067
 ##  9 contemporary         960
 ## 10 thriller             957</code></pre>
-<pre class="r"><code># Box Graph
-library(ggplot2)
-
-ggplot(top_tags, aes(x = reorder(tag, count), y = count)) +
-  geom_bar(stat = &quot;identity&quot;, fill = &quot;darkred&quot;) +
-  coord_flip() +
-  labs(title = &quot;Top Genres Based on Tags&quot;,
-       x = &quot;Genre&quot;,
-       y = &quot;Count&quot;) +
-  theme_minimal()</code></pre>
-<p><img src="genres_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="genres_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="least-popular-genres" class="section level3">
 <h3>Least Popular Genres</h3>
-<pre class="r"><code># Filter tags with counts of 50 or greater
-filtered_tags = tag_counts %&gt;%
-  filter(count &gt;= 100)
-
-# Display the least popular genres from the filtered set
-least_popular_tags = filtered_tags %&gt;%
-  slice_min(count, n = 10)
-print(least_popular_tags)</code></pre>
 <pre><code>## # A tibble: 10 × 2
 ##    tag           count
 ##    &lt;chr&gt;         &lt;int&gt;
@@ -458,30 +377,10 @@ print(least_popular_tags)</code></pre>
 ##  8 religion        126
 ##  9 adult-fiction   130
 ## 10 manga           134</code></pre>
-<pre class="r"><code># Box graph
-library(ggplot2)
-
-ggplot(least_popular_tags, aes(x = reorder(tag, count), y = count)) +
-  geom_bar(stat = &quot;identity&quot;, fill = &quot;darkred&quot;) +
-  coord_flip() +
-  labs(title = &quot;20 Least Popular Genres with a Tag Count of 100 or Greater&quot;,
-       x = &quot;Genre&quot;,
-       y = &quot;Count&quot;) +
-  theme_minimal()</code></pre>
-<p><img src="genres_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="genres_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="most-popular-to-be-read-genre" class="section level3">
 <h3>Most Popular To-Be-Read Genre</h3>
-<pre class="r"><code># Count occurrences of each tag, in descending order
-to_read_tag_counts = to_read_genre_data_longer %&gt;%
-  group_by(tag) %&gt;%
-  summarise(count = n(), .groups = &quot;drop&quot;) %&gt;%
-  arrange(desc(count))
-
-# Display the 10 most popular tags for to-be-read
-to_read_top_tags = to_read_tag_counts %&gt;%
-  slice_max(count, n = 10)
-print(to_read_top_tags)</code></pre>
 <pre><code>## # A tibble: 10 × 2
 ##    tag                count
 ##    &lt;chr&gt;              &lt;int&gt;
@@ -495,28 +394,10 @@ print(to_read_top_tags)</code></pre>
 ##  8 historical-fiction  1067
 ##  9 contemporary         960
 ## 10 thriller             957</code></pre>
-<pre class="r"><code># Box Graph
-library(ggplot2)
-
-ggplot(to_read_top_tags, aes(x = reorder(tag, count), y = count)) +
-  geom_bar(stat = &quot;identity&quot;, fill = &quot;gold&quot;) +
-  coord_flip() +
-  labs(title = &quot;Top 10 Genres To-Read, Based on Tags&quot;,
-       x = &quot;Genre&quot;,
-       y = &quot;Count&quot;) +
-  theme_minimal()</code></pre>
-<p><img src="genres_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="genres_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="least-popular-to-be-read-genre" class="section level3">
 <h3>Least Popular To-Be-Read Genre</h3>
-<pre class="r"><code># Filter tags with counts of 100 or greater
-to_read_filtered_tags = to_read_tag_counts %&gt;%
-  filter(count &gt;= 100)
-
-# Display the least popular genres from the filtered set
-to_read_least_popular_tags = to_read_filtered_tags %&gt;%
-  slice_min(count, n = 10)
-print(to_read_least_popular_tags)</code></pre>
 <pre><code>## # A tibble: 10 × 2
 ##    tag           count
 ##    &lt;chr&gt;         &lt;int&gt;
@@ -530,17 +411,7 @@ print(to_read_least_popular_tags)</code></pre>
 ##  8 religion        126
 ##  9 adult-fiction   130
 ## 10 manga           133</code></pre>
-<pre class="r"><code># Box graph
-library(ggplot2)
-
-ggplot(to_read_least_popular_tags, aes(x = reorder(tag, count), y = count)) +
-  geom_bar(stat = &quot;identity&quot;, fill = &quot;gold&quot;) +
-  coord_flip() +
-  labs(title = &quot;10 Least Popular Genres To-Read, based on tags&quot;,
-       x = &quot;Genre&quot;,
-       y = &quot;Count&quot;) +
-  theme_minimal()</code></pre>
-<p><img src="genres_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="genres_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
 
