@@ -9,18 +9,23 @@ output: html_document
 library(readxl)
 library(tidyverse)
 library(readr)
+library(dplyr)
 
 ```
 
-Cleaning the Books file. 
+## IMPORTING GOODREADS DATASET
+
+Our Goodreads dataset has five sub-datasets that we are interested in analyzing. Each dataset has to be imported separately from an existing GitHub repository. We first import all of the datasets. 
+
+Importing Books file: 
 ```{r}
 
 url = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/books.csv"
-books = read_csv(url)
+book_data = read_csv(url)
 
 ```
 
-Cleaning the Ratings file.  
+Importing the Ratings file:  
 ```{r}
 
 url2 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/ratings.csv"
@@ -29,7 +34,7 @@ ratings = read_csv(url2)
 
 ```
 
-Cleaning the Book Tags file.  
+Importing Book Tags file:  
 ```{r}
 url3 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/book_tags.csv"
 book_tag = read_csv(url3)
@@ -37,7 +42,7 @@ book_tag = read_csv(url3)
 ```
 
 
-Cleaning the Tags file. 
+Importing the Tags file:  
 ```{r}
 
 url4 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/tags.csv"
@@ -45,24 +50,17 @@ tags = read_csv(url4)
 
 ```
 
-Cleaning the To Read file. 
+Importing To Read file:  
 ```{r}
 url5 = "https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv"
 to_read = read_csv(url5)
 
 
 ```
-Set Up (KB):
-```{r}
-library(readr)
-library(dplyr)
-```
 
-Import data (JM):
-```{r}
-book_data = read_csv("Books.csv")
-head(book_data)
-```
+## Data Cleaning
+
+Next, we are doing further cleaning of the Books file for individual analyses: 
 
 Remove unnecessary variables (JM): 
 ```{r}
@@ -107,7 +105,7 @@ write.csv(book_data_complete, "book_data_complete.csv", row.names = FALSE)
 ```
 
 
-Creating merged tag file (SR)
+Creating merged Tags file (SR):
 ```{r}
 merged_tags = 
   left_join(book_tag, tags, by = c("tag_id")) %>%
@@ -149,26 +147,22 @@ genres <- list(
   "christianity" = c("christian-living", "christian", "christian-literature", "christian-fiction")
 )
 
-# Create a function to standardize tags
 standardize_tag <- function(tag) {
-  # Check each genre list for a match
   for (genre in names(genres)) {
     if (tag %in% genres[[genre]]) {
       return(genre)
     }
   }
-  # If no match, return the original tag
   return(tag)
 }
 
-# Apply the function to the tag_name column
 rename_tags <- merged_tags %>%
   mutate(tag_name = sapply(tag_name, standardize_tag))
 
 
 
 pivoted_data <- rename_tags %>%
-  mutate(rank = row_number(), .by = goodreads_book_id) %>% # Add rank for top tags
+  mutate(rank = row_number(), .by = goodreads_book_id) %>% 
   pivot_wider(
     id_cols = goodreads_book_id, 
     names_from = rank, 

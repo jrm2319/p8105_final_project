@@ -252,9 +252,12 @@ $(document).ready(function () {
         <li>
   <a href="index.html">About</a>
 </li>
+<li>
+  <a href="Report.html">Report - Hypothesis Testing Results</a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Analyses
+    Descriptive Analyses
      
     <span class="caret"></span>
   </a>
@@ -279,17 +282,8 @@ $(document).ready(function () {
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Recommendations
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="reccomendations.html">Recommendations</a>
-    </li>
-  </ul>
+<li>
+  <a href="reccomendations.html">Recommendations</a>
 </li>
 <li>
   <a href="https://github.com/jrm2319/p8105_final_project.io.git">
@@ -331,10 +325,16 @@ library(tidyverse)</code></pre>
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(readr)</code></pre>
-<p>Cleaning the Books file.</p>
+<pre class="r"><code>library(readr)
+library(dplyr)</code></pre>
+<div id="importing-goodreads-dataset" class="section level2">
+<h2>IMPORTING GOODREADS DATASET</h2>
+<p>Our Goodreads dataset has five sub-datasets that we are interested in
+analyzing. Each dataset has to be imported separately from an existing
+GitHub repository. We first import all of the datasets.</p>
+<p>Importing Books file:</p>
 <pre class="r"><code>url = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/books.csv&quot;
-books = read_csv(url)</code></pre>
+book_data = read_csv(url)</code></pre>
 <pre><code>## Rows: 10000 Columns: 23
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -343,7 +343,7 @@ books = read_csv(url)</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Cleaning the Ratings file.</p>
+<p>Importing the Ratings file:</p>
 <pre class="r"><code>url2 = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/ratings.csv&quot;
 ratings = read_csv(url2)</code></pre>
 <pre><code>## Rows: 5976479 Columns: 3
@@ -353,7 +353,7 @@ ratings = read_csv(url2)</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Cleaning the Book Tags file.</p>
+<p>Importing Book Tags file:</p>
 <pre class="r"><code>url3 = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/book_tags.csv&quot;
 book_tag = read_csv(url3)</code></pre>
 <pre><code>## Rows: 999912 Columns: 3
@@ -363,7 +363,7 @@ book_tag = read_csv(url3)</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Cleaning the Tags file.</p>
+<p>Importing the Tags file:</p>
 <pre class="r"><code>url4 = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/tags.csv&quot;
 tags = read_csv(url4)</code></pre>
 <pre><code>## Rows: 34252 Columns: 2
@@ -374,7 +374,7 @@ tags = read_csv(url4)</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Cleaning the To Read file.</p>
+<p>Importing To Read file:</p>
 <pre class="r"><code>url5 = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv&quot;
 to_read = read_csv(url5)</code></pre>
 <pre><code>## Rows: 912705 Columns: 2
@@ -384,35 +384,11 @@ to_read = read_csv(url5)</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Set Up (KB):</p>
-<pre class="r"><code>library(readr)
-library(dplyr)</code></pre>
-<p>Import data (JM):</p>
-<pre class="r"><code>book_data = read_csv(&quot;Books.csv&quot;)</code></pre>
-<pre><code>## Rows: 10000 Columns: 23
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
-## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>head(book_data)</code></pre>
-<pre><code>## # A tibble: 6 × 23
-##   book_id goodreads_book_id best_book_id  work_id books_count isbn        isbn13
-##     &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
-## 1       1           2767052      2767052  2792775         272 439023483  9.78e12
-## 2       2                 3            3  4640799         491 439554934  9.78e12
-## 3       3             41865        41865  3212258         226 316015849  9.78e12
-## 4       4              2657         2657  3275794         487 61120081   9.78e12
-## 5       5              4671         4671   245494        1356 743273567  9.78e12
-## 6       6          11870085     11870085 16827462         226 525478817  9.78e12
-## # ℹ 16 more variables: authors &lt;chr&gt;, original_publication_year &lt;dbl&gt;,
-## #   original_title &lt;chr&gt;, title &lt;chr&gt;, language_code &lt;chr&gt;,
-## #   average_rating &lt;dbl&gt;, ratings_count &lt;dbl&gt;, work_ratings_count &lt;dbl&gt;,
-## #   work_text_reviews_count &lt;dbl&gt;, ratings_1 &lt;dbl&gt;, ratings_2 &lt;dbl&gt;,
-## #   ratings_3 &lt;dbl&gt;, ratings_4 &lt;dbl&gt;, ratings_5 &lt;dbl&gt;, image_url &lt;chr&gt;,
-## #   small_image_url &lt;chr&gt;</code></pre>
+</div>
+<div id="data-cleaning" class="section level2">
+<h2>Data Cleaning</h2>
+<p>Next, we are doing further cleaning of the Books file for individual
+analyses:</p>
 <p>Remove unnecessary variables (JM):</p>
 <pre class="r"><code>book_data = book_data %&gt;%
   select(
@@ -450,7 +426,7 @@ print(missing_summary)</code></pre>
   filter(!is.na(isbn))</code></pre>
 <p>Creating new csv file for use (JM):</p>
 <pre class="r"><code>write.csv(book_data_complete, &quot;book_data_complete.csv&quot;, row.names = FALSE)</code></pre>
-<p>Creating merged tag file (SR)</p>
+<p>Creating merged Tags file (SR):</p>
 <pre class="r"><code>merged_tags = 
   left_join(book_tag, tags, by = c(&quot;tag_id&quot;)) %&gt;%
   group_by(goodreads_book_id) %&gt;%
@@ -491,26 +467,22 @@ genres &lt;- list(
   &quot;christianity&quot; = c(&quot;christian-living&quot;, &quot;christian&quot;, &quot;christian-literature&quot;, &quot;christian-fiction&quot;)
 )
 
-# Create a function to standardize tags
 standardize_tag &lt;- function(tag) {
-  # Check each genre list for a match
   for (genre in names(genres)) {
     if (tag %in% genres[[genre]]) {
       return(genre)
     }
   }
-  # If no match, return the original tag
   return(tag)
 }
 
-# Apply the function to the tag_name column
 rename_tags &lt;- merged_tags %&gt;%
   mutate(tag_name = sapply(tag_name, standardize_tag))
 
 
 
 pivoted_data &lt;- rename_tags %&gt;%
-  mutate(rank = row_number(), .by = goodreads_book_id) %&gt;% # Add rank for top tags
+  mutate(rank = row_number(), .by = goodreads_book_id) %&gt;% 
   pivot_wider(
     id_cols = goodreads_book_id, 
     names_from = rank, 
@@ -522,6 +494,7 @@ pivoted_data &lt;- rename_tags %&gt;%
 books_with_tags &lt;- left_join(book_data_complete, pivoted_data, by = c(&quot;goodreads_book_id&quot;))
 
 write.csv(books_with_tags, &quot;books_with_tags.csv&quot;, row.names = FALSE)</code></pre>
+</div>
 
 
 
