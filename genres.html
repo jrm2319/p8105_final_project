@@ -9,11 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Jasmin Martinez" />
 
-<meta name="date" content="2024-12-03" />
 
-<title>Genres Analysis</title>
+<title>Genres</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -326,16 +324,14 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Genres Analysis</h1>
-<h4 class="author">Jasmin Martinez</h4>
-<h4 class="date">2024-12-03</h4>
+<h1 class="title toc-ignore"><b>Genres</b></h1>
 
 </div>
 
 
 <div id="data-most-and-least-popular-genres-read"
 class="section level2">
-<h2><strong>DATA: Most and Least Popular Genres Read</strong></h2>
+<h2>DATA: Most and Least Popular Genres Read</h2>
 <p>Importing data to use:</p>
 <pre class="r"><code>library(readr)
 genre_data = read_csv (&quot;books_with_tags.csv&quot;, show_col_types = FALSE)</code></pre>
@@ -363,7 +359,7 @@ genre_data_longer = genre_data_longer %&gt;%
 </div>
 <div id="data-most-and-least-popular-genres-to-be-read"
 class="section level2">
-<h2><strong>DATA: Most and Least Popular Genres To-Be-Read</strong></h2>
+<h2>DATA: Most and Least Popular Genres To-Be-Read</h2>
 <p>Importing data to use:</p>
 <pre class="r"><code>to_read = read_csv (&quot;to_read.csv&quot;, show_col_types = FALSE)
 head(to_read)</code></pre>
@@ -401,9 +397,9 @@ to_read_genre_data_longer = to_read_genre_data_longer %&gt;%
 write_csv(to_read_genre_data_longer, &quot;to_read_with_tag.csv&quot;)</code></pre>
 </div>
 <div id="exploratory-analysis" class="section level2">
-<h2><strong>Exploratory Analysis</strong></h2>
+<h2>Exploratory Analysis</h2>
 <div id="most-popular-genres" class="section level3">
-<h3><strong>Most Popular Genres</strong></h3>
+<h3>Most Popular Genres</h3>
 <pre class="r"><code># Count occurrences of each tag, in descending order
 tag_counts = genre_data_longer %&gt;%
   group_by(tag) %&gt;%
@@ -437,8 +433,10 @@ ggplot(top_tags, aes(x = reorder(tag, count), y = count)) +
        x = &quot;Genre&quot;,
        y = &quot;Count&quot;) +
   theme_minimal()</code></pre>
-<p><img src="genres_files/figure-html/unnamed-chunk-5-1.png" width="672" />
-### <strong>Least Popular Genres</strong></p>
+<p><img src="genres_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="least-popular-genres" class="section level3">
+<h3>Least Popular Genres</h3>
 <pre class="r"><code># Filter tags with counts of 50 or greater
 filtered_tags = tag_counts %&gt;%
   filter(count &gt;= 100)
@@ -473,7 +471,7 @@ ggplot(least_popular_tags, aes(x = reorder(tag, count), y = count)) +
 <p><img src="genres_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="most-popular-to-be-read-genre" class="section level3">
-<h3><strong>Most Popular To-Be-Read Genre</strong></h3>
+<h3>Most Popular To-Be-Read Genre</h3>
 <pre class="r"><code># Count occurrences of each tag, in descending order
 to_read_tag_counts = to_read_genre_data_longer %&gt;%
   group_by(tag) %&gt;%
@@ -510,7 +508,7 @@ ggplot(to_read_top_tags, aes(x = reorder(tag, count), y = count)) +
 <p><img src="genres_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="least-popular-to-be-read-genre" class="section level3">
-<h3><strong>Least Popular To-Be-Read Genre</strong></h3>
+<h3>Least Popular To-Be-Read Genre</h3>
 <pre class="r"><code># Filter tags with counts of 100 or greater
 to_read_filtered_tags = to_read_tag_counts %&gt;%
   filter(count &gt;= 100)

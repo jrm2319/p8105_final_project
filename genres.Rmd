@@ -1,10 +1,8 @@
 ---
-title: "Genres Analysis"
-author: "Jasmin Martinez"
-date: "2024-12-03"
+title: "<b>Genres</b>"
 output: html_document
 ---
-## **DATA: Most and Least Popular Genres Read**  
+## DATA: Most and Least Popular Genres Read
 Importing data to use:  
 ```{r}
 library(readr)
@@ -27,7 +25,7 @@ genre_data_longer = genre_data_longer %>%
   filter(!tag %in% c("fiction", "non-fiction"))
 ```
 
-## **DATA: Most and Least Popular Genres To-Be-Read**  
+## DATA: Most and Least Popular Genres To-Be-Read  
 Importing data to use:
 ```{r}
 to_read = read_csv ("to_read.csv", show_col_types = FALSE)
@@ -60,8 +58,8 @@ to_read_genre_data_longer = to_read_genre_data_longer %>%
 write_csv(to_read_genre_data_longer, "to_read_with_tag.csv")
 ```
 
-## **Exploratory Analysis** 
-### **Most Popular Genres**  
+## Exploratory Analysis 
+### Most Popular Genres
 ```{r}
 # Count occurrences of each tag, in descending order
 tag_counts = genre_data_longer %>%
@@ -86,7 +84,8 @@ ggplot(top_tags, aes(x = reorder(tag, count), y = count)) +
   theme_minimal()
 
 ```
-### **Least Popular Genres**  
+
+### Least Popular Genres
 ```{r}
 # Filter tags with counts of 50 or greater
 filtered_tags = tag_counts %>%
@@ -109,7 +108,7 @@ ggplot(least_popular_tags, aes(x = reorder(tag, count), y = count)) +
   theme_minimal()
 ```
 
-### **Most Popular To-Be-Read Genre**  
+### Most Popular To-Be-Read Genre 
 ```{r}
 # Count occurrences of each tag, in descending order
 to_read_tag_counts = to_read_genre_data_longer %>%
@@ -134,7 +133,7 @@ ggplot(to_read_top_tags, aes(x = reorder(tag, count), y = count)) +
   theme_minimal()
 ```
 
-### **Least Popular To-Be-Read Genre**  
+### Least Popular To-Be-Read Genre  
 ```{r}
 # Filter tags with counts of 100 or greater
 to_read_filtered_tags = to_read_tag_counts %>%
