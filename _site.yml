@@ -30,6 +30,8 @@ navbar:
           href: top_users.html
         - text: "Top Users by Most To-Read"
           href: top_users_to_read.html
+        - text: "Sequels"
+          href: Sequels.html   
         - text: "Recommendations"
           menu:
             - text: "Recommendations"
