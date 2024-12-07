@@ -3,9 +3,9 @@ output_dir: "."
 navbar:
   title: "To Be Read or Not To Be Read"
   right: 
-      - text: "About"
+    - text: "About"
       href: index.html
-      - text: "Analyses"
+    - text: "Analyses"
       menu:
         - text: "Most Read Authors"
           href: most_read_authors.html
