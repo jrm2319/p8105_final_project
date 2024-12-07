@@ -101,8 +101,6 @@ titlePanel("Enter your Author or Genre of Interest Here:"),
 
 server <- function(input, output, session) {
   
-  read_books <- reactiveValues(marks = list())
-  
   filtered_books <- reactive({
     booktok <- books_rate
     
@@ -151,12 +149,12 @@ server <- function(input, output, session) {
         if (nrow(books_to_show) > 0) {
         tagList(
           lapply(1:nrow(books_to_show), function(i) {
-            is_lower_rated <- books_to_show$average_rating[i] < as.numeric(input$average_rating)
+            lower_rated <- books_to_show$average_rating[i] < as.numeric(input$average_rating)
             
             div(
               img(src = books_to_show$image_url[i], width = "250px", height = "300px"),  
               strong(books_to_show$title[i]), 
-              if (is_lower_rated) {
+              if (lower_rated) {
                 span(style = "color: brown; font-weight: bold;", "(Rated Below Your Selection)")
               },
               p(paste("Rating:", books_to_show$average_rating[i]))
