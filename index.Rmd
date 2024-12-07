@@ -6,7 +6,27 @@ output:
     toc_float: true   
     theme: yeti      
 ---
-### Welcome to My Website
+### **About the Team**
+
+### **Motivation**
+With the New Year right around the corner, countless sources are providing their list of the ‘Best Books’ of the year. These lists help inform readers while providing them with book recommendations that interest them. Our project aims to explore GoodReads data to understand the genre and author preferences of readers in the United States.  
+
+We aim to identify the most and least read genres and authors to gain insight into trends of literary engagement. With this information, publishers, authors, and libraries can tailor their book selections to meet reader's demands and promote lesser-known genres and authors. Understanding popular genres and authors can also help explore cultural trends that resonate with the public, while identifying lesser-read genres to create opportunities for re-engagement.
+
+### **Project Inspiration**
+With the demanding workload of graduate school, there’s little time to sit down and enjoy a good book. However, with winter break approaching, we’re all looking forward to some much-needed rest and the chance to indulge in quality reading time! This project was inspired by a shared hobby among the team and our collective anticipation for the opportunity to relax on the couch, sip some coffee, and dive into a good book.  
+
+### **Initial Questions**
+The initial research question of our project was: What are trends among readers? This initial research question aided us when exploring datasets. Once we found the [GoodRead-10k](https://github.com/zygmuntz/goodbooks-10k), an open data source hosted on GitHub with data from GoodReads, we were interested in exploring trends among readers using GoodReads. The team spent time understand what data was available and then created the following questions to guide this project:  
+
+- Who are the top fifteen GoodReads users, by Ratings and To-Read?   
+- Are sequels worth reading?  
+- What are the top 10 most popular genres? What are the 10 least popular genres?   
+- Who are the top 10 most popular authors? Who are the 10 least popular authors?   
+- How can we build a recommendations page based on the data provided?   
+
+### **Report**  
+
 
 
 
