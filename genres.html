@@ -319,98 +319,328 @@ $(document).ready(function () {
 class="section level2">
 <h2>DATA: Most and Least Popular Genres Read</h2>
 <p>Here is a sample of the data after cleaning:</p>
-<pre><code>## # A tibble: 6 × 2
-##   tag_type tag        
-##   &lt;chr&gt;    &lt;chr&gt;      
-## 1 top_1    young adult
-## 2 top_3    dystopian  
-## 3 top_4    dystopian  
-## 4 top_5    fantasy    
-## 5 top_1    fantasy    
-## 6 top_2    young adult</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">tag_type</th>
+<th align="left">tag</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">top_1</td>
+<td align="left">young adult</td>
+</tr>
+<tr class="even">
+<td align="left">top_3</td>
+<td align="left">dystopian</td>
+</tr>
+<tr class="odd">
+<td align="left">top_4</td>
+<td align="left">dystopian</td>
+</tr>
+<tr class="even">
+<td align="left">top_5</td>
+<td align="left">fantasy</td>
+</tr>
+<tr class="odd">
+<td align="left">top_1</td>
+<td align="left">fantasy</td>
+</tr>
+<tr class="even">
+<td align="left">top_2</td>
+<td align="left">young adult</td>
+</tr>
+<tr class="odd">
+<td align="left">top_4</td>
+<td align="left">young adult</td>
+</tr>
+<tr class="even">
+<td align="left">top_5</td>
+<td align="left">magic</td>
+</tr>
+<tr class="odd">
+<td align="left">top_1</td>
+<td align="left">young adult</td>
+</tr>
+<tr class="even">
+<td align="left">top_2</td>
+<td align="left">fantasy</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="data-most-and-least-popular-genres-to-be-read"
 class="section level2">
 <h2>DATA: Most and Least Popular Genres To-Be-Read</h2>
 <p>Here is the sample of the data, after cleaning:</p>
-<pre><code>## # A tibble: 6 × 2
-##   tag_type tag        
-##   &lt;chr&gt;    &lt;chr&gt;      
-## 1 top_1    classics   
-## 2 top_3    classics   
-## 3 top_4    young adult
-## 4 top_5    literature 
-## 5 top_3    food       
-## 6 top_4    health</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">tag_type</th>
+<th align="left">tag</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">top_1</td>
+<td align="left">classics</td>
+</tr>
+<tr class="even">
+<td align="left">top_3</td>
+<td align="left">classics</td>
+</tr>
+<tr class="odd">
+<td align="left">top_4</td>
+<td align="left">young adult</td>
+</tr>
+<tr class="even">
+<td align="left">top_5</td>
+<td align="left">literature</td>
+</tr>
+<tr class="odd">
+<td align="left">top_3</td>
+<td align="left">food</td>
+</tr>
+<tr class="even">
+<td align="left">top_4</td>
+<td align="left">health</td>
+</tr>
+<tr class="odd">
+<td align="left">top_5</td>
+<td align="left">sociology</td>
+</tr>
+<tr class="even">
+<td align="left">top_1</td>
+<td align="left">young adult</td>
+</tr>
+<tr class="odd">
+<td align="left">top_2</td>
+<td align="left">young adult</td>
+</tr>
+<tr class="even">
+<td align="left">top_3</td>
+<td align="left">contemporary</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="exploratory-analysis" class="section level2">
 <h2>Exploratory Analysis</h2>
 <div id="most-popular-genres" class="section level3">
 <h3>Most Popular Genres</h3>
-<pre><code>## # A tibble: 10 × 2
-##    tag                count
-##    &lt;chr&gt;              &lt;int&gt;
-##  1 young adult         2765
-##  2 fantasy             2548
-##  3 romance             1854
-##  4 science fiction     1772
-##  5 children            1767
-##  6 mystery             1671
-##  7 classics            1446
-##  8 historical-fiction  1067
-##  9 contemporary         960
-## 10 thriller             957</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">tag</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">young adult</td>
+<td align="right">2765</td>
+</tr>
+<tr class="even">
+<td align="left">fantasy</td>
+<td align="right">2548</td>
+</tr>
+<tr class="odd">
+<td align="left">romance</td>
+<td align="right">1854</td>
+</tr>
+<tr class="even">
+<td align="left">science fiction</td>
+<td align="right">1772</td>
+</tr>
+<tr class="odd">
+<td align="left">children</td>
+<td align="right">1767</td>
+</tr>
+<tr class="even">
+<td align="left">mystery</td>
+<td align="right">1671</td>
+</tr>
+<tr class="odd">
+<td align="left">classics</td>
+<td align="right">1446</td>
+</tr>
+<tr class="even">
+<td align="left">historical-fiction</td>
+<td align="right">1067</td>
+</tr>
+<tr class="odd">
+<td align="left">contemporary</td>
+<td align="right">960</td>
+</tr>
+<tr class="even">
+<td align="left">thriller</td>
+<td align="right">957</td>
+</tr>
+</tbody>
+</table>
 <p><img src="genres_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="least-popular-genres" class="section level3">
 <h3>Least Popular Genres</h3>
-<pre><code>## # A tibble: 10 × 2
-##    tag           count
-##    &lt;chr&gt;         &lt;int&gt;
-##  1 middle-grade    102
-##  2 drama           109
-##  3 poetry          112
-##  4 lgbtq           113
-##  5 memoirs         114
-##  6 war             114
-##  7 art             121
-##  8 religion        126
-##  9 adult-fiction   130
-## 10 manga           134</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">tag</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">middle-grade</td>
+<td align="right">102</td>
+</tr>
+<tr class="even">
+<td align="left">drama</td>
+<td align="right">109</td>
+</tr>
+<tr class="odd">
+<td align="left">poetry</td>
+<td align="right">112</td>
+</tr>
+<tr class="even">
+<td align="left">lgbtq</td>
+<td align="right">113</td>
+</tr>
+<tr class="odd">
+<td align="left">memoirs</td>
+<td align="right">114</td>
+</tr>
+<tr class="even">
+<td align="left">war</td>
+<td align="right">114</td>
+</tr>
+<tr class="odd">
+<td align="left">art</td>
+<td align="right">121</td>
+</tr>
+<tr class="even">
+<td align="left">religion</td>
+<td align="right">126</td>
+</tr>
+<tr class="odd">
+<td align="left">adult-fiction</td>
+<td align="right">130</td>
+</tr>
+<tr class="even">
+<td align="left">manga</td>
+<td align="right">134</td>
+</tr>
+</tbody>
+</table>
 <p><img src="genres_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="most-popular-to-be-read-genre" class="section level3">
 <h3>Most Popular To-Be-Read Genre</h3>
-<pre><code>## # A tibble: 10 × 2
-##    tag                count
-##    &lt;chr&gt;              &lt;int&gt;
-##  1 young adult         2764
-##  2 fantasy             2546
-##  3 romance             1852
-##  4 science fiction     1772
-##  5 children            1730
-##  6 mystery             1671
-##  7 classics            1445
-##  8 historical-fiction  1067
-##  9 contemporary         960
-## 10 thriller             957</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">tag</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">young adult</td>
+<td align="right">2764</td>
+</tr>
+<tr class="even">
+<td align="left">fantasy</td>
+<td align="right">2546</td>
+</tr>
+<tr class="odd">
+<td align="left">romance</td>
+<td align="right">1852</td>
+</tr>
+<tr class="even">
+<td align="left">science fiction</td>
+<td align="right">1772</td>
+</tr>
+<tr class="odd">
+<td align="left">children</td>
+<td align="right">1730</td>
+</tr>
+<tr class="even">
+<td align="left">mystery</td>
+<td align="right">1671</td>
+</tr>
+<tr class="odd">
+<td align="left">classics</td>
+<td align="right">1445</td>
+</tr>
+<tr class="even">
+<td align="left">historical-fiction</td>
+<td align="right">1067</td>
+</tr>
+<tr class="odd">
+<td align="left">contemporary</td>
+<td align="right">960</td>
+</tr>
+<tr class="even">
+<td align="left">thriller</td>
+<td align="right">957</td>
+</tr>
+</tbody>
+</table>
 <p><img src="genres_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="least-popular-to-be-read-genre" class="section level3">
 <h3>Least Popular To-Be-Read Genre</h3>
-<pre><code>## # A tibble: 10 × 2
-##    tag           count
-##    &lt;chr&gt;         &lt;int&gt;
-##  1 middle-grade    102
-##  2 drama           109
-##  3 poetry          112
-##  4 lgbtq           113
-##  5 memoirs         114
-##  6 war             114
-##  7 art             121
-##  8 religion        126
-##  9 adult-fiction   130
-## 10 manga           133</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">tag</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">middle-grade</td>
+<td align="right">102</td>
+</tr>
+<tr class="even">
+<td align="left">drama</td>
+<td align="right">109</td>
+</tr>
+<tr class="odd">
+<td align="left">poetry</td>
+<td align="right">112</td>
+</tr>
+<tr class="even">
+<td align="left">lgbtq</td>
+<td align="right">113</td>
+</tr>
+<tr class="odd">
+<td align="left">memoirs</td>
+<td align="right">114</td>
+</tr>
+<tr class="even">
+<td align="left">war</td>
+<td align="right">114</td>
+</tr>
+<tr class="odd">
+<td align="left">art</td>
+<td align="right">121</td>
+</tr>
+<tr class="even">
+<td align="left">religion</td>
+<td align="right">126</td>
+</tr>
+<tr class="odd">
+<td align="left">adult-fiction</td>
+<td align="right">130</td>
+</tr>
+<tr class="even">
+<td align="left">manga</td>
+<td align="right">133</td>
+</tr>
+</tbody>
+</table>
 <p><img src="genres_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
