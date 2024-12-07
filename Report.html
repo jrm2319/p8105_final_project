@@ -11,9 +11,9 @@
 
 
 
-<title>Sequels</title>
+<title>Exploring sequels: Are They Worth Reading?</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -244,9 +244,6 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="index.html">About</a>
 </li>
@@ -305,6 +302,9 @@ $(document).ready(function () {
   </a>
 </li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -313,107 +313,97 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Sequels</h1>
+<h1 class="title toc-ignore"><b>Exploring sequels: Are They Worth
+Reading?</b></h1>
 
 </div>
 
 
-<div id="exploring-sequels-are-they-worth-reading"
-class="section level2">
-<h2>Exploring sequels: Are They Worth Reading?</h2>
-<p>In this page, we will explore book sequels and analyze whether they
-live up to the original works. First let’s take a look at how many books
-have a series.</p>
+<p>In this page, we explore the dynamics of book sequels and analyze
+whether they live up to their original works. First we begin by taking a
+look at the distribution of series lengths to show how many books
+typically make up a series.</p>
 <div id="distribution-of-series-lengths" class="section level3">
-<h3>Distribution of series lengths</h3>
-<pre class="r"><code>series_length &lt;- sequel |&gt;
-  mutate(series = str_extract(title, &quot;\\(.*\\)&quot;), 
-         series_number = as.numeric(str_sub(str_extract(series, &#39;, #[0-9]+\\)$&#39;),4,-2)),
-         series_name = str_sub(str_extract(series, &#39;\\(.*,&#39;),2,-2)) |&gt;
-  filter(!is.na(series_number)) |&gt;
-  group_by(series_name) |&gt;
-  summarise(max_series_number = max(series_number, na.rm = TRUE)) |&gt;
-  count(max_series_number, name = &quot;n_series&quot;)
-
-ggplot(series_length, aes(x = max_series_number, y = n_series)) +
-  geom_bar(stat = &quot;identity&quot;, fill = &quot;steelblue&quot;) +
-  labs(
-    x = &quot;Series Length (Number of Books)&quot;,
-    y = &quot;Number of Series&quot;,
-    title = &quot;Distribution of Series Lengths&quot;
-  ) +
-  theme_minimal()</code></pre>
+<h3><strong><em>Distribution of Series Lengths</em></strong></h3>
 <p><img src="Report_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<ul>
+<li>Based on the graph, we see that a majority of series consist of 1
+book, with the next largest groups being sequels and triologies.</li>
+</ul>
 </div>
 <div id="comparing-average-ratings-first-vs-second-books"
 class="section level3">
-<h3>Comparing Average Ratings: First vs Second Books</h3>
-<pre class="r"><code>#Select books that have a sequel
-sequel_data &lt;- sequel |&gt;
-  mutate(series = str_extract(title, &quot;\\(.*\\)&quot;), 
-         series_number = as.numeric(str_sub(str_extract(series, &#39;, #[0-9]+\\)$&#39;),4,-2)),
-         series_name = str_sub(str_extract(series, &#39;\\(.*,&#39;),2,-2)) |&gt;
-  filter(series_number %in% c(1, 2))
-
-#Boxplot of average ratings of first vs second book
-ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = factor(series_number))) +
-  geom_boxplot() +
-  coord_cartesian(ylim = c(3, 5)) +
-  labs(x = &quot;Book in Series&quot;, y = &quot;Average Rating&quot;) +
-  scale_color_manual(values = c(&#39;blue&#39;, &#39;red&#39;)) +
-  theme_minimal() +
-  theme(legend.position = &quot;none&quot;) </code></pre>
+<h3><strong><em>Comparing Average Ratings: First vs Second
+Books</em></strong></h3>
+<p>We examine how series perform in terms of ratings, starting with a
+comparison between the average ratings of the first and second books in
+a series.</p>
 <p><img src="Report_files/figure-html/avg%20ratings-1.png" width="672" /></p>
-<p>Based off of average ratings, good reads users generally rate the
-sequel higher than the original book.</p>
-</div>
-<div id="table-of-first-vs-second-book-ratings" class="section level3">
-<h3>Table of First vs Second Book Ratings</h3>
-<pre class="r"><code>sequel_performance &lt;- sequel_data |&gt;
-  group_by(series_name) |&gt;
-  arrange(series_number) |&gt;
-  summarise(
-    rating_diff = diff(average_rating),
-    .groups = &quot;drop&quot; 
-  )</code></pre>
-<pre><code>## Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
-## dplyr 1.1.0.
-## ℹ Please use `reframe()` instead.
-## ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
-##   always returns an ungrouped data frame and adjust accordingly.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.</code></pre>
-<pre class="r"><code>prop_sequel_higher &lt;- mean(sequel_performance$rating_diff &gt; 0, na.rm = TRUE)
-
-
-cat(sprintf(&quot;In %.1f%% of cases, the sequel is rated higher than the first book.&quot;, 
-            prop_sequel_higher * 100))</code></pre>
-<pre><code>## In 71.8% of cases, the sequel is rated higher than the first book.</code></pre>
+<ul>
+<li>Based off of average ratings, good reads users generally rate the
+sequel higher than the original book.</li>
+</ul>
 </div>
 <div id="hypothesis-test" class="section level3">
 <h3>Hypothesis Test</h3>
 <p>While the visualizations suggest that sequels may outperform the
 original book in terms of average ratings, let’s apply statistical
-techniques to formally test this hypothesis.</p>
-<pre class="r"><code>t_test_result &lt;- t.test(average_rating ~ series_number, data = sequel_data)
-
-t_test_table &lt;- t_test_result |&gt;
-  tidy() |&gt;
-  knitr::kable(caption = &quot;T-Test Results: Comparing Ratings of First and Second Books&quot;)
-
-print(t_test_table)</code></pre>
-<pre><code>## 
-## 
-## Table: T-Test Results: Comparing Ratings of First and Second Books
-## 
-## |   estimate| estimate1| estimate2| statistic| p.value| parameter|   conf.low|  conf.high|method                  |alternative |
-## |----------:|---------:|---------:|---------:|-------:|---------:|----------:|----------:|:-----------------------|:-----------|
-## | -0.0940757|  3.980256|  4.074332| -9.373965|       0|  1375.975| -0.1137629| -0.0743884|Welch Two Sample t-test |two.sided   |</code></pre>
+techniques to formally test this hypothesis. Given the relatively normal
+distribution of ratings for the first and second books, we move forward
+with a t-test.</p>
+<table style="width:100%;">
+<caption>T-Test Results: Comparing Ratings of First and Second
+Books</caption>
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="21%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">estimate</th>
+<th align="right">estimate1</th>
+<th align="right">estimate2</th>
+<th align="right">statistic</th>
+<th align="left">p.value</th>
+<th align="right">parameter</th>
+<th align="right">conf.low</th>
+<th align="right">conf.high</th>
+<th align="left">method</th>
+<th align="left">alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">-0.094</td>
+<td align="right">3.98</td>
+<td align="right">4.074</td>
+<td align="right">-9.374</td>
+<td align="left">0e+00</td>
+<td align="right">1375.975</td>
+<td align="right">-0.114</td>
+<td align="right">-0.074</td>
+<td align="left">Welch Two Sample t-test</td>
+<td align="left">two.sided</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The t-test confirms that the sequel in a series has a statistically
+significant higher average rating than the first book. We estimate that
+the sequel is rated approximately 0.094 stars higher than the first
+book.</li>
+</ul>
 </div>
 <div id="regression-models" class="section level3">
 <h3>Regression Models</h3>
-<pre class="r"><code>lm_sequel &lt;- lm(average_rating ~ factor(series_number) + factor(series_name), data = sequel_data)</code></pre>
-</div>
 </div>
 
 
