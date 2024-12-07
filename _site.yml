@@ -5,15 +5,11 @@ navbar:
   left:
     - text: "About"
       href: index.html
-<<<<<<< HEAD
     - text: "Analysis"
       href: Analysis.html
     - text: "Dashboard"
       href: dashboard.html
     - text: "Report – Hypothesis Testing Results"
-=======
-    - text: "Report - Hypothesis Testing Results"
->>>>>>> 547d8940aef390caf073fad85c621187306a0f1d
       href: Report.html
     - text: "Descriptive Analyses"
       menu:
@@ -23,28 +19,25 @@ navbar:
           href: least_read_authors.html
         - text: "Popular Authors"
           href: popular_authors.html
-<<<<<<< HEAD
     - text: "Get a Book Recommendation"
       href: reccomendations.html
     - text: "Most to Least Read Genres"
       href: genres.html
   right:
-=======
         - text: "Most to Least Read Genres"
           href: genres.html
         - text: "Top Users by Ratings"
           href: top_users.html
         - text: "Top Users by Most To-Read"
           href: top_users_to_read.html
-    - text: "Recommendations"
-      menu:
         - text: "Recommendations"
-          href: reccomendations.html
->>>>>>> 547d8940aef390caf073fad85c621187306a0f1d
-    - icon: fa-github fa-lg
-      href: https://github.com/jrm2319/p8105_final_project.io.git
-    - icon: fa-envelope fa-lg
-      href: mailto:kab2310@cumc.columbia.edu
+          menu:
+            - text: "Recommendations"
+              href: reccomendations.html
+        - icon: fa-github fa-lg
+          href: https://github.com/jrm2319/p8105_final_project.io.git
+        - icon: fa-envelope fa-lg
+          href: mailto:kab2310@cumc.columbia.edu
 output:
   html_document:
     theme: yeti
