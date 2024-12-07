@@ -2,10 +2,16 @@ name: "To Be Read or Not To Be Read"
 output_dir: "."
 navbar:
   title: "To Be Read or Not To Be Read"
-  right: 
-      - text: "About"
+  left:
+    - text: "About"
       href: index.html
-      - text: "Analyses"
+    - text: "Analysis"
+      href: Analysis.html
+    - text: "Dashboard"
+      href: dashboard.html
+    - text: "Report – Hypothesis Testing Results"
+      href: Report.html
+    - text: "Descriptive Analyses"
       menu:
         - text: "Most Read Authors"
           href: most_read_authors.html
@@ -13,25 +19,25 @@ navbar:
           href: least_read_authors.html
         - text: "Popular Authors"
           href: popular_authors.html
-        - text: "Most and Least Read Genres"
+    - text: "Get a Book Recommendation"
+      href: reccomendations.html
+    - text: "Most to Least Read Genres"
+      href: genres.html
+  right:
+        - text: "Most to Least Read Genres"
           href: genres.html
         - text: "Top Users by Ratings"
           href: top_users.html
         - text: "Top Users by Most To-Read"
           href: top_users_to_read.html
-        - text: "Sequels"
-          href: Sequels.html 
-    - text: "Recommendations"
-      menu:
         - text: "Recommendations"
-          href: recommendations.html
-    - icon: fa-github fa-lg
-      href: https://github.com/jrm2319/p8105_final_project.io.git
-    - icon: fa-envelope fa-lg
-      href: mailto:kab2310@cumc.columbia.edu
+          menu:
+            - text: "Recommendations"
+              href: reccomendations.html
+        - icon: fa-github fa-lg
+          href: https://github.com/jrm2319/p8105_final_project.io.git
+        - icon: fa-envelope fa-lg
+          href: mailto:kab2310@cumc.columbia.edu
 output:
   html_document:
     theme: yeti
-
-
-
