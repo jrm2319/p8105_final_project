@@ -1,9 +1,9 @@
 ---
-title: "Least Read Authors"
+title: "<b>Least Read Authors</b>"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(plotly)
 library(dplyr)
@@ -19,8 +19,7 @@ library(ggplot2)
 books <- read.csv("books.csv")
 ```
 
-### Summarizing Read Counts by Author 
-```{r most read authors}
+```{r most read authors, echo=FALSE}
 least_read_authors <- books %>%
   group_by(authors) %>%
   summarize(
@@ -31,12 +30,13 @@ least_read_authors <- books %>%
 
 ```
 
-### Displaying Top 10 Least Read Authors
-```{r Dislaying Top 10 Least Read Authors}
+### *Displaying  Top 10 Least Read Authors*
+
+```{r Dislaying Top 10 Least Read Authors, echo=FALSE}
 ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = "identity", aes(fill = total_ratings), show.legend = FALSE) +
   labs(
-    title = "Top 10 Least Read Authors",
+    title = "Top 10 Least Read Authors by Ratings",
     x = "Total Ratings Count",
     y = "Authors"
   ) +
@@ -50,6 +50,22 @@ ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors,
     panel.grid.major.y = element_blank() 
   ) +
   scale_x_continuous(labels = scales::comma)
+```
+
+**Top 10 Least Read Authors**
+
+
+This bar chart, "Top 10 Least Read Authors by Ratings" depicts the percentage of total ratings each author received relative to the dataset.
+
+```{r, echo=FALSE}
+# Load required library
+library(knitr)
+
+# Display the least read authors as a table
+least_read_authors %>%
+  head(10) %>%  # Select the first 10 least read authors
+  kable(caption = "Table: Top 10 Least Read Authors by Total Ratings")
+
 ```
 
 

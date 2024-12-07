@@ -244,33 +244,18 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="index.html">About</a>
 </li>
 <li>
-  <a href="Analysis.html">Analysis</a>
-</li>
-<li>
-  <a href="Report.html">Report – Hypothesis Testing Results</a>
+  <a href="Report.html">Report - Hypothesis Testing Results</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Top Users
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="top_users.html">Top Users by Ratings</a>
-    </li>
-    <li>
-      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Authors
+    Descriptive Analyses
      
     <span class="caret"></span>
   </a>
@@ -284,17 +269,30 @@ $(document).ready(function () {
     <li>
       <a href="popular_authors.html">Popular Authors</a>
     </li>
+    <li>
+      <a href="genres.html">Most to Least Read Genres</a>
+    </li>
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Recommendations
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="reccomendations.html">Recommendations</a>
+    </li>
   </ul>
 </li>
 <li>
-  <a href="reccomendations.html">Reccomendations</a>
-</li>
-<li>
-  <a href="genres.html">Most to Least Read Genres</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
   <a href="https://github.com/jrm2319/p8105_final_project.io.git">
     <span class="fa fa-github fa-lg"></span>
      
@@ -315,43 +313,88 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Least Read Authors</h1>
+<h1 class="title toc-ignore"><b>Least Read Authors</b></h1>
 
 </div>
 
 
 <div id="data-import" class="section level2">
 <h2>Data Import</h2>
-<div id="summarizing-read-counts-by-author" class="section level3">
-<h3>Summarizing Read Counts by Author</h3>
-<pre class="r"><code>least_read_authors &lt;- books %&gt;%
-  group_by(authors) %&gt;%
-  summarize(
-    total_ratings = sum(work_ratings_count, na.rm = TRUE), 
-    num_books = n() 
-  ) %&gt;%
-  arrange(total_ratings) </code></pre>
-</div>
 <div id="displaying-top-10-least-read-authors" class="section level3">
-<h3>Displaying Top 10 Least Read Authors</h3>
-<pre class="r"><code>ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
-  geom_bar(stat = &quot;identity&quot;, aes(fill = total_ratings), show.legend = FALSE) +
-  labs(
-    title = &quot;Top 10 Least Read Authors&quot;,
-    x = &quot;Total Ratings Count&quot;,
-    y = &quot;Authors&quot;
-  ) +
-  scale_fill_gradient(low = &quot;red&quot;, high = &quot;darkred&quot;) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5),  
-    axis.text.y = element_text(size = 10),
-    axis.text.x = element_text(size = 12),
-    axis.title = element_text(size = 14, face = &quot;bold&quot;), 
-    panel.grid.major.y = element_blank() 
-  ) +
-  scale_x_continuous(labels = scales::comma)</code></pre>
+<h3><em>Displaying Top 10 Least Read Authors</em></h3>
 <p><img src="least_read_authors_files/figure-html/Dislaying%20Top%2010%20Least%20Read%20Authors-1.png" width="672" /></p>
+<p><strong>Top 10 Least Read Authors</strong></p>
+<p>This bar chart, “Top 10 Least Read Authors by Ratings” depicts the
+percentage of total ratings each author received relative to the
+dataset.</p>
+<table>
+<caption>Table: Top 10 Least Read Authors by Total Ratings</caption>
+<colgroup>
+<col width="69%" />
+<col width="17%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">authors</th>
+<th align="right">total_ratings</th>
+<th align="right">num_books</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">سهراب سپهری</td>
+<td align="right">5510</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Hafez</td>
+<td align="right">6323</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Stacy King, SunNeko Lee, Crystal S. Chan, Victor
+Hugo</td>
+<td align="right">6823</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">HaveYouSeenThisGirL, Jan Irene Villar</td>
+<td align="right">7045</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Perry Moore, Andrew Adamson, C.S. Lewis</td>
+<td align="right">7353</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">عباس معروفی</td>
+<td align="right">7410</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Steve Perry, Tom Clancy, Steve Pieczenik</td>
+<td align="right">7825</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">نور عبدالمجيد</td>
+<td align="right">7845</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Charles Harrison, Paul Wood</td>
+<td align="right">7866</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">مصطفى إبراهيم</td>
+<td align="right">7956</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

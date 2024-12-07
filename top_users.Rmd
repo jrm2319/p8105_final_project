@@ -1,7 +1,5 @@
 ---
 title: "Top Users By Ratings"
-author: "Samiha Reza"
-date: "2024-12-03"
 output: html_document
 ---
 
@@ -18,7 +16,7 @@ to_read <- read_csv("./to_read.csv")
 books_with_tags <- read_csv("./books_with_tags.csv")
 ```
 
-```{r data_1}
+```{r data_1, echo=FALSE}
 # Count the number of ratings per user
 users_ratings <- ratings %>%
   group_by(user_id) %>%
@@ -26,6 +24,9 @@ users_ratings <- ratings %>%
   arrange(desc(total_ratings))
 
 ```
+### Average Ratings
+
+There were `r nrow(users_ratings)` raters in the GoodReads community -- that's a lot! We chose to take a deeper dive into the top 15 raters by number of ratings to look at features such as on their average ratings. 
 
 ```{r ratings_users, echo = FALSE}
 # Select the top 15 users by number of ratings
@@ -50,26 +51,54 @@ top_users <- left_join(top_user_ids_rat, avg_rat, by = c("user_id")) %>%
 # Print table of average ratings
 kable(top_users, caption = "Average Ratings and Number of Ratings for Top 15 Raters", align = "c")
 
+```
+What about in comparison to the general GoodReads community?
 
+```{r, echo = FALSE}
 
 over_avg_rat <-ratings %>%
   group_by(user_id) %>%  
-  summarize(avg_rating = mean(rating, na.rm = TRUE))
+  summarize(avg_rating = mean(rating, na.rm = TRUE)) %>%
+  rename("User ID" = user_id) %>%
+  rename("Average Rating" = avg_rating)
 
 
 # Overlay density plots
+
 ggplot() +
-  geom_density(data = top_users, aes(x = `Average Rating`), fill = "blue", alpha = 0.5) +
-  geom_density(data = over_avg_rat, aes(x = avg_rating), fill = "red", alpha = 0.5) +
-  labs(title = "Average Ratings Distribution for All Raters vs Top 15 Raters",
-       x = "Rating", y = "Density") +
+  geom_density(data = top_users, aes(x = `Average Rating`, fill = "Top 15 Raters"), alpha = 0.5) +
+  geom_density(data = over_avg_rat, aes(x = `Average Rating`, fill = "All Raters"), alpha = 0.5) +
+  labs(
+    title = "Average Ratings Distribution for All Raters vs Top 15 Raters",
+    x = "Rating", y = "Density",
+    fill = "Group"
+  ) +
   theme_minimal() +
-  theme(legend.title = element_text(size = 14, face = "bold"),
+  theme(
+    legend.title = element_text(size = 14, face = "bold"),
     legend.text = element_text(size = 12),
     legend.background = element_rect(fill = "gray90"),
-    legend.position = "top")
+    legend.position = "top"
+  )
 
+top_15_summary <- top_users %>%
+  summarise(
+    mean_value = mean(`Average Rating`, na.rm = TRUE),
+    median_value = median(`Average Rating`, na.rm = TRUE),
+    sd_value = sd(`Average Rating`, na.rm = TRUE)
+  )
+overall_summary <- over_avg_rat %>%
+  summarise(
+    mean_value = mean(`Average Rating`, na.rm = TRUE),
+    median_value = median(`Average Rating`, na.rm = TRUE),
+    sd_value = sd(`Average Rating`, na.rm = TRUE)
+  )
 
+kable(top_15_summary, caption = "Descriptive Statistics for Top 15 Users' Ratings", align = "c")
+kable(overall_summary, caption = "Descriptive Statistics for Overall GoodReads Community's Ratings", align = "c")
+```
+It looks like the Top 15 raters are on average a little less generous with their scores than the general GoodReads community.
+```{r}
 # Creates a data frame that includes the book information for each of the ratings in top_ratings. Then found the three most rated genres for the top 15 users. 
 top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id")) %>%
   group_by(user_id) %>% 
@@ -84,16 +113,20 @@ top_ratings_genres <- left_join(top_ratings, books_with_tags, by = c("book_id"))
   ungroup()
 
 
-# Counted how many of the 15 users rated a genre out of the groups top three's
+# Counted how many of the 15 users rated a genre out of the top three
 genres_count <- top_ratings_genres %>%
   count(tag)
 
 ```
+ 
+### Genres
 
-```{r plot}
+The 15 Top raters had a range of genres so we looked at the top 3 genres rated by how many ratings per genres. The clear winners were fiction and classics, with all 15 raters having fiction in their top 3 and 13 of the 15 rating classics. 
+
+```{r plot, echo=FALSE}
 # create a pie chart to show all genres
 genres_count %>%
-  plot_ly(labels = ~tag, values = ~n, type = "pie", colors = "viridis")
+  plot_ly(labels = ~tag, values = ~n, type = "pie", colors = "Pastel1")
   
 ```
   

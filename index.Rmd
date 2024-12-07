@@ -1,12 +1,11 @@
 ---
 title: "To Be Read or Not To Be Read"
-output: 
+output:
   html_document:
-    toc: true
-    toc_float: true
-    theme: yeti
+    toc: true         
+    toc_float: true   
+    theme: yeti      
 ---
-
 ### Welcome to My Website
 
 

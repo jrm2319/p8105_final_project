@@ -244,33 +244,18 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="index.html">About</a>
 </li>
 <li>
-  <a href="Analysis.html">Analysis</a>
-</li>
-<li>
-  <a href="Report.html">Report – Hypothesis Testing Results</a>
+  <a href="Report.html">Report - Hypothesis Testing Results</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Top Users
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="top_users.html">Top Users by Ratings</a>
-    </li>
-    <li>
-      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Authors
+    Descriptive Analyses
      
     <span class="caret"></span>
   </a>
@@ -284,17 +269,30 @@ $(document).ready(function () {
     <li>
       <a href="popular_authors.html">Popular Authors</a>
     </li>
+    <li>
+      <a href="genres.html">Most to Least Read Genres</a>
+    </li>
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Recommendations
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="reccomendations.html">Recommendations</a>
+    </li>
   </ul>
 </li>
 <li>
-  <a href="reccomendations.html">Reccomendations</a>
-</li>
-<li>
-  <a href="genres.html">Most to Least Read Genres</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
   <a href="https://github.com/jrm2319/p8105_final_project.io.git">
     <span class="fa fa-github fa-lg"></span>
      
@@ -315,7 +313,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Most Read Authors</h1>
+<h1 class="title toc-ignore"><b>Most Read Authors</b></h1>
 
 </div>
 
@@ -323,16 +321,7 @@ $(document).ready(function () {
 <div id="data-import" class="section level2">
 <h2>Data Import</h2>
 <div id="summarizing-read-counts-by-author" class="section level3">
-<h3>Summarizing Read Counts by Author</h3>
-<pre class="r"><code>most_read_authors &lt;- books %&gt;%
-  group_by(authors) %&gt;%
-  summarize(
-    total_ratings = sum(work_ratings_count, na.rm = TRUE), 
-    num_books = n() #Counting the number of books per author
-  ) %&gt;%
-  arrange(desc(total_ratings))
-
-head(most_read_authors, 50)</code></pre>
+<h3><em>Summarizing Read Counts by Author</em></h3>
 <pre><code>## # A tibble: 50 × 3
 ##    authors                     total_ratings num_books
 ##    &lt;chr&gt;                               &lt;int&gt;     &lt;int&gt;
@@ -349,29 +338,74 @@ head(most_read_authors, 50)</code></pre>
 ## # ℹ 40 more rows</code></pre>
 </div>
 <div id="displaying-top-10-most-read-authors" class="section level3">
-<h3>Displaying Top 10 Most Read Authors</h3>
-<pre class="r"><code>ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
-  geom_bar(stat = &quot;identity&quot;, aes(fill = total_ratings), show.legend = FALSE) +
-  labs(
-    title = &quot;Top 10 Most Read Authors&quot;,
-    x = &quot;Total Ratings Count&quot;,
-    y = &quot;Authors&quot;
-  ) +
-  scale_fill_gradient(low = &quot;red&quot;, high = &quot;darkred&quot;) + 
-  theme_minimal() +
-  theme(
-    plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5), 
-    axis.text.y = element_text(size = 10), 
-    axis.text.x = element_text(size = 12),
-    axis.title = element_text(size = 14, face = &quot;bold&quot;), 
-    panel.grid.major.y = element_blank() 
-  ) +
-  scale_x_continuous(labels = scales::comma)</code></pre>
-<p><img src="most_read_authors_files/figure-html/Dislaying%20Top%2010%20Most%20Read%20Authors-1.png" width="672" />
-```</p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the
-code chunk to prevent printing of the R code that generated the
-plot.</p>
+<h3><em>Displaying Top 10 Most Read Authors</em></h3>
+<p><img src="most_read_authors_files/figure-html/Dislaying%20Top%2010%20Most%20Read%20Authors-1.png" width="672" /></p>
+<p><strong>Top 10 Most Read Authors</strong></p>
+<p>This bar chart, “Top 10 Most Read Authors by Ratings” depicts the
+percentage of total ratings each author received relative to the
+dataset.</p>
+<table>
+<caption>Top 10 Most Read Authors by Total Ratings</caption>
+<thead>
+<tr class="header">
+<th align="left">Author</th>
+<th align="right">Total_Ratings</th>
+<th align="right">Number_of_Books</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">J.K. Rowling, Mary GrandPré</td>
+<td align="right">14126791</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">Suzanne Collins</td>
+<td align="right">9161124</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="left">Stephenie Meyer</td>
+<td align="right">8631937</td>
+<td align="right">11</td>
+</tr>
+<tr class="even">
+<td align="left">Stephen King</td>
+<td align="right">7297834</td>
+<td align="right">60</td>
+</tr>
+<tr class="odd">
+<td align="left">Rick Riordan</td>
+<td align="right">5717999</td>
+<td align="right">22</td>
+</tr>
+<tr class="even">
+<td align="left">J.R.R. Tolkien</td>
+<td align="right">5602790</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Dan Brown</td>
+<td align="right">5332589</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="left">Cassandra Clare</td>
+<td align="right">4631019</td>
+<td align="right">13</td>
+</tr>
+<tr class="odd">
+<td align="left">Nicholas Sparks</td>
+<td align="right">4501871</td>
+<td align="right">19</td>
+</tr>
+<tr class="even">
+<td align="left">John Green</td>
+<td align="right">4312589</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
