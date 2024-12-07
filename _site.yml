@@ -2,6 +2,7 @@ name: "To Be Read or Not To Be Read"
 output_dir: "."
 navbar:
   title: "To Be Read or Not To Be Read"
+<<<<<<< HEAD
   left:
     - text: "About"
       href: index.html
@@ -12,6 +13,12 @@ navbar:
     - text: "Report – Hypothesis Testing Results"
       href: Report.html
     - text: "Descriptive Analyses"
+=======
+  right: 
+    - text: "About"
+      href: index.html
+    - text: "Analyses"
+>>>>>>> d925cc9baee5713e8867f0ddb45c8c3140f5469a
       menu:
         - text: "Most Read Authors"
           href: most_read_authors.html

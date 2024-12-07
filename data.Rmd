@@ -2,8 +2,9 @@
 title: "DATA"
 author: "Erynne Jackson"
 date: "2024-12-01"
-output: github_document
----
+output: 
+  github_document
+----
 
 ```{r}
 
