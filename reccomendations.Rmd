@@ -1,12 +1,17 @@
 ---
-title: "Get Book Recommendations!"
+title: "Welcome to our Recommendations Page!"
 output: html_document
 runtime: shiny
 ---
 
-Welcome to our recommendations page! Looking for a new romance story? Want to get into some classics? Looking to read some other books by your favorite author? Fear not! You can get some book recommendations right here. You can search by your favorite genre, by author, and include the rating of the book your want. 
+Looking for a new romance story? Want to get into some classics? Looking to read other books by your favorite author? Fear not! You can get book recommendations right here. Search by your favorite genre or author and include the ratings of interest. Please indicate if you have read a book on your recommendations list so that we can give you an updated list! 
 
 Have fun reading! 
+
+
+
+
+
 
 ```{r setup, include=FALSE}
 
@@ -26,23 +31,40 @@ books = read_csv("books_with_tags.csv")
 books_clean = books |> 
   select(-isbn, ratings_count, work_ratings_count, work_text_reviews_count)
 
-rate = read_csv("ratings.csv")
+books_rate <- books_clean %>%
+  mutate(average_rating = round(average_rating*2)/2)
 
-rate_clean = rate |> 
-  select(-user_id)
-
-
-rec_data <- merge(books_clean, rate_clean, by = "book_id", all = TRUE)
 
 ```
 
 ```{r, echo=FALSE, warning=FALSE}
 
-authors <- unique(rec_data$authors)
-
-  titlePanel("Book Recommendations")
+authors <- unique(books_rate$authors)
 
 ui <- fluidPage(
+tags$head(
+    tags$style(HTML("
+      #banner {
+        width: 100%;
+        height: 200px;
+        background-image: url('https://t3.ftcdn.net/jpg/05/04/40/40/360_F_504404010_Li0drda7VOTZsxJLWY1dbID2CinSu3c1.jpg'); 
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+        color: white;
+        font-size: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Arial', sans-serif;
+      }
+      ")
+      )
+),
+titlePanel("Enter your Author or Genre of Interest Here:"), 
+  
+ div(id="banner"), 
+
   selectInput("search_by", 
               label = "Search by:", 
               choices = c("Select", "Author", "Genre")),
@@ -63,28 +85,28 @@ ui <- fluidPage(
     condition = "input.search_by == 'Genre'",
     selectInput("search_genre", 
                 label = "Choose Genre(s):", 
-                choices = unique(c(rec_data$top_1, rec_data$top_2, rec_data$top_3, rec_data$top_4, rec_data$top_5)), 
+                choices = unique(c(books_rate$top_1, books_rate$top_2, books_rate$top_3, books_rate$top_4, books_rate$top_5)), 
                 multiple = TRUE)  
   ),
   
   conditionalPanel( 
     condition = "input.search_by == 'Genre' || input.search_by == 'Author'",
-    selectInput("rating", 
+    selectInput("average_rating", 
                 label = "Choose Rating:", 
-                choices = unique(rec_data$rating), 
+                choices = unique(books_rate$average_rating), 
                 selected = NULL)
   ),
   
   actionButton("recommend", "Get Recommendations"),
   
-  h3("Recommended Books"),
+  h3("Your Recommended Books:"),
   uiOutput("book_list")
 )
 
 server <- function(input, output, session) {
   
   filtered_books <- reactive({
-    booktok <- rec_data
+    booktok <- books_rate
     
     if (length(input$search_genre) > 0) {
       booktok <- booktok %>%
@@ -102,30 +124,228 @@ server <- function(input, output, session) {
     }
     
     
-    if (!is.null(input$rating) && input$rating != "") {
-      booktok <- booktok %>% filter(rating == as.numeric(input$rating))
+    if (!is.null(input$average_rating) && input$average_rating != "") {
+      booktok <- booktok %>% filter(average_rating == as.numeric(input$average_rating))
     }
     
     booktok %>% distinct(title, .keep_all = TRUE)
   })
   
+   read_books <- reactiveVal(character(0))
+  
   observeEvent(input$recommend, {
     output$book_list <- renderUI({
       booktok <- filtered_books()
       
+      if(nrow(booktok) < 5 && !is.null(input$average_rating)) { 
+        selected_rating <- as.numeric(input$average_rating)
+        
+        lower_rating_books <- books_rate |> 
+          filter(average_rating == (selected_rating -1)) |> 
+          distinct(title, .keep_all = TRUE)
+        
+        booktok <- bind_rows(booktok, lower_rating_books)
+      
+      
       books_to_show <- head(booktok, 5)
+      
+      }
+      
+      booktok <- booktok %>%
+        filter(!title %in% read_books())
       
       if (nrow(books_to_show) > 0) {
         tagList(
           lapply(1:nrow(books_to_show), function(i) {
+            is_lower_rated <- booktok$average_rating[i] < as.numeric(input$average_rating)
+            
             div(
               img(src = books_to_show$image_url[i], width = "250px", height = "300px"),  
-              strong(books_to_show$title[i])
+              strong(books_to_show$title[i]), 
+              if (is_lower_rated) {
+                span(style = "color: brown; font-weight: bold;", "(Rated Below Your Selection)")
+              },
+              p(paste("Rating:", booktok$average_rating[i])),
+              actionButton(paste0("read_", i), "Mark as Read", class = "btn-primary")
             )
           })
         )
       } else {
         p("No books found based on your selection.")
+      }
+    })
+  })
+  
+  observe({
+    # Loop through each action button corresponding to a book
+    lapply(1:5, function(i) {
+      button_id <- paste0("read_", i)
+      if (input[[button_id]]) {
+        # Mark the book as read by adding it to the list of read books
+        booktok <- filtered_books()
+        book_to_add <- booktok[i, ]$title
+        read_books(c(read_books(), book_to_add))  # Add to the list of read books
+        
+        # Re-render the book list with the updated list of books
+        output$book_list <- renderUI({
+          booktok <- filtered_books()
+          
+          # Filter out books that have already been read
+          booktok <- booktok %>%
+            filter(!title %in% read_books())
+          
+          # Render the updated list
+          if (nrow(booktok) > 0) {
+            tagList(
+              lapply(1:nrow(booktok), function(i) {
+                book <- booktok[i, ]
+                
+                div(
+                  img(src = book$image_url, width = "250px", height = "300px"),
+                  strong(book$title),
+                  p(paste("Rating:", book$average_rating)),
+                  actionButton(paste0("read_", i), "Mark as Read", class = "btn-primary")
+                )
+              })
+            )
+          } else {
+            p("No books found based on your selection.")
+          }
+        })
+      }
+    })
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+
+```
+
+
+
+```{r, echo=FALSE, warning=FALSE}
+server <- function(input, output, session) {
+  
+  filtered_books <- reactive({
+    booktok <- books_rate
+    
+    if (length(input$search_genre) > 0) {
+      booktok <- booktok %>%
+        filter(
+          top_1 %in% input$search_genre | 
+          top_2 %in% input$search_genre | 
+          top_3 %in% input$search_genre | 
+          top_4 %in% input$search_genre | 
+          top_5 %in% input$search_genre
+        )
+    }
+    
+    if (input$search_by == "Author" && input$authors != "") {
+      booktok <- booktok %>% filter(authors == input$authors)
+    }
+    
+    if (!is.null(input$average_rating) && input$average_rating != "") {
+      booktok <- booktok %>% filter(average_rating == as.numeric(input$average_rating))
+    }
+    
+    booktok %>% distinct(title, .keep_all = TRUE)
+  })
+  
+  # Reactive value to store the books that the user has marked as read
+  read_books <- reactiveVal(character(0))
+  
+  observeEvent(input$recommend, {
+    output$book_list <- renderUI({
+      booktok <- filtered_books()
+      
+      # Ensure filtered_books() isn't empty
+      if (nrow(booktok) == 0) {
+        return(p("No books found based on your selection."))
+      }
+      
+      if (nrow(booktok) < 5 && !is.null(input$average_rating)) { 
+        selected_rating <- as.numeric(input$average_rating)
+        
+        lower_rating_books <- books_rate %>% 
+          filter(average_rating == (selected_rating - 1)) %>% 
+          distinct(title, .keep_all = TRUE)
+        
+        # Only bind rows if there are books with lower rating
+        if (nrow(lower_rating_books) > 0) {
+          booktok <- bind_rows(booktok, lower_rating_books)
+        }
+      }
+      
+      # Filter out books that the user has already read
+      booktok <- booktok %>%
+        filter(!title %in% read_books())
+      
+      # Limit to 5 books
+      books_to_show <- head(booktok, 5)
+      
+      # Ensure books_to_show is not empty
+      if (nrow(books_to_show) > 0) {
+        tagList(
+          lapply(1:nrow(books_to_show), function(i) {
+            is_lower_rated <- books_to_show$average_rating[i] < as.numeric(input$average_rating)
+            
+            div(
+              img(src = books_to_show$image_url[i], width = "250px", height = "300px"),  
+              strong(books_to_show$title[i]), 
+              if (is_lower_rated) {
+                span(style = "color: brown; font-weight: bold;", "(Rated Below Your Selection)")
+              },
+              p(paste("Rating:", books_to_show$average_rating[i])),
+              actionButton(paste0("read_", i), "Mark as Read", class = "btn-primary")
+            )
+          })
+        )
+      } else {
+        p("No books found based on your selection.")
+      }
+    })
+  })
+  
+  # Observe when a user clicks "Mark as Read" for a book
+  observe({
+    # Loop through each action button corresponding to a book
+    lapply(1:5, function(i) {
+      button_id <- paste0("read_", i)
+      if (input[[button_id]]) {
+        # Mark the book as read by adding it to the list of read books
+        booktok <- filtered_books()
+        if (nrow(booktok) >= i) {
+          book_to_add <- booktok[i, ]$title  # Use books_to_show here
+          read_books(c(read_books(), book_to_add))  # Add to the list of read books
+          
+          # Re-render the book list with the updated list of books
+          output$book_list <- renderUI({
+            booktok <- filtered_books()
+            
+            # Filter out books that have already been read
+            booktok <- booktok %>%
+              filter(!title %in% read_books())
+            
+            # Render the updated list
+            if (nrow(booktok) > 0) {
+              tagList(
+                lapply(1:nrow(booktok), function(i) {
+                  book <- booktok[i, ]
+                  
+                  div(
+                    img(src = book$image_url, width = "250px", height = "300px"),
+                    strong(book$title),
+                    p(paste("Rating:", book$average_rating)),
+                    actionButton(paste0("read_", i), "Mark as Read", class = "btn-primary")
+                  )
+                })
+              )
+            } else {
+              p("No books found based on your selection.")
+            }
+          })
+        }
       }
     })
   })

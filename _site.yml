@@ -7,6 +7,8 @@ navbar:
       href: index.html
     - text: "Analysis"
       href: Analysis.html
+    - text: "Dashboard"
+      href: dashboard.html
     - text: "Report – Hypothesis Testing Results"
       href: Report.html
     - text: "Top Users"
@@ -23,7 +25,7 @@ navbar:
           href: least_read_authors.html
         - text: "Popular Authors"
           href: popular_authors.html
-    - text: "Reccomendations"
+    - text: "Get a Book Recommendation"
       href: reccomendations.html
     - text: "Most to Least Read Genres"
       href: genres.html
