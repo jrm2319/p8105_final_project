@@ -5,12 +5,6 @@ navbar:
   left:
     - text: "About"
       href: index.html
-    - text: "Analysis"
-      href: Analysis.html
-    - text: "Dashboard"
-      href: dashboard.html
-    - text: "Additional Analyses: Sequels"
-      href: Report.html
     - text: "Descriptive Analyses"
       menu:
         - text: "Most Read Authors"
