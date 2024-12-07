@@ -82,7 +82,7 @@ ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = f
 
 - Based off of average ratings, good reads users generally rate the sequel higher than the original book.
 
-### Hypothesis Test
+### ***Hypothesis Test***
 
 While the visualizations suggest that sequels may outperform the original book in terms of average ratings, let's apply statistical techniques to formally test this hypothesis. Given the relatively normal distribution of ratings for the first and second books, we move forward with a t-test. 
 
@@ -112,13 +112,4 @@ knitr::kable(t_test_table, caption = "T-Test Results: Comparing Ratings of First
 
 + The t-test confirms that the sequel in a series has a statistically significant higher average rating than the first book. We estimate that the sequel is rated approximately 0.094 stars higher than the first book. 
 
-### Regression Models
-
-```{r, include = FALSE}
-lm_sequel <- lm(average_rating ~ factor(series_number) + factor(series_name), data = sequel_data)
-
-sequel_data$predicted_ratings <- predict(lm_sequel, sequel_data)
-
-sequel_data$predicted_rating <- predict(lm_sequel)
-```
 
