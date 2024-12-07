@@ -14,26 +14,24 @@ navbar:
         - text: "Popular Authors"
           href: popular_authors.html
     - text: "Get a Book Recommendation"
-      href: reccomendations.html
+      href: recommendations.html
+  right:
     - text: "Most to Least Read Genres"
       href: genres.html
-  right:
-        - text: "Most to Least Read Genres"
-          href: genres.html
-        - text: "Top Users by Ratings"
-          href: top_users.html
-        - text: "Top Users by Most To-Read"
-          href: top_users_to_read.html
-        - text: "Sequels"
-          href: Sequels.html   
+    - text: "Top Users by Ratings"
+      href: top_users.html
+    - text: "Top Users by Most To-Read"
+      href: top_users_to_read.html
+    - text: "Sequels"
+      href: sequels.html   
+    - text: "Recommendations"
+      menu:
         - text: "Recommendations"
-          menu:
-            - text: "Recommendations"
-              href: reccomendations.html
-        - icon: fa-github fa-lg
-          href: https://github.com/jrm2319/p8105_final_project.io.git
-        - icon: fa-envelope fa-lg
-          href: mailto:kab2310@cumc.columbia.edu
+          href: recommendations.html
+    - icon: fa-github fa-lg
+      href: https://github.com/jrm2319/p8105_final_project.io.git
+    - icon: fa-envelope fa-lg
+      href: mailto:kab2310@cumc.columbia.edu
 output:
   html_document:
     theme: yeti
