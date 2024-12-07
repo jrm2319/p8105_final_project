@@ -1,30 +1,158 @@
 ---
-title: "genres"
-author: "Kamiah Brown"
+title: "Genres Analysis"
+author: "Jasmin Martinez"
 date: "2024-12-03"
 output: html_document
 ---
-**TEST** -Jamsin
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+## **DATA: Most and Least Popular Genres Read**  
+Importing data to use:  
+```{r}
+library(readr)
+genre_data = read_csv ("books_with_tags.csv", show_col_types = FALSE)
 ```
 
-## R Markdown
+Tidying data:
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(tidyr)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# Combine all tags into a single column
+genre_data_longer = genre_data %>%
+  select(top_1:top_5) %>%  # Select the columns with tags
+  pivot_longer(cols = everything(), names_to = "tag_type", values_to = "tag") 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+# remove fiction and nonfiction from genre list
+genre_data_longer = genre_data_longer %>%
+  filter(!tag %in% c("fiction", "non-fiction"))
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+## **DATA: Most and Least Popular Genres To-Be-Read**  
+Importing data to use:
+```{r}
+to_read = read_csv ("to_read.csv", show_col_types = FALSE)
+head(to_read)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Tidying data:  
+```{r}
+# Remove the 'user_id' variable
+to_read = to_read %>%
+  select(-user_id)  # Drop the user_id column
+
+# Remove duplicate 'book_id' entries
+to_read_cleaned = to_read %>%
+  distinct(book_id, .keep_all = TRUE)
+
+# Merge to_read dataset with genre_data, on book_id
+to_read_merged = to_read_cleaned %>%
+  inner_join(genre_data, by = "book_id")
+
+# Combine all tags into a single column
+to_read_genre_data_longer = to_read_merged %>%
+  select(top_1:top_5) %>%  # Select the columns with tags
+  pivot_longer(cols = everything(), names_to = "tag_type", values_to = "tag") 
+
+# remove fiction and nonfiction from genre list
+to_read_genre_data_longer = to_read_genre_data_longer %>%
+  filter(!tag %in% c("fiction", "non-fiction"))
+
+write_csv(to_read_genre_data_longer, "to_read_with_tag.csv")
+```
+
+## **Exploratory Analysis** 
+### **Most Popular Genres**  
+```{r}
+# Count occurrences of each tag, in descending order
+tag_counts = genre_data_longer %>%
+  group_by(tag) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  arrange(desc(count))
+
+# Display the 10 most popular tags
+top_tags = tag_counts %>%
+  slice_max(count, n = 10)
+print(top_tags)
+
+# Box Graph
+library(ggplot2)
+
+ggplot(top_tags, aes(x = reorder(tag, count), y = count)) +
+  geom_bar(stat = "identity", fill = "darkred") +
+  coord_flip() +
+  labs(title = "Top Genres Based on Tags",
+       x = "Genre",
+       y = "Count") +
+  theme_minimal()
+
+```
+### **Least Popular Genres**  
+```{r}
+# Filter tags with counts of 50 or greater
+filtered_tags = tag_counts %>%
+  filter(count >= 100)
+
+# Display the least popular genres from the filtered set
+least_popular_tags = filtered_tags %>%
+  slice_min(count, n = 10)
+print(least_popular_tags)
+
+# Box graph
+library(ggplot2)
+
+ggplot(least_popular_tags, aes(x = reorder(tag, count), y = count)) +
+  geom_bar(stat = "identity", fill = "darkred") +
+  coord_flip() +
+  labs(title = "20 Least Popular Genres with a Tag Count of 100 or Greater",
+       x = "Genre",
+       y = "Count") +
+  theme_minimal()
+```
+
+### **Most Popular To-Be-Read Genre**  
+```{r}
+# Count occurrences of each tag, in descending order
+to_read_tag_counts = to_read_genre_data_longer %>%
+  group_by(tag) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  arrange(desc(count))
+
+# Display the 10 most popular tags for to-be-read
+to_read_top_tags = to_read_tag_counts %>%
+  slice_max(count, n = 10)
+print(to_read_top_tags)
+
+# Box Graph
+library(ggplot2)
+
+ggplot(to_read_top_tags, aes(x = reorder(tag, count), y = count)) +
+  geom_bar(stat = "identity", fill = "gold") +
+  coord_flip() +
+  labs(title = "Top 10 Genres To-Read, Based on Tags",
+       x = "Genre",
+       y = "Count") +
+  theme_minimal()
+```
+
+### **Least Popular To-Be-Read Genre**  
+```{r}
+# Filter tags with counts of 100 or greater
+to_read_filtered_tags = to_read_tag_counts %>%
+  filter(count >= 100)
+
+# Display the least popular genres from the filtered set
+to_read_least_popular_tags = to_read_filtered_tags %>%
+  slice_min(count, n = 10)
+print(to_read_least_popular_tags)
+
+# Box graph
+library(ggplot2)
+
+ggplot(to_read_least_popular_tags, aes(x = reorder(tag, count), y = count)) +
+  geom_bar(stat = "identity", fill = "gold") +
+  coord_flip() +
+  labs(title = "10 Least Popular Genres To-Read, based on tags",
+       x = "Genre",
+       y = "Count") +
+  theme_minimal()
+```
