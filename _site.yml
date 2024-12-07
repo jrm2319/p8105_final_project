@@ -5,7 +5,7 @@ navbar:
   right: 
     - text: "About"
       href: index.html
-    - "Report - Hypothesis Testing Results"
+    - text: "Report - Hypothesis Testing Results"
       href: Report.html
     - text: "Descriptive Analyses"
       menu:
