@@ -2,10 +2,10 @@ name: "To Be Read or Not To Be Read"
 output_dir: "."
 navbar:
   title: "To Be Read or Not To Be Read"
-  left:
-    - text: "About"
+  right: 
+      - text: "About"
       href: index.html
-    - text: "Descriptive Analyses"
+      - text: "Analyses"
       menu:
         - text: "Most Read Authors"
           href: most_read_authors.html
@@ -13,17 +13,14 @@ navbar:
           href: least_read_authors.html
         - text: "Popular Authors"
           href: popular_authors.html
-    - text: "Get a Book Recommendation"
-      href: recommendations.html
-  right:
-    - text: "Most to Least Read Genres"
-      href: genres.html
-    - text: "Top Users by Ratings"
-      href: top_users.html
-    - text: "Top Users by Most To-Read"
-      href: top_users_to_read.html
-    - text: "Sequels"
-      href: sequels.html   
+        - text: "Most and Least Read Genres"
+          href: genres.html
+        - text: "Top Users by Ratings"
+          href: top_users.html
+        - text: "Top Users by Most To-Read"
+          href: top_users_to_read.html
+        - text: "Sequels"
+          href: Sequels.html 
     - text: "Recommendations"
       menu:
         - text: "Recommendations"
