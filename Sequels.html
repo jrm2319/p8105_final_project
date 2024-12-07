@@ -15,7 +15,7 @@
 
 <title>Sequels</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
@@ -246,14 +246,17 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="index.html">About</a>
 </li>
 <li>
-  <a href="Report.html">Report - Hypothesis Testing Results</a>
+  <a href="Analysis.html">Analysis</a>
+</li>
+<li>
+  <a href="dashboard.html">Dashboard</a>
+</li>
+<li>
+  <a href="Report.html">Report – Hypothesis Testing Results</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -271,16 +274,24 @@ $(document).ready(function () {
     <li>
       <a href="popular_authors.html">Popular Authors</a>
     </li>
-    <li>
-      <a href="genres.html">Most to Least Read Genres</a>
-    </li>
-    <li>
-      <a href="top_users.html">Top Users by Ratings</a>
-    </li>
-    <li>
-      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
-    </li>
   </ul>
+</li>
+<li>
+  <a href="reccomendations.html">Get a Book Recommendation</a>
+</li>
+<li>
+  <a href="genres.html">Most to Least Read Genres</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="genres.html">Most to Least Read Genres</a>
+</li>
+<li>
+  <a href="top_users.html">Top Users by Ratings</a>
+</li>
+<li>
+  <a href="top_users_to_read.html">Top Users by Most To-Read</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -322,8 +333,18 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>library(tidyverse)
-library(ggplot2)
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(ggplot2)
 library(dplyr)
 library(knitr)
 library(broom)</code></pre>
@@ -423,11 +444,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Alexandra Cooper                                             -6.556e-02
 ## factor(series_name)Alice in the Country of Hearts                                2.444e-01
 ## factor(series_name)Alienated                                                    -1.556e-02
+## factor(series_name)All-American Girl                                            -4.350e-01
+## factor(series_name)All-of-a-Kind Family                                          2.644e-01
 ## factor(series_name)All Clear                                                    -1.356e-01
 ## factor(series_name)All Souls Trilogy                                             1.500e-02
 ## factor(series_name)All the Wrong Questions                                      -1.356e-01
-## factor(series_name)All-American Girl                                            -4.350e-01
-## factor(series_name)All-of-a-Kind Family                                          2.644e-01
 ## factor(series_name)Allan Quatermain                                             -1.656e-01
 ## factor(series_name)Alpha &amp; Omega                                                 1.900e-01
 ## factor(series_name)Altered                                                       7.444e-02
@@ -620,9 +641,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Daniel X                                                     -3.956e-01
 ## factor(series_name)Darcy &amp; Rachel                                               -1.250e-01
 ## factor(series_name)Dark                                                          1.050e-01
+## factor(series_name)Dark-Hunter                                                   2.644e-01
 ## factor(series_name)Dark Hunter, #8; Were-Hunter                                  3.056e-01
 ## factor(series_name)Dark Swan                                                     8.556e-02
-## factor(series_name)Dark-Hunter                                                   2.644e-01
 ## factor(series_name)Darkest Powers                                                9.500e-02
 ## factor(series_name)Darkness                                                      2.700e-01
 ## factor(series_name)Darkness Rising                                               6.500e-02
@@ -681,7 +702,7 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Dumplin&#39;                                                     -9.556e-02
 ## factor(series_name)Dust Lands                                                   -8.500e-02
 ## factor(series_name)Eagle and Jaguar                                             -2.756e-01
-## factor(series_name)Earth&#39;s Children                                             -2.000e-14
+## factor(series_name)Earth&#39;s Children                                             -1.751e-14
 ## factor(series_name)Earthsea Cycle                                                3.000e-02
 ## factor(series_name)Earthseed                                                     1.750e-01
 ## factor(series_name)Easy Rawlins                                                 -5.556e-02
@@ -767,8 +788,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)From Ashes                                                    1.644e-01
 ## factor(series_name)Fudge                                                         1.244e-01
 ## factor(series_name)Fullmetal Alchemist                                           5.244e-01
-## factor(series_name)Gabriel Allon                                                 6.000e-02
 ## factor(series_name)Gabriel&#39;s Inferno                                             1.200e-01
+## factor(series_name)Gabriel Allon                                                 6.000e-02
 ## factor(series_name)Gaither Sisters                                              -1.556e-02
 ## factor(series_name)Gakuen Alice                                                  2.644e-01
 ## factor(series_name)Gallagher Girls                                              -2.500e-02
@@ -796,7 +817,7 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Green Rider                                                   1.450e-01
 ## factor(series_name)Green Town                                                    1.500e-02
 ## factor(series_name)Greer Family                                                 -2.556e-02
-## factor(series_name)Grim Reaper                                                   3.385e-15
+## factor(series_name)Grim Reaper                                                  -6.237e-14
 ## factor(series_name)Grimnoir Chronicles                                           1.644e-01
 ## factor(series_name)Guardians of Ga&#39;Hoole                                        -8.556e-02
 ## factor(series_name)Guild Hunter                                                  1.800e-01
@@ -1047,7 +1068,7 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Merry Gentry                                                  3.000e-02
 ## factor(series_name)MeruPuri                                                      1.744e-01
 ## factor(series_name)METRO                                                         1.444e-02
-## factor(series_name)Michael Bennett                                              -3.308e-15
+## factor(series_name)Michael Bennett                                              -4.982e-14
 ## factor(series_name)Michael Vey                                                   2.400e-01
 ## factor(series_name)Mick Stranahan                                               -5.562e-03
 ## factor(series_name)Mickey Bolitar                                               -4.556e-02
@@ -1099,11 +1120,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Newsoul                                                      -2.356e-01
 ## factor(series_name)Nexus                                                         9.444e-02
 ## factor(series_name)Niebla                                                       -3.800e-01
+## factor(series_name)Night&#39;s Dawn                                                  1.950e-01
 ## factor(series_name)Night Angel                                                   2.100e-01
 ## factor(series_name)Night Huntress                                                2.450e-01
 ## factor(series_name)Night Huntress World                                          1.800e-01
 ## factor(series_name)Night Prince                                                  2.700e-01
-## factor(series_name)Night&#39;s Dawn                                                  1.950e-01
 ## factor(series_name)Nightrunner                                                   1.144e-01
 ## factor(series_name)Nightside                                                    -1.150e-01
 ## factor(series_name)Nightwalkers                                                  5.444e-02
@@ -1244,9 +1265,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Sailor Moon                                                   3.244e-01
 ## factor(series_name)Sally Lockhart                                               -2.156e-01
 ## factor(series_name)Sandman Slim                                                 -5.000e-03
+## factor(series_name)Sarah&#39;s Scribbles                                             1.744e-01
 ## factor(series_name)Sarah Agnes Prine                                             3.844e-01
 ## factor(series_name)Sarah, Plain and Tall                                        -2.456e-01
-## factor(series_name)Sarah&#39;s Scribbles                                             1.744e-01
 ## factor(series_name)Savvy                                                        -5.562e-03
 ## factor(series_name)Scarlet                                                      -1.556e-02
 ## factor(series_name)Scary Stories                                                 8.444e-02
@@ -1285,7 +1306,7 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Shoes                                                         9.444e-02
 ## factor(series_name)Shopaholic                                                   -3.200e-01
 ## factor(series_name)Shugo Chara!                                                  1.444e-01
-## factor(series_name)Sigma Force                                                  -4.043e-15
+## factor(series_name)Sigma Force                                                  -5.065e-14
 ## factor(series_name)Sign of Seven                                                 1.300e-01
 ## factor(series_name)Significance                                                  1.644e-01
 ## factor(series_name)Silence                                                      -3.556e-02
@@ -1557,8 +1578,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)The Program                                                   1.044e-01
 ## factor(series_name)The Promise                                                   3.350e-01
 ## factor(series_name)The Proposition                                               8.444e-02
-## factor(series_name)The Queen of the Tearling                                     8.500e-02
 ## factor(series_name)The Queen&#39;s Thief                                             7.500e-02
+## factor(series_name)The Queen of the Tearling                                     8.500e-02
 ## factor(series_name)The Raven Cycle                                               1.600e-01
 ## factor(series_name)The Reckoners                                                 2.250e-01
 ## factor(series_name)The Red Queen&#39;s War                                           1.044e-01
@@ -1655,7 +1676,7 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Tunnels                                                      -3.956e-01
 ## factor(series_name)Tupelo Landing                                                4.444e-02
 ## factor(series_name)Twilight                                                     -4.550e-01
-## factor(series_name)Twilight: The Graphic Novel                                  -1.500e-15
+## factor(series_name)Twilight: The Graphic Novel                                  -5.701e-14
 ## factor(series_name)Uglies                                                       -1.450e-01
 ## factor(series_name)Undead                                                       -1.300e-01
 ## factor(series_name)Under Suspicion                                              -2.200e-01
@@ -1675,7 +1696,7 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Vampire Kisses                                               -2.200e-01
 ## factor(series_name)Vampire Knight                                                1.750e-01
 ## factor(series_name)Variant                                                      -4.556e-02
-## factor(series_name)Veronica Mars                                                -3.866e-15
+## factor(series_name)Veronica Mars                                                -4.980e-14
 ## factor(series_name)Villains                                                      2.844e-01
 ## factor(series_name)Virals                                                       -2.556e-02
 ## factor(series_name)Virgil Flowers                                                8.000e-02
@@ -1698,7 +1719,7 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Waverley Family                                               5.000e-03
 ## factor(series_name)Wayfarer Redemption                                          -3.556e-02
 ## factor(series_name)Wayfarers                                                     2.144e-01
-## factor(series_name)Wayward Pines                                                -8.442e-15
+## factor(series_name)Wayward Pines                                                -5.383e-14
 ## factor(series_name)Weddings by Bella                                            -3.756e-01
 ## factor(series_name)Weezie and Bebe Mysteries                                     1.000e-02
 ## factor(series_name)Welsh Princes                                                 3.344e-01
@@ -1724,8 +1745,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Winnie-the-Pooh                                               3.500e-01
 ## factor(series_name)Winter                                                       -2.956e-01
 ## factor(series_name)Witch &amp; Wizard                                               -2.544e-01
-## factor(series_name)Women of the Otherworld                                       1.100e-01
 ## factor(series_name)Women&#39;s Murder Club                                           3.000e-02
+## factor(series_name)Women of the Otherworld                                       1.100e-01
 ## factor(series_name)Wondrous Strange                                             -2.756e-01
 ## factor(series_name)Word &amp; Void                                                  -5.000e-03
 ## factor(series_name)World of the Five Gods                                        1.450e-01
@@ -1784,11 +1805,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Alexandra Cooper                                              1.314e-01
 ## factor(series_name)Alice in the Country of Hearts                                1.314e-01
 ## factor(series_name)Alienated                                                     1.314e-01
+## factor(series_name)All-American Girl                                             1.073e-01
+## factor(series_name)All-of-a-Kind Family                                          1.314e-01
 ## factor(series_name)All Clear                                                     1.314e-01
 ## factor(series_name)All Souls Trilogy                                             1.073e-01
 ## factor(series_name)All the Wrong Questions                                       1.314e-01
-## factor(series_name)All-American Girl                                             1.073e-01
-## factor(series_name)All-of-a-Kind Family                                          1.314e-01
 ## factor(series_name)Allan Quatermain                                              1.314e-01
 ## factor(series_name)Alpha &amp; Omega                                                 1.073e-01
 ## factor(series_name)Altered                                                       1.314e-01
@@ -1981,9 +2002,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Daniel X                                                      1.314e-01
 ## factor(series_name)Darcy &amp; Rachel                                                1.073e-01
 ## factor(series_name)Dark                                                          1.073e-01
+## factor(series_name)Dark-Hunter                                                   1.314e-01
 ## factor(series_name)Dark Hunter, #8; Were-Hunter                                  1.314e-01
 ## factor(series_name)Dark Swan                                                     1.314e-01
-## factor(series_name)Dark-Hunter                                                   1.314e-01
 ## factor(series_name)Darkest Powers                                                1.073e-01
 ## factor(series_name)Darkness                                                      1.073e-01
 ## factor(series_name)Darkness Rising                                               1.073e-01
@@ -2128,8 +2149,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)From Ashes                                                    1.314e-01
 ## factor(series_name)Fudge                                                         1.314e-01
 ## factor(series_name)Fullmetal Alchemist                                           1.314e-01
-## factor(series_name)Gabriel Allon                                                 1.073e-01
 ## factor(series_name)Gabriel&#39;s Inferno                                             1.073e-01
+## factor(series_name)Gabriel Allon                                                 1.073e-01
 ## factor(series_name)Gaither Sisters                                               1.314e-01
 ## factor(series_name)Gakuen Alice                                                  1.314e-01
 ## factor(series_name)Gallagher Girls                                               1.073e-01
@@ -2460,11 +2481,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Newsoul                                                       1.314e-01
 ## factor(series_name)Nexus                                                         1.314e-01
 ## factor(series_name)Niebla                                                        1.073e-01
+## factor(series_name)Night&#39;s Dawn                                                  1.073e-01
 ## factor(series_name)Night Angel                                                   1.073e-01
 ## factor(series_name)Night Huntress                                                1.073e-01
 ## factor(series_name)Night Huntress World                                          1.073e-01
 ## factor(series_name)Night Prince                                                  1.073e-01
-## factor(series_name)Night&#39;s Dawn                                                  1.073e-01
 ## factor(series_name)Nightrunner                                                   1.314e-01
 ## factor(series_name)Nightside                                                     1.073e-01
 ## factor(series_name)Nightwalkers                                                  1.314e-01
@@ -2605,9 +2626,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Sailor Moon                                                   1.314e-01
 ## factor(series_name)Sally Lockhart                                                1.314e-01
 ## factor(series_name)Sandman Slim                                                  1.073e-01
+## factor(series_name)Sarah&#39;s Scribbles                                             1.314e-01
 ## factor(series_name)Sarah Agnes Prine                                             1.314e-01
 ## factor(series_name)Sarah, Plain and Tall                                         1.314e-01
-## factor(series_name)Sarah&#39;s Scribbles                                             1.314e-01
 ## factor(series_name)Savvy                                                         1.314e-01
 ## factor(series_name)Scarlet                                                       1.314e-01
 ## factor(series_name)Scary Stories                                                 1.314e-01
@@ -2918,8 +2939,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)The Program                                                   1.314e-01
 ## factor(series_name)The Promise                                                   1.073e-01
 ## factor(series_name)The Proposition                                               1.314e-01
-## factor(series_name)The Queen of the Tearling                                     1.073e-01
 ## factor(series_name)The Queen&#39;s Thief                                             1.073e-01
+## factor(series_name)The Queen of the Tearling                                     1.073e-01
 ## factor(series_name)The Raven Cycle                                               1.073e-01
 ## factor(series_name)The Reckoners                                                 1.073e-01
 ## factor(series_name)The Red Queen&#39;s War                                           1.314e-01
@@ -3085,8 +3106,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Winnie-the-Pooh                                               1.073e-01
 ## factor(series_name)Winter                                                        1.314e-01
 ## factor(series_name)Witch &amp; Wizard                                                1.314e-01
-## factor(series_name)Women of the Otherworld                                       1.073e-01
 ## factor(series_name)Women&#39;s Murder Club                                           1.073e-01
+## factor(series_name)Women of the Otherworld                                       1.073e-01
 ## factor(series_name)Wondrous Strange                                              1.314e-01
 ## factor(series_name)Word &amp; Void                                                   1.073e-01
 ## factor(series_name)World of the Five Gods                                        1.073e-01
@@ -3145,11 +3166,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Alexandra Cooper                                              -0.499
 ## factor(series_name)Alice in the Country of Hearts                                 1.860
 ## factor(series_name)Alienated                                                     -0.118
+## factor(series_name)All-American Girl                                             -4.055
+## factor(series_name)All-of-a-Kind Family                                           2.012
 ## factor(series_name)All Clear                                                     -1.031
 ## factor(series_name)All Souls Trilogy                                              0.140
 ## factor(series_name)All the Wrong Questions                                       -1.031
-## factor(series_name)All-American Girl                                             -4.055
-## factor(series_name)All-of-a-Kind Family                                           2.012
 ## factor(series_name)Allan Quatermain                                              -1.260
 ## factor(series_name)Alpha &amp; Omega                                                  1.771
 ## factor(series_name)Altered                                                        0.566
@@ -3342,9 +3363,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Daniel X                                                      -3.010
 ## factor(series_name)Darcy &amp; Rachel                                                -1.165
 ## factor(series_name)Dark                                                           0.979
+## factor(series_name)Dark-Hunter                                                    2.012
 ## factor(series_name)Dark Hunter, #8; Were-Hunter                                   2.325
 ## factor(series_name)Dark Swan                                                      0.651
-## factor(series_name)Dark-Hunter                                                    2.012
 ## factor(series_name)Darkest Powers                                                 0.886
 ## factor(series_name)Darkness                                                       2.517
 ## factor(series_name)Darkness Rising                                                0.606
@@ -3489,8 +3510,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)From Ashes                                                     1.251
 ## factor(series_name)Fudge                                                          0.947
 ## factor(series_name)Fullmetal Alchemist                                            3.990
-## factor(series_name)Gabriel Allon                                                  0.559
 ## factor(series_name)Gabriel&#39;s Inferno                                              1.119
+## factor(series_name)Gabriel Allon                                                  0.559
 ## factor(series_name)Gaither Sisters                                               -0.118
 ## factor(series_name)Gakuen Alice                                                   2.012
 ## factor(series_name)Gallagher Girls                                               -0.233
@@ -3821,11 +3842,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Newsoul                                                       -1.792
 ## factor(series_name)Nexus                                                          0.719
 ## factor(series_name)Niebla                                                        -3.542
+## factor(series_name)Night&#39;s Dawn                                                   1.818
 ## factor(series_name)Night Angel                                                    1.958
 ## factor(series_name)Night Huntress                                                 2.284
 ## factor(series_name)Night Huntress World                                           1.678
 ## factor(series_name)Night Prince                                                   2.517
-## factor(series_name)Night&#39;s Dawn                                                   1.818
 ## factor(series_name)Nightrunner                                                    0.871
 ## factor(series_name)Nightside                                                     -1.072
 ## factor(series_name)Nightwalkers                                                   0.414
@@ -3966,9 +3987,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Sailor Moon                                                    2.469
 ## factor(series_name)Sally Lockhart                                                -1.640
 ## factor(series_name)Sandman Slim                                                  -0.047
+## factor(series_name)Sarah&#39;s Scribbles                                              1.327
 ## factor(series_name)Sarah Agnes Prine                                              2.925
 ## factor(series_name)Sarah, Plain and Tall                                         -1.868
-## factor(series_name)Sarah&#39;s Scribbles                                              1.327
 ## factor(series_name)Savvy                                                         -0.042
 ## factor(series_name)Scarlet                                                       -0.118
 ## factor(series_name)Scary Stories                                                  0.642
@@ -4279,8 +4300,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)The Program                                                    0.795
 ## factor(series_name)The Promise                                                    3.123
 ## factor(series_name)The Proposition                                                0.642
-## factor(series_name)The Queen of the Tearling                                      0.792
 ## factor(series_name)The Queen&#39;s Thief                                              0.699
+## factor(series_name)The Queen of the Tearling                                      0.792
 ## factor(series_name)The Raven Cycle                                                1.491
 ## factor(series_name)The Reckoners                                                  2.097
 ## factor(series_name)The Red Queen&#39;s War                                            0.795
@@ -4446,8 +4467,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Winnie-the-Pooh                                                3.263
 ## factor(series_name)Winter                                                        -2.249
 ## factor(series_name)Witch &amp; Wizard                                                -1.936
-## factor(series_name)Women of the Otherworld                                        1.025
 ## factor(series_name)Women&#39;s Murder Club                                            0.280
+## factor(series_name)Women of the Otherworld                                        1.025
 ## factor(series_name)Wondrous Strange                                              -2.097
 ## factor(series_name)Word &amp; Void                                                   -0.047
 ## factor(series_name)World of the Five Gods                                         1.352
@@ -4506,11 +4527,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Alexandra Cooper                                             0.618062
 ## factor(series_name)Alice in the Country of Hearts                               0.063379
 ## factor(series_name)Alienated                                                    0.905783
+## factor(series_name)All-American Girl                                            5.67e-05
+## factor(series_name)All-of-a-Kind Family                                         0.044650
 ## factor(series_name)All Clear                                                    0.302725
 ## factor(series_name)All Souls Trilogy                                            0.888845
 ## factor(series_name)All the Wrong Questions                                      0.302725
-## factor(series_name)All-American Girl                                            5.67e-05
-## factor(series_name)All-of-a-Kind Family                                         0.044650
 ## factor(series_name)Allan Quatermain                                             0.208242
 ## factor(series_name)Alpha &amp; Omega                                                0.077044
 ## factor(series_name)Altered                                                      0.571333
@@ -4703,9 +4724,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Daniel X                                                     0.002722
 ## factor(series_name)Darcy &amp; Rachel                                               0.244395
 ## factor(series_name)Dark                                                         0.328084
+## factor(series_name)Dark-Hunter                                                  0.044650
 ## factor(series_name)Dark Hunter, #8; Were-Hunter                                 0.020400
 ## factor(series_name)Dark Swan                                                    0.515270
-## factor(series_name)Dark-Hunter                                                  0.044650
 ## factor(series_name)Darkest Powers                                               0.376209
 ## factor(series_name)Darkness                                                     0.012097
 ## factor(series_name)Darkness Rising                                              0.544805
@@ -4850,8 +4871,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)From Ashes                                                   0.211341
 ## factor(series_name)Fudge                                                        0.344094
 ## factor(series_name)Fullmetal Alchemist                                          7.40e-05
-## factor(series_name)Gabriel Allon                                                0.576166
 ## factor(series_name)Gabriel&#39;s Inferno                                            0.263756
+## factor(series_name)Gabriel Allon                                                0.576166
 ## factor(series_name)Gaither Sisters                                              0.905783
 ## factor(series_name)Gakuen Alice                                                 0.044650
 ## factor(series_name)Gallagher Girls                                              0.815809
@@ -5182,11 +5203,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Newsoul                                                      0.073569
 ## factor(series_name)Nexus                                                        0.472678
 ## factor(series_name)Niebla                                                       0.000427
+## factor(series_name)Night&#39;s Dawn                                                 0.069600
 ## factor(series_name)Night Angel                                                  0.050741
 ## factor(series_name)Night Huntress                                               0.022727
 ## factor(series_name)Night Huntress World                                         0.093883
 ## factor(series_name)Night Prince                                                 0.012097
-## factor(series_name)Night&#39;s Dawn                                                 0.069600
 ## factor(series_name)Nightrunner                                                  0.384231
 ## factor(series_name)Nightside                                                    0.284153
 ## factor(series_name)Nightwalkers                                                 0.678860
@@ -5327,9 +5348,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Sailor Moon                                                  0.013836
 ## factor(series_name)Sally Lockhart                                               0.101481
 ## factor(series_name)Sandman Slim                                                 0.962841
+## factor(series_name)Sarah&#39;s Scribbles                                            0.184910
 ## factor(series_name)Sarah Agnes Prine                                            0.003571
 ## factor(series_name)Sarah, Plain and Tall                                        0.062177
-## factor(series_name)Sarah&#39;s Scribbles                                            0.184910
 ## factor(series_name)Savvy                                                        0.966259
 ## factor(series_name)Scarlet                                                      0.905783
 ## factor(series_name)Scary Stories                                                0.520799
@@ -5640,8 +5661,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)The Program                                                  0.427118
 ## factor(series_name)The Promise                                                  0.001877
 ## factor(series_name)The Proposition                                              0.520799
-## factor(series_name)The Queen of the Tearling                                    0.428474
 ## factor(series_name)The Queen&#39;s Thief                                            0.484745
+## factor(series_name)The Queen of the Tearling                                    0.428474
 ## factor(series_name)The Raven Cycle                                              0.136360
 ## factor(series_name)The Reckoners                                                0.036374
 ## factor(series_name)The Red Queen&#39;s War                                          0.427118
@@ -5807,8 +5828,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Winnie-the-Pooh                                              0.001166
 ## factor(series_name)Winter                                                       0.024875
 ## factor(series_name)Witch &amp; Wizard                                               0.053329
-## factor(series_name)Women of the Otherworld                                      0.305594
 ## factor(series_name)Women&#39;s Murder Club                                          0.779843
+## factor(series_name)Women of the Otherworld                                      0.305594
 ## factor(series_name)Wondrous Strange                                             0.036429
 ## factor(series_name)Word &amp; Void                                                  0.962841
 ## factor(series_name)World of the Five Gods                                       0.176996
@@ -5867,11 +5888,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Alexandra Cooper                                                
 ## factor(series_name)Alice in the Country of Hearts                               .  
 ## factor(series_name)Alienated                                                       
+## factor(series_name)All-American Girl                                            ***
+## factor(series_name)All-of-a-Kind Family                                         *  
 ## factor(series_name)All Clear                                                       
 ## factor(series_name)All Souls Trilogy                                               
 ## factor(series_name)All the Wrong Questions                                         
-## factor(series_name)All-American Girl                                            ***
-## factor(series_name)All-of-a-Kind Family                                         *  
 ## factor(series_name)Allan Quatermain                                                
 ## factor(series_name)Alpha &amp; Omega                                                .  
 ## factor(series_name)Altered                                                         
@@ -6064,9 +6085,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Daniel X                                                     ** 
 ## factor(series_name)Darcy &amp; Rachel                                                  
 ## factor(series_name)Dark                                                            
+## factor(series_name)Dark-Hunter                                                  *  
 ## factor(series_name)Dark Hunter, #8; Were-Hunter                                 *  
 ## factor(series_name)Dark Swan                                                       
-## factor(series_name)Dark-Hunter                                                  *  
 ## factor(series_name)Darkest Powers                                                  
 ## factor(series_name)Darkness                                                     *  
 ## factor(series_name)Darkness Rising                                                 
@@ -6211,8 +6232,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)From Ashes                                                      
 ## factor(series_name)Fudge                                                           
 ## factor(series_name)Fullmetal Alchemist                                          ***
-## factor(series_name)Gabriel Allon                                                   
 ## factor(series_name)Gabriel&#39;s Inferno                                               
+## factor(series_name)Gabriel Allon                                                   
 ## factor(series_name)Gaither Sisters                                                 
 ## factor(series_name)Gakuen Alice                                                 *  
 ## factor(series_name)Gallagher Girls                                                 
@@ -6543,11 +6564,11 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Newsoul                                                      .  
 ## factor(series_name)Nexus                                                           
 ## factor(series_name)Niebla                                                       ***
+## factor(series_name)Night&#39;s Dawn                                                 .  
 ## factor(series_name)Night Angel                                                  .  
 ## factor(series_name)Night Huntress                                               *  
 ## factor(series_name)Night Huntress World                                         .  
 ## factor(series_name)Night Prince                                                 *  
-## factor(series_name)Night&#39;s Dawn                                                 .  
 ## factor(series_name)Nightrunner                                                     
 ## factor(series_name)Nightside                                                       
 ## factor(series_name)Nightwalkers                                                    
@@ -6688,9 +6709,9 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Sailor Moon                                                  *  
 ## factor(series_name)Sally Lockhart                                                  
 ## factor(series_name)Sandman Slim                                                    
+## factor(series_name)Sarah&#39;s Scribbles                                               
 ## factor(series_name)Sarah Agnes Prine                                            ** 
 ## factor(series_name)Sarah, Plain and Tall                                        .  
-## factor(series_name)Sarah&#39;s Scribbles                                               
 ## factor(series_name)Savvy                                                           
 ## factor(series_name)Scarlet                                                         
 ## factor(series_name)Scary Stories                                                   
@@ -7001,8 +7022,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)The Program                                                     
 ## factor(series_name)The Promise                                                  ** 
 ## factor(series_name)The Proposition                                                 
-## factor(series_name)The Queen of the Tearling                                       
 ## factor(series_name)The Queen&#39;s Thief                                               
+## factor(series_name)The Queen of the Tearling                                       
 ## factor(series_name)The Raven Cycle                                                 
 ## factor(series_name)The Reckoners                                                *  
 ## factor(series_name)The Red Queen&#39;s War                                             
@@ -7168,8 +7189,8 @@ summary(lm_sequel)</code></pre>
 ## factor(series_name)Winnie-the-Pooh                                              ** 
 ## factor(series_name)Winter                                                       *  
 ## factor(series_name)Witch &amp; Wizard                                               .  
-## factor(series_name)Women of the Otherworld                                         
 ## factor(series_name)Women&#39;s Murder Club                                             
+## factor(series_name)Women of the Otherworld                                         
 ## factor(series_name)Wondrous Strange                                             *  
 ## factor(series_name)Word &amp; Void                                                     
 ## factor(series_name)World of the Five Gods                                          

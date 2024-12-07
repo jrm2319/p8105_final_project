@@ -16,6 +16,7 @@ library(knitr)
 library(broom)
 
 ```
+
 ### Load and clean the datasets
 ```{r}
 sequel = read.csv("book_data_complete.csv")
@@ -28,7 +29,6 @@ sequel_data <- sequel |>
 ```
 
 ### Visualization of Average Ratings of First Book vs Sequel
-
 ```{r}
 ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = factor(series_number))) +
   geom_boxplot() +
@@ -40,7 +40,6 @@ ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = f
 ```
 
 ### Chi-Square Test
-
 ```{r}
 t_test_result <- t.test(average_rating ~ series_number, data = sequel_data)
 

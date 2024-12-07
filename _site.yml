@@ -9,7 +9,7 @@ navbar:
       href: Analysis.html
     - text: "Dashboard"
       href: dashboard.html
-    - text: "Report – Hypothesis Testing Results"
+    - text: "Report"
       href: Report.html
     - text: "Descriptive Analyses"
       menu:
