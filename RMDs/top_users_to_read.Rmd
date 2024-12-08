@@ -1,6 +1,8 @@
 ---
 title: "Top Users by To Read"
-output: html_document
+output: 
+  html_document:
+    output_dir: "../HTMLs"
 ---
 
 ```{r setup, include=FALSE}
