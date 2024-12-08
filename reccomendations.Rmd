@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, warning=FALSE}
 
-books = read_csv("./Data/books_with_tags.csv")
+books = read_csv("../Data/books_with_tags.csv")
 
 books_clean = books |> 
   select(-isbn,-ratings_count,-work_ratings_count,-work_text_reviews_count)
@@ -33,8 +33,9 @@ books_rate <- books_clean |>
 ```
 
 
-```{r, echo=TRUE}
+```{r}
 authors <- unique(books_rate$authors)
+
 
 ui <- fluidPage(
   
