@@ -91,10 +91,7 @@ After some descriptive analysis, we found that the most popular tag is “fictio
 
 We grouped the data by tag value and then calculated the number of occurrences for each tag. We then sorted the tags by count in descending order and selected the top 10 most popular tags. A bar plot was created to display the top 10 genres based on tags. The 10 most popular genres read, in order, are: Young Adult, Fantasy, Romance, Science Fiction, Children, Mystery, Classics, Historical Fiction, Contemporary, and Thriller. 
 
-(GRAPH)
 A similar process as above was used to identify the 10 least popular genres. We found there was a substantial number of tags that were only used once, twice, or three times but this information was not useful when presented on a bar graph. Therefore, we decided to exclude all tags that have a tag count of less than 100. A cut off tag count of 100 was used because we wanted to focus on tags that have a moderate level of user engagement. By using a threshold of 100 for tag count, the analysis ensures that the least popular genres identified still have sufficient user recognition and can represent meaningful patterns in the data.  The 10 least popular genres read, in order, are: Manga, Adult Fiction, Religion, Art, War, Memoirs, IGBTQ, Poetry, Drama, and Middle Grade.
-
-(GRAPH)
 
 #### **What are the top 10 most and least popular genres, among to-be-read books?**
 
@@ -102,9 +99,8 @@ For the most and least popular to-be-read genre analysis, we merged the *to_read
 
 The same process was followed, as described above, to identify the 10 most popular and 10 least popular genres, among to-be-read books. The 10 most popular genres to-be-read, in order, are: Young Adult, Fantasy, Romance, Science Fiction, Children, Mystery, Classics, Historical Fiction, Contemporary, and Thriller. The 10 least popular genres read, in order, are: Manga, Adult Fiction, Religion, Art, War, Memoirs, IGBTQ, Poetry, Drama, and Middle Grade. 
 
-(GRAPHS)
-
 The rankings were the same for books read and book to-be-read, this was expected since we expect the genres that users are reading to be similar to genres that users are planning to-read.This consistency highlights a strong alignment between what users are reading and what they plan to read, reinforcing the persistence of genre preferences across user behavior.
+
 
 #### **What are the most and least popular authors?**
 
