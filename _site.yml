@@ -22,7 +22,7 @@ navbar:
         - text: "Top Users by Most To-Read"
           href: top_users_to_read.html
     - text: "Recommendations"
-      href: https://erynnejackson16.shinyapps.io/Recommendations2/
+      href: https://erynnejackson16.shinyapps.io/Recommendations2
     - icon: fa-github fa-lg
       href: https://github.com/jrm2319/p8105_final_project.io.git
     - icon: fa-envelope fa-lg
