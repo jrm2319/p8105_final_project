@@ -10,7 +10,7 @@ navbar:
     - text: "Descriptive Analyses"
       menu:
         - text: "Most Read Authors"
-          href: most_read_authors.html
+          href: most_read_authors.html    
         - text: "Least Read Authors"
           href: least_read_authors.html
         - text: "Popular Authors"

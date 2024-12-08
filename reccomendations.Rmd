@@ -1,6 +1,8 @@
 ---
 title: "Welcome to our Recommendations Page!"
-output: html_document
+output: 
+  html_document:
+    self_contained: true
 runtime: shiny
 ---
 
@@ -9,21 +11,24 @@ Looking for a new romance book? Want to get into some classics? Looking to read 
 
 Have fun reading!
 
-```{r setup}
-
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(shiny)
 library(bslib)
 library(dplyr)
 library(rmarkdown)
+<<<<<<< HEAD
 
 knitr::opts_chunk$set(echo = TRUE)
+=======
+>>>>>>> ad0bc60fadc363530d65adc66a558bb30ba913a4
 
 ```
 
 ```{r, warning=FALSE}
 
-books = read_csv("./Data/books_with_tags.csv")
+books = read_csv("books_with_tags.csv")
 
 books_clean = books |> 
   select(-isbn,-ratings_count,-work_ratings_count,-work_text_reviews_count)
@@ -34,8 +39,9 @@ books_rate <- books_clean |>
 ```
 
 
-```{r, echo=TRUE}
+```{r}
 authors <- unique(books_rate$authors)
+
 
 ui <- fluidPage(
 
@@ -148,6 +154,7 @@ server <- function(input, output, session) {
 
 shinyApp(ui = ui, server = server)
 
+<<<<<<< HEAD
 ```
 
 ```{r}
@@ -155,4 +162,11 @@ shinyApp(ui = ui, server = server)
 output_path <- "C:/Users/jacks/OneDrive/Documents/p8105_final_project/reccomendations.html"
 
 render("reccomendations.Rmd", output_file = output_path)
+=======
+output_path <- "./reccomendations.html"
+
+# Render the document with the specified output file path
+render("reccomendations.Rmd", output_file = output_path)
+
+>>>>>>> ad0bc60fadc363530d65adc66a558bb30ba913a4
 ```

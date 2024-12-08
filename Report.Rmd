@@ -1,0 +1,116 @@
+---
+title: "<b>Exploring sequels: Are They Worth Reading?</b>"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r, include = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(broom)
+library(readr)
+sequel = read_csv("books_with_tags.csv")
+```
+
+In this page, we explore the dynamics of book sequels and analyze whether they live up to their original works. First we begin by taking a look at the distribution of series lengths to show how many books typically make up a series. 
+
+### ***Distribution of Series Lengths***
+
+```{r, echo = FALSE, warning = FALSE}
+#Create series length and max series variables
+series_length <- sequel |>
+  mutate(series = str_extract(title, "\\(.*\\)"), 
+         series_number = as.numeric(str_sub(str_extract(series, ', #[0-9]+\\)$'),4,-2)),
+         series_name = str_sub(str_extract(series, '\\(.*,'),2,-2)) |>
+  filter(!is.na(series_number)) |>
+  group_by(series_name) |>
+  summarise(max_series_number = max(series_number, na.rm = TRUE)) |>
+  count(max_series_number, name = "n_series")
+
+#Create barplot showing distribution of series lengths
+ggplot(series_length, aes(x = max_series_number, y = n_series, fill = n_series)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  labs(
+    x = "Series Length (Number of Books)",
+    y = "Number of Series",
+    title = "Distribution of Series Lengths by Series Number"
+  ) +
+  scale_fill_gradient(low = "red", high = "darkred") +
+  theme_minimal() +
+  scale_x_continuous(breaks = 1:10, limits = c(0, 10)) +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), 
+    axis.text.y = element_text(size = 10), 
+    axis.text.x = element_text(size = 12),
+    axis.title = element_text(size = 14, face = "bold"), 
+    panel.grid.major.y = element_blank() 
+  )
+```
+
++ Based on the graph, we see that a majority of series consist of 1 book, with the next largest groups being sequels and triologies. 
+
+### ***Comparing Average Ratings: First vs Second Books***
+
+We examine how series perform in terms of ratings, starting with a comparison between the average ratings of the first and second books in a series. 
+
+```{r avg ratings, echo = FALSE}
+#Select books that have a sequel
+sequel_data <- sequel |>
+  mutate(series = str_extract(title, "\\(.*\\)"), 
+         series_number = as.numeric(str_sub(str_extract(series, ', #[0-9]+\\)$'),4,-2)),
+         series_name = str_sub(str_extract(series, '\\(.*,'),2,-2)) |>
+  filter(series_number %in% c(1, 2))
+
+#Boxplot of average ratings of first vs second book
+ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = factor(series_number))) +
+  geom_boxplot(show.legend = FALSE) +
+  coord_cartesian(ylim = c(3, 5)) +
+  labs(title = "Average Ratings of First vs. Second Book", x = "Book in Series", y = "Average Rating") +
+  scale_color_manual(values = c('black', 'red')) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5), 
+    axis.text.y = element_text(size = 10), 
+    axis.text.x = element_text(size = 12),
+    axis.title = element_text(size = 14, face = "bold"), 
+    panel.grid.major.y = element_blank()
+  ) 
+```
+
+- Based off of average ratings, good reads users generally rate the sequel higher than the original book.
+
+### ***Hypothesis Test***
+
+While the visualizations suggest that sequels may outperform the original book in terms of average ratings, let's apply statistical techniques to formally test this hypothesis. Given the relatively normal distribution of ratings for the first and second books, we move forward with a t-test. 
+
+```{r, include = FALSE}
+sequel_data |>
+  ggplot(aes(x = average_rating, fill = factor(series_number))) +
+  geom_histogram(alpha = 0.5, position = "identity") +
+  facet_wrap(~ series_number) +
+  labs(title = "Distribution of Ratings for First and Second Books")
+
+# Shapiro's test to formally check normality
+shapiro_test_first_book <- shapiro.test(subset(sequel_data, series_number == 1)$average_rating)
+shapiro_test_second_book <- shapiro.test(subset(sequel_data, series_number == 2)$average_rating)
+```
+
+
+```{r, echo = FALSE}
+t_test_result <- t.test(average_rating ~ series_number, data = sequel_data)
+
+t_test_table <- t_test_result |>
+  tidy() |>
+  mutate(across(where(is.numeric), ~ round(.x, 3))) |>
+  mutate(p.value = format(p.value, scientific = TRUE, digits = 4))
+
+knitr::kable(t_test_table, caption = "T-Test Results: Comparing Ratings of First and Second Books")
+```
+
++ The t-test confirms that the sequel in a series has a statistically significant higher average rating than the first book. We estimate that the sequel is rated approximately 0.094 stars higher than the first book. 
+
+
