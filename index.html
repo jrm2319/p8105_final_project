@@ -315,8 +315,8 @@ $(document).ready(function () {
 providing their list of the ‘Best Books’ of the year. These lists help
 inform readers while providing them with book recommendations that
 interest them. Our overarching goal is to understand trends of readers
-using GoodReads.</p>
-<p>GoodReads is an online platform to find, share, and rate books
+using Goodreads.</p>
+<p>Goodreads is an online platform to find, share, and rate books
 readers have read. This information can help publishers, authors, and
 libraries tailor their book selections to meet reader’s demands and
 promote lesser-known genres and authors. Understanding this can also
@@ -337,13 +337,14 @@ book.</p>
 <h3><strong>Initial Questions</strong></h3>
 <p>The initial research question of our project was: What are trends
 among readers? This initial research question aided us when exploring
-datasets. Once we found GoodBooks-10K, an open data source hosted on
-GitHub with data from GoodReads, we were interested in exploring trends
-among readers using GoodReads. The team spent time understand what data
-was available and then created the following questions to guide this
-project:</p>
+datasets. Once we found <a
+href="https://github.com/zygmuntz/goodbooks-10k">GoodBooks-10K</a>, an
+open data source hosted on GitHub with data from Goodreads, we were
+interested in exploring trends among readers using Goodreads. The team
+spent time understand what data was available and then created the
+following questions to guide this project:</p>
 <ul>
-<li>Who are the top fifteen GoodReads users, by Ratings and
+<li>Who are the top fifteen Goodreads users, by Ratings and
 To-Read?</li>
 <li>Are sequels worth reading?</li>
 <li>What are the top 10 most and least popular genres?</li>
@@ -354,29 +355,29 @@ provided?</li>
 </div>
 <div id="data" class="section level3">
 <h3><strong>Data</strong></h3>
-<p>The original data for this project is from GoodBooks-10K and is from
-an open data source hosted on GitHub with data from GoodReads. We used
-the following datasets from the original GoodBooks-10K data:
+<p>The original data for this project is from <a
+href="https://github.com/zygmuntz/goodbooks-10k">GoodBooks-10K</a> and
+is from an open data source hosted on GitHub with data from Goodreads.
+We used the following datasets from the original <a
+href="https://github.com/zygmuntz/goodbooks-10k">GoodBooks-10K</a> data:
 book_tags.csv, books.csv, ratings.csv, tags.csv, and to_read.csv.</p>
-<p>Our main dataset is called books_with_tags.csv. This dataset was
-created by merging the books.csv with book_tags.csv. This dataset had a
-sample size of 9300 books and each book has five top tags. On GoodReads,
-tags are non-exclusive virtual shelves that users can organize their
-books on. In the raw data, books had between 1-25 tags, we took the five
-most common tags for each book and kept those in the books_with_tags.csv
+<p>Our main dataset is called books_with_tags. This dataset was created
+by merging the books.csv with book_tags.csv. This dataset had a sample
+size of 9300 books and each book has five top tags. On Goodreads, tags
+are non-exclusive virtual shelves that users can organize their books
+on. In the raw data, books had between 1-25 tags, we took the five most
+common tags for each book and kept those in the books_with_tags.csv
 dataset. The tags in this dataset are used as proxies for genres.</p>
 <p>The books_with_tags dataset contains the following variables:</p>
 <ul>
-<li>book_id:<br />
-</li>
-<li>goodreads_book_id:</li>
+<li>book_id: book id for this dataset</li>
+<li>goodreads_book_id:book id for the most popular version of the book,
+according to Goodreads</li>
 <li>isbn: International Standard Book Number</li>
 <li>authors: author name (first, last)</li>
 <li>title: title of the book</li>
 <li>average_rating: average goodreads user rating of a book</li>
 <li>ratings_count: the total count of ratings for a book</li>
-<li>work_ratings_count:</li>
-<li>work_text_reviews_count:</li>
 <li>ratings_1: Total count of users who rated book as 1 star</li>
 <li>ratings_2: Total count of users who rated book as 2 star</li>
 <li>ratings_3: Total count of users who rated book as 3 star</li>
@@ -394,7 +395,7 @@ dataset. The tags in this dataset are used as proxies for genres.</p>
 <h3><strong>Exploratory Analysis</strong></h3>
 <div id="who-are-the-top-fifteen-goodreads-users-by-ratings-and-to-read"
 class="section level4">
-<h4><strong>Who are the top fifteen GoodReads users, by Ratings and
+<h4><strong>Who are the top fifteen Goodreads users, by Ratings and
 To-Read?</strong></h4>
 <p>To explore this question, we used the following datasets: cleaned
 books data, books_with_tags.csv, ratings.csv, and to_read.csv. Separate
@@ -402,7 +403,7 @@ data frames were made to find the top 15 users by ratings and by number
 of to-read books.</p>
 <p>For general analysis, the average rating by each of the top 15 users
 was summarized. This distribution was visually compared to the average
-ratings of the entire GoodReads community and found that the Top 15
+ratings of the entire Goodreads community and found that the Top 15
 ratings data was bimodal.</p>
 <p>[insert graph]</p>
 <p>The average rating among the Top 15 users was 3.756 while among the

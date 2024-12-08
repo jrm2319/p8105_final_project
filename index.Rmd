@@ -3,23 +3,18 @@ title: "<b>To Be Read or Not To Be Read</b>"
 output: html_document     
 ---
 
-```{r setup, include = FALSE}
-library(readr)
-books_with_tags <- read_csv("books_with_tags.csv")
-```
-
 ### **Motivation**
-With the New Year right around the corner, countless sources are providing their list of the ‘Best Books’ of the year. These lists help inform readers while providing them with book recommendations that interest them. Our overarching goal is to understand trends of readers using GoodReads. 
+With the New Year right around the corner, countless sources are providing their list of the ‘Best Books’ of the year. These lists help inform readers while providing them with book recommendations that interest them. Our overarching goal is to understand trends of readers using Goodreads. 
 
-GoodReads is an online platform to find, share, and rate books readers have read. This information can help publishers, authors, and libraries tailor their book selections to meet reader's demands and promote lesser-known genres and authors. Understanding this can also help explore cultural trends that resonate with the public, while identifying or creating opportunities for reader re-engagement. 
+Goodreads is an online platform to find, share, and rate books readers have read. This information can help publishers, authors, and libraries tailor their book selections to meet reader's demands and promote lesser-known genres and authors. Understanding this can also help explore cultural trends that resonate with the public, while identifying or creating opportunities for reader re-engagement. 
 
 ### **Project Inspiration**
 With the demanding workload of graduate school, there’s little time to sit down and enjoy a good book. However, with winter break approaching, we’re all looking forward to some much-needed rest and the chance to indulge in quality reading time! This project was inspired by a shared hobby among our team and our collective anticipation for the opportunity to relax on the couch, sip some coffee, and dive into a good book.
 
 ### **Initial Questions**
-The initial research question of our project was: What are trends among readers? This initial research question aided us when exploring datasets. Once we found GoodBooks-10K, an open data source hosted on GitHub with data from GoodReads, we were interested in exploring trends among readers using GoodReads. The team spent time understand what data was available and then created the following questions to guide this project: 
+The initial research question of our project was: What are trends among readers? This initial research question aided us when exploring datasets. Once we found [GoodBooks-10K](https://github.com/zygmuntz/goodbooks-10k), an open data source hosted on GitHub with data from Goodreads, we were interested in exploring trends among readers using Goodreads. The team spent time understand what data was available and then created the following questions to guide this project: 
 
-- Who are the top fifteen GoodReads users, by Ratings and To-Read? 
+- Who are the top fifteen Goodreads users, by Ratings and To-Read? 
 - Are sequels worth reading?
 - What are the top 10 most and least popular genres?
 - Who are the top 10 most and least popular authors? 
@@ -28,21 +23,19 @@ The initial research question of our project was: What are trends among readers?
 
 ### **Data** 
 
-The original data for this project is from GoodBooks-10K and is from an open data source hosted on GitHub with data from GoodReads. We used the following datasets from the original GoodBooks-10K data: book_tags.csv, books.csv, ratings.csv, tags.csv, and to_read.csv. 
+The original data for this project is from [GoodBooks-10K](https://github.com/zygmuntz/goodbooks-10k) and is from an open data source hosted on GitHub with data from Goodreads. We used the following datasets from the original [GoodBooks-10K](https://github.com/zygmuntz/goodbooks-10k) data: book_tags.csv, books.csv, ratings.csv, tags.csv, and to_read.csv. 
 
-Our main dataset is called `r books_with_tags`. This dataset was created by merging the books.csv with book_tags.csv. This dataset had a sample size of 9300 books and each book has five top tags. On GoodReads, tags are non-exclusive virtual shelves that users can organize their books on. In the raw data, books had between 1-25 tags, we took the five most common tags for each book and kept those in the books_with_tags.csv dataset. The tags in this dataset are used as proxies for genres. 
+Our main dataset is called books_with_tags. This dataset was created by merging the books.csv with book_tags.csv. This dataset had a sample size of 9300 books and each book has five top tags. On Goodreads, tags are non-exclusive virtual shelves that users can organize their books on. In the raw data, books had between 1-25 tags, we took the five most common tags for each book and kept those in the books_with_tags.csv dataset. The tags in this dataset are used as proxies for genres. 
 
 The books_with_tags dataset contains the following variables: 
 
-- book_id:  
-- goodreads_book_id:
+- book_id: book id for this dataset
+- goodreads_book_id:book id for the most popular version of the book, according to Goodreads
 - isbn: International Standard Book Number
 - authors: author name (first, last)
 - title: title of the book
 - average_rating: average goodreads user rating of a book
 - ratings_count: the total count of ratings for a book
-- work_ratings_count: 
-- work_text_reviews_count:
 - ratings_1: Total count of users who rated book as 1 star 
 - ratings_2: Total count of users who rated book as 2 star 
 - ratings_3: Total count of users who rated book as 3 star 
@@ -57,11 +50,11 @@ The books_with_tags dataset contains the following variables:
 
 ### **Exploratory Analysis**
 
-#### **Who are the top fifteen GoodReads users, by Ratings and To-Read?**
+#### **Who are the top fifteen Goodreads users, by Ratings and To-Read?**
 
 To explore this question, we used the following datasets: cleaned books data, books_with_tags.csv, ratings.csv, and to_read.csv. Separate data frames were made to find the top 15 users by ratings and by number of to-read books.
 
-For general analysis, the average rating by each of the top 15 users was summarized. This distribution was visually compared to the average ratings of the entire GoodReads community and found that the Top 15 ratings data was bimodal. 
+For general analysis, the average rating by each of the top 15 users was summarized. This distribution was visually compared to the average ratings of the entire Goodreads community and found that the Top 15 ratings data was bimodal. 
 
 [insert graph]
 
