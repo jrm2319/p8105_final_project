@@ -29,30 +29,30 @@ Our main dataset is called books_with_tags. This dataset was created by merging 
 
 The books_with_tags dataset contains the following variables: 
 
-- book_id: book id for this dataset
-- goodreads_book_id:book id for the most popular version of the book, according to Goodreads
-- isbn: International Standard Book Number
-- authors: author name (first, last)
-- title: title of the book
-- average_rating: average goodreads user rating of a book
-- ratings_count: the total count of ratings for a book
-- ratings_1: Total count of users who rated book as 1 star 
-- ratings_2: Total count of users who rated book as 2 star 
-- ratings_3: Total count of users who rated book as 3 star 
-- ratings_4: Total count of users who rated book as 4 star 
-- ratings_5: Total count of users who rated book as 5 star 
-- image_url: url link to book image 
-- top_1: first top tag for the book, used as a proxy for genre 
-- top_2: second top tag for the book, used as a proxy for genre 
-- top_3: third top tag for the book, used as a proxy for genre 
-- top_4: fourth top tag for the book, used as a proxy for genre 
-- top_5: fifth top tag for the book, used as a proxy for genre 
+- **book_id**: book id for this dataset
+- **goodreads_book_id**:book id for the most popular version of the book, according to Goodreads
+- **isbn**: International Standard Book Number
+- **authors**: author name (first, last)
+- **title**: title of the book
+- **average_rating**: average goodreads user rating of a book
+- **ratings_count**: the total count of ratings for a book
+- **ratings_1**: Total count of users who rated book as 1 star 
+- **ratings_2**: Total count of users who rated book as 2 star 
+- **ratings_3**: Total count of users who rated book as 3 star 
+- **ratings_4**: Total count of users who rated book as 4 star 
+- **ratings_5**: Total count of users who rated book as 5 star 
+- **image_url**: url link to book image 
+- **top_1**: first top tag for the book, used as a proxy for genre 
+- **top_2**: second top tag for the book, used as a proxy for genre 
+- **top_3**: third top tag for the book, used as a proxy for genre 
+- **top_4**: fourth top tag for the book, used as a proxy for genre 
+- **top_5**: fifth top tag for the book, used as a proxy for genre 
 
 ### **Exploratory Analysis**
 
 #### **Who are the top fifteen Goodreads users, by Ratings and To-Read?**
 
-To explore this question, we used the following datasets: cleaned books data, books_with_tags.csv, ratings.csv, and to_read.csv. Separate data frames were made to find the top 15 users by ratings and by number of to-read books.
+To explore this question, we used the following datasets: *cleaned books data*, *books_with_tags.csv*, *ratings.csv*, and *to_read.csv*. Separate data frames were made to find the top 15 users by ratings and by number of to-read books.
 
 For general analysis, the average rating by each of the top 15 users was summarized. This distribution was visually compared to the average ratings of the entire Goodreads community and found that the Top 15 ratings data was bimodal. 
 
@@ -64,7 +64,7 @@ For the top 15 users by number of to-read, all of the books each of the selected
 
 #### **Are sequels worth reading?**
 
-To investigate whether sequels are worth the read, we start by assessing the distribution of series lengths with a bar plot. We utilized data from the books_with_tags.csv dataset and conducted a string extraction to identify information on the order of books within a series and series name, creating the variables “series_number” and “series_name”. We also created a series length variable by finding the maximum of the series_number variable. These variables were created in a new dataset called sequels. We plotted the distribution of series length on a barplot and found that the majority of series are one book, with the next largest groups being sequels and trilogies. 
+To investigate whether sequels are worth the read, we start by assessing the distribution of series lengths with a bar plot. We utilized data from the *books_with_tags.csv* dataset and conducted a string extraction to identify information on the order of books within a series and series name, creating the variables **series_number** and **series_name**. We also created a series length variable by finding the maximum of the series_number variable. These variables were created in a new dataset called sequels. We plotted the distribution of series length on a barplot and found that the majority of series are one book, with the next largest groups being sequels and trilogies. 
 
 [insert graph here]
 
@@ -85,7 +85,7 @@ Based on the analyses, most series tend to be shorter in length, with single boo
 
 #### **What are the top 10 most and least popular genres, among read books?**
 
-For the most and least popular genre analysis, we used the books_with_tags.csv dataset (n=9300). We used the pivot_longer function from the tidyr package to create a single column for tags, called “  “ (n=XXX). This allowed me to analyze the most and least popular genres based on tags. 
+For the most and least popular genre analysis, we used the *books_with_tags.csv* dataset (n=9300). We used the pivot_longer function from the tidyr package to create a single column for tags, called *tag*. This allowed me to analyze the most and least popular genres based on tags. 
 
 After some descriptive analysis, we found that the most popular tag is “fiction” and the third most popular tag is “non-fiction.” However, some would argue that in modern literature these tags are considered the broadest category of genre but do not provide information about the specific fiction or nonfiction genres readers are reading or interested in reading. Therefore, the decision to exclude these two categories was made. There are 1,348 distinct genre categories, based on tags.  
 
@@ -98,7 +98,7 @@ A similar process as above was used to identify the 10 least popular genres. We 
 
 #### **What are the top 10 most and least popular genres, among to-be-read books?**
 
-For the most and least popular to-be-read genre analysis, we merged the to_read.csv and books_with_tags.csv datasets on book_id using an inner join, to create to_read_with_tags.csv. We created a single column/variable for tags and removed fiction and non-fiction tags, as done in the previous analysis. 
+For the most and least popular to-be-read genre analysis, we merged the *to_read.csv* and *books_with_tags.csv* datasets on **book_id** using an inner join, to create *to_read_with_tags.csv*. We created a single column/variable for tags and removed fiction and non-fiction tags, as done in the previous analysis. 
 
 The same process was followed, as described above, to identify the 10 most popular and 10 least popular genres, among to-be-read books. The 10 most popular genres to-be-read, in order, are: Young Adult, Fantasy, Romance, Science Fiction, Children, Mystery, Classics, Historical Fiction, Contemporary, and Thriller. The 10 least popular genres read, in order, are: Manga, Adult Fiction, Religion, Art, War, Memoirs, IGBTQ, Poetry, Drama, and Middle Grade. 
 
@@ -108,7 +108,7 @@ The rankings were the same for books read and book to-be-read, this was expected
 
 #### **What are the most and least popular authors?**
 
-To observe genre popularity, we started by calculating the total number of ratings for each author from the book data.csv. We grouped authors and summarized by the total ratings using the sum() function to determine the authors with the highest cumulative ratings. We sorted the data in ascending order to determine the least-read authors and descending order for the most-read authors based on their total ratings. We then extracted the top 10 entries from each sorted dataset to represent the most-read and least-read authors, respectively, For popular authors, we calculated the percentage of total ratings contributed by each author to assess their relative popularity within the dataset. In order to do this, each of the author's total ratings were divided by hr overall sum of ratings and then multiplied (the times) by 100. We then sorted the data in descending order based on the percentages to display the top 10 popular authors.  
+To observe genre popularity, we started by calculating the total number of ratings for each author from the *book_data.csv*. We grouped authors and summarized by the total ratings using the sum() function to determine the authors with the highest cumulative ratings. We sorted the data in ascending order to determine the least-read authors and descending order for the most-read authors based on their total ratings. We then extracted the top 10 entries from each sorted dataset to represent the most-read and least-read authors, respectively, For popular authors, we calculated the percentage of total ratings contributed by each author to assess their relative popularity within the dataset. In order to do this, each of the author's total ratings were divided by hr overall sum of ratings and then multiplied (the times) by 100. We then sorted the data in descending order based on the percentages to display the top 10 popular authors.  
 
 The visualization of the least-read, most-read, and popular authors were essential in displaying the descriptive analyses. We created bar charts and tables using ggplot and knitr to display the data in an accessible format. Bar charts and tables complemented each other by providing both visual comparisons and detailed numerical information to highlight trends in engagement across authors.  For the least-read, most-read and popular authors, we created bar charts to display the total ratings of the authors with the highest, lowest and most engagement. The least-read authors were sorted in ascending order, displaying minimal engagement, while the most-read authors were sorted in descending order to showcase those with the highest engagement. For popular authors, we created a percentage-based bar chart to display the relative contribution of each author’s ratings to the overall dataset. 
 
@@ -122,7 +122,7 @@ Using the Shiny App, we created a data-based book recommendations page. Users ca
 
 (Insert picture here once website is completely set up)
 
-Starting with the books_with_tags.csv dataset, we restricted the dataset to the variables of interest and rounded the ‘average_rating’ variable to the nearest half number. After creating the final dataset, we built the User Interface. We added conditions that allow users to select a genre or author to base their recommendations on. Because some books were classified under multiple genres, users can choose more than one genre to narrow their recommendations. We also allow users to limit to a specific book rating, no matter which search criteria they use. If no books match the criteria, we alter the interface so that they will receive book recommendations that still match their genre and author preference, but will have a lower rating than they specified. We indicate that the book listed is not based on their rating preference next to the book title. We restricted the resulting list to five books. 
+Starting with the *books_with_tags.csv* dataset, we restricted the dataset to the variables of interest and rounded the **average_rating** variable to the nearest half number. After creating the final dataset, we built the User Interface. We added conditions that allow users to select a genre or author to base their recommendations on. Because some books were classified under multiple genres, users can choose more than one genre to narrow their recommendations. We also allow users to limit to a specific book rating, no matter which search criteria they use. If no books match the criteria, we alter the interface so that they will receive book recommendations that still match their genre and author preference, but will have a lower rating than they specified. We indicate that the book listed is not based on their rating preference next to the book title. We restricted the resulting list to five books. 
 
 ### **Discussion & Limitations**
 
@@ -135,5 +135,3 @@ We found that among read and to-be-read books, the 10 most popular genres are Yo
 To help users find recommendations through our website, we created a Recommendations page using the Shiny App. With these features users will be recommended up to five books based on rating and author preferences. 
 
 A limitation for our project is the lack of temporal information in the Goodreads dataset we selected for our analyses; the dataset did not include variables that specified when the data was collected or when ratings were published. This absence of time-related variables limited our ability to determine trends in genre, author, and book popularity. Additionally, as we do not have information on when the dataset was compiled, we cannot determine how relevant the ratings metrics are for current reading trends. 
-
-
