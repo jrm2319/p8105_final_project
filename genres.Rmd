@@ -88,7 +88,7 @@ top_tags %>%
 # Box Graph
 library(ggplot2)
 
-ggplot(top_tags, aes(x = reorder(tag, count), y = count)) +
+Most_pop_genres = ggplot(top_tags, aes(x = reorder(tag, count), y = count)) +
   geom_bar(stat = "identity", fill = "darkred") +
   coord_flip() +
   labs(title = "Top Genres Based on Tags",
@@ -96,6 +96,9 @@ ggplot(top_tags, aes(x = reorder(tag, count), y = count)) +
        y = "Count") +
   theme_minimal()
 
+print(Most_pop_genres)
+
+ggsave("report visualizations/Most_pop_genres.png", plot = Most_pop_genres, width = 10, height = 6)
 ```
 
 ### Least Popular Genres
@@ -115,13 +118,18 @@ least_popular_tags %>%
 # Box graph
 library(ggplot2)
 
-ggplot(least_popular_tags, aes(x = reorder(tag, count), y = count)) +
+least_popular_genre = ggplot(least_popular_tags, aes(x = reorder(tag, count), y = count)) +
   geom_bar(stat = "identity", fill = "darkred") +
   coord_flip() +
   labs(title = "20 Least Popular Genres with a Tag Count of 100 or Greater",
        x = "Genre",
        y = "Count") +
   theme_minimal()
+
+print(least_popular_genre)
+
+ggsave("report visualizations/least_popular_genre.png", plot = least_popular_genre, width = 10, height = 6)
+
 ```
 
 ### Most Popular To-Be-Read Genre 
@@ -143,13 +151,17 @@ to_read_top_tags %>%
 # Box Graph
 library(ggplot2)
 
-ggplot(to_read_top_tags, aes(x = reorder(tag, count), y = count)) +
+most_pop_genre_toread = ggplot(to_read_top_tags, aes(x = reorder(tag, count), y = count)) +
   geom_bar(stat = "identity", fill = "gold") +
   coord_flip() +
   labs(title = "Top 10 Genres To-Read, Based on Tags",
        x = "Genre",
        y = "Count") +
   theme_minimal()
+
+print(most_pop_genre_toread)
+
+ggsave("report visualizations/most_pop_genre_toread.png", plot = most_pop_genre_toread, width = 10, height = 6)
 ```
 
 ### Least Popular To-Be-Read Genre  
@@ -169,11 +181,16 @@ to_read_least_popular_tags %>%
 # Box graph
 library(ggplot2)
 
-ggplot(to_read_least_popular_tags, aes(x = reorder(tag, count), y = count)) +
+least_pop_genre_toread = ggplot(to_read_least_popular_tags, aes(x = reorder(tag, count), y = count)) +
   geom_bar(stat = "identity", fill = "gold") +
   coord_flip() +
   labs(title = "10 Least Popular Genres To-Read, based on tags",
        x = "Genre",
        y = "Count") +
   theme_minimal()
+
+print(least_pop_genre_toread)
+
+ggsave("report visualizations/least_pop_genre_toread.png", plot = least_pop_genre_toread, width = 10, height = 6)
+
 ```

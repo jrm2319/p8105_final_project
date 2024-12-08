@@ -66,7 +66,7 @@ For the top 15 users by number of to-read, all of the books each of the selected
 
 To investigate whether sequels are worth the read, we start by assessing the distribution of series lengths with a bar plot. We utilized data from the *books_with_tags.csv* dataset and conducted a string extraction to identify information on the order of books within a series and series name, creating the variables **series_number** and **series_name**. We also created a series length variable by finding the maximum of the series_number variable. These variables were created in a new dataset called sequels. We plotted the distribution of series length on a barplot and found that the majority of series are one book, with the next largest groups being sequels and trilogies. 
 
-[insert graph here]
+![Boxplot of Series Distributions](report visualizations/series_distributions_boxplot.png)
 
 We then filtered the sequels dataset to look at the average ratings of the first two books of each series. To explore whether sequels are rated higher than their original books, we used a box plot to visualize the comparison between the average ratings of the first and second books in a series. This box plot showed that the median rating for sequels is slightly higher than that of the first book. 
 
