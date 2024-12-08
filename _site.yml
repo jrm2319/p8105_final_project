@@ -1,26 +1,26 @@
 name: "To Be Read or Not To Be Read"
-output_dir: "HTMLs"
+output_dir: "RMDs"
 navbar:
   title: "To Be Read or Not To Be Read"
   right: 
     - text: "About"
-      href: HTMLs/index.html
+      href: RMDs/index.html
     - text: "Report - Hypothesis Testing Results"
-      href: HTMLs/Report.html
+      href: RMDs/Report.html
     - text: "Descriptive Analyses"
       menu:
         - text: "Most Read Authors"
-          href: HTMLs/most_read_authors.html    
+          href: RMDs/most_read_authors.html    
         - text: "Least Read Authors"
-          href: HTMLs/least_read_authors.html
+          href: RMDs/least_read_authors.html
         - text: "Popular Authors"
-          href: HTMLs/popular_authors.html
+          href: RMDs/popular_authors.html
         - text: "Most to Least Read Genres"
-          href: HTMLs/genres.html
+          href: RMDs/genres.html
         - text: "Top Users by Ratings"
-          href: HTMLs/top_users.html
+          href: RMDs/top_users.html
         - text: "Top Users by Most To-Read"
-          href: HTMLs/top_users_to_read.html
+          href: RMDs/top_users_to_read.html
     - text: "Recommendations"
       href: reccomendations.html
     - icon: fa-github fa-lg
