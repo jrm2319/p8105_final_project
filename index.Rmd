@@ -5,6 +5,10 @@ output: html_document
 
 *Erynne Jackson (ej2520), Samiha Reza (sr4081), Jasmin Martinez (jrm2319), Kamiah Brown (kab2310), Elliot Kim (ek3376)*
 
+```{r echo=FALSE}
+knitr::include_url("https://youtu.be/wL9OyhF8ms0")
+```
+
 ### **Motivation**
 With the New Year right around the corner, countless sources are providing their list of the ‘Best Books’ of the year. These lists help inform readers while providing them with book recommendations that interest them. Our overarching goal is to understand trends of readers using Goodreads. 
 
