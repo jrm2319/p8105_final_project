@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Top Users by To Read</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">To Be Read or Not To Be Read</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">About</a>
+</li>
+<li>
+  <a href="Report.html">Report - Hypothesis Testing Results</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Descriptive Analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="most_read_authors.html">Most Read Authors</a>
+    </li>
+    <li>
+      <a href="least_read_authors.html">Least Read Authors</a>
+    </li>
+    <li>
+      <a href="popular_authors.html">Popular Authors</a>
+    </li>
+    <li>
+      <a href="genres.html">Most to Least Read Genres</a>
+    </li>
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="reccomendations.html">Recommendations</a>
+</li>
+<li>
+  <a href="https://github.com/jrm2319/p8105_final_project.io.git">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:kab2310@cumc.columbia.edu">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Top Users by To Read</h1>
+
+</div>
+
+
+<p>In this section, we’ll be looking at the top users on GoodReads who
+have the most “to-read” books.</p>
+<div id="most-wanted-to-read-books" class="section level3">
+<h3>Most Wanted-To-Read Books</h3>
+<p>Let’s first look at the most popular books our top 15 users want to
+read.</p>
+<table style="width:100%;">
+<caption>Top 15 To-Read books for Top 15 Users</caption>
+<colgroup>
+<col width="42%" />
+<col width="47%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Title</th>
+<th align="center">Authors</th>
+<th align="center">Number of Top Users</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">The Catcher in the Rye</td>
+<td align="center">J.D. Salinger</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">The Fault in Our Stars</td>
+<td align="center">John Green</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">A Tale of Two Cities</td>
+<td align="center">Charles Dickens, Richard Maxwell, Hablot Knight
+Browne</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">Miss Peregrine’s Home for Peculiar Children (Miss
+Peregrine’s Peculiar Children, #1)</td>
+<td align="center">Ransom Riggs</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">Much Ado About Nothing</td>
+<td align="center">William Shakespeare, Barbara A. Mowat, Paul Werstine,
+Gail Kern Paster, Robert Jackson</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">The Great Gatsby</td>
+<td align="center">F. Scott Fitzgerald</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">The Hobbit</td>
+<td align="center">J.R.R. Tolkien</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">The Girl with the Dragon Tattoo (Millennium, #1)</td>
+<td align="center">Stieg Larsson, Reg Keeland</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">Lord of the Flies</td>
+<td align="center">William Golding</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">Memoirs of a Geisha</td>
+<td align="center">Arthur Golden</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">A Game of Thrones (A Song of Ice and Fire, #1)</td>
+<td align="center">George R.R. Martin</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">Jane Eyre</td>
+<td align="center">Charlotte Brontë, Michael Mason</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">The Notebook (The Notebook, #1)</td>
+<td align="center">Nicholas Sparks</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">Life of Pi</td>
+<td align="center">Yann Martel</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">The Book Thief</td>
+<td align="center">Markus Zusak</td>
+<td align="center">4</td>
+</tr>
+</tbody>
+</table>
+<p>The books that the most of the top 15 users wanted to read is “The
+Catcher in the Rye” by J.D. Salinger, followed by “The Fault in Our
+Stars” by John Green and “A Tale of Two Cities” by Charles Dickens.</p>
+</div>
+<div id="top-genres" class="section level3">
+<h3>Top Genres</h3>
+<p>Now, let’s look at the top genres for the 15 Users using distinct
+book titles.</p>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-a6fea25c617bf6e34283" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-a6fea25c617bf6e34283">{"x":{"visdat":{"138de33653b9a":["function () ","plotlyVisDat"]},"cur_data":"138de33653b9a","attrs":{"138de33653b9a":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Top Genres for Top 15 Users","xaxis":{"domain":[0,1],"automargin":true,"title":"Genres","type":"category","categoryorder":"array","categoryarray":["children","classics","fantasy","fiction","horror","lgbtq","non-fiction","romance","science fiction","self-help","thriller","young adult"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Values"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["fiction","young adult","fantasy","classics","non-fiction","romance","children","horror","lgbtq","science fiction","self-help","thriller"],"y":[13,9,8,5,4,2,1,1,1,1,1,1],"type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Now let’s look at the top genres of the top users’ books.</p>
+<table>
+<caption>Top To-Read genres for Top 15 Users</caption>
+<thead>
+<tr class="header">
+<th align="center">tag</th>
+<th align="center">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">young adult</td>
+<td align="center">177</td>
+</tr>
+<tr class="even">
+<td align="center">classics</td>
+<td align="center">151</td>
+</tr>
+<tr class="odd">
+<td align="center">fiction</td>
+<td align="center">124</td>
+</tr>
+<tr class="even">
+<td align="center">fantasy</td>
+<td align="center">116</td>
+</tr>
+<tr class="odd">
+<td align="center">non-fiction</td>
+<td align="center">99</td>
+</tr>
+<tr class="even">
+<td align="center">romance</td>
+<td align="center">52</td>
+</tr>
+<tr class="odd">
+<td align="center">horror</td>
+<td align="center">47</td>
+</tr>
+<tr class="even">
+<td align="center">mystery</td>
+<td align="center">45</td>
+</tr>
+<tr class="odd">
+<td align="center">graphic novels</td>
+<td align="center">33</td>
+</tr>
+<tr class="even">
+<td align="center">historical-fiction</td>
+<td align="center">26</td>
+</tr>
+<tr class="odd">
+<td align="center">manga</td>
+<td align="center">21</td>
+</tr>
+<tr class="even">
+<td align="center">science fiction</td>
+<td align="center">18</td>
+</tr>
+<tr class="odd">
+<td align="center">christianity</td>
+<td align="center">17</td>
+</tr>
+<tr class="even">
+<td align="center">humor</td>
+<td align="center">17</td>
+</tr>
+<tr class="odd">
+<td align="center">memoir</td>
+<td align="center">16</td>
+</tr>
+<tr class="even">
+<td align="center">plays</td>
+<td align="center">16</td>
+</tr>
+<tr class="odd">
+<td align="center">chick-lit</td>
+<td align="center">13</td>
+</tr>
+<tr class="even">
+<td align="center">vampires</td>
+<td align="center">13</td>
+</tr>
+<tr class="odd">
+<td align="center">poetry</td>
+<td align="center">12</td>
+</tr>
+<tr class="even">
+<td align="center">history</td>
+<td align="center">11</td>
+</tr>
+<tr class="odd">
+<td align="center">self-help</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center">comics</td>
+<td align="center">9</td>
+</tr>
+<tr class="odd">
+<td align="center">biography</td>
+<td align="center">7</td>
+</tr>
+<tr class="even">
+<td align="center">children</td>
+<td align="center">7</td>
+</tr>
+<tr class="odd">
+<td align="center">contemporary</td>
+<td align="center">7</td>
+</tr>
+<tr class="even">
+<td align="center">lgbtq</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">art</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">dystopian</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">philosophy</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">psychology</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">short-stories</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">travel</td>
+<td align="center">5</td>
+</tr>
+</tbody>
+</table>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-c0b628c35eeb9aeafe49" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-c0b628c35eeb9aeafe49">{"x":{"visdat":{"138de16c6aa60":["function () ","plotlyVisDat"]},"cur_data":"138de16c6aa60","attrs":{"138de16c6aa60":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Top Genres for Top 15 To-Read Users","xaxis":{"domain":[0,1],"automargin":true,"title":"Genres","type":"category","categoryorder":"array","categoryarray":["art","biography","chick-lit","children","christianity","classics","comics","contemporary","dystopian","fantasy","fiction","graphic novels","historical-fiction","history","horror","humor","lgbtq","manga","memoir","mystery","non-fiction","philosophy","plays","poetry","psychology","romance","science fiction","self-help","short-stories","travel","vampires","young adult"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Values"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["young adult","classics","fiction","fantasy","non-fiction","romance","horror","mystery","graphic novels","historical-fiction","manga","science fiction","christianity","humor","memoir","plays","chick-lit","vampires","poetry","history","self-help","comics","biography","children","contemporary","lgbtq","art","dystopian","philosophy","psychology","short-stories","travel"],"y":[177,151,124,116,99,52,47,45,33,26,21,18,17,17,16,16,13,13,12,11,10,9,7,7,7,6,5,5,5,5,5,5],"type":"bar","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>The most popular to-read genre among the top 15 users is young adult.
+The next most popular genres are classics and fiction.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

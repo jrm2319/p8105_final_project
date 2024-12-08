@@ -17,7 +17,7 @@ library(ggplot2)
 
 ```{r books}
 #Read CSV file 
-books <- read.csv("../Data/books.csv")
+books <- read.csv("books.csv")
 str(books)
 summary(books)
 ```

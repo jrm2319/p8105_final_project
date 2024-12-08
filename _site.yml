@@ -1,26 +1,26 @@
 name: "To Be Read or Not To Be Read"
-output_dir: "RMDs"
+output_dir: "."
 navbar:
   title: "To Be Read or Not To Be Read"
   right: 
     - text: "About"
-      href: RMDs/index.html
+      href: index.html
     - text: "Report - Hypothesis Testing Results"
-      href: RMDs/Report.html
+      href: Report.html
     - text: "Descriptive Analyses"
       menu:
         - text: "Most Read Authors"
-          href: RMDs/most_read_authors.html    
+          href: most_read_authors.html    
         - text: "Least Read Authors"
-          href: RMDs/least_read_authors.html
+          href: least_read_authors.html
         - text: "Popular Authors"
-          href: RMDs/popular_authors.html
+          href: popular_authors.html
         - text: "Most to Least Read Genres"
-          href: RMDs/genres.html
+          href: genres.html
         - text: "Top Users by Ratings"
-          href: RMDs/top_users.html
+          href: top_users.html
         - text: "Top Users by Most To-Read"
-          href: RMDs/top_users_to_read.html
+          href: top_users_to_read.html
     - text: "Recommendations"
       href: reccomendations.html
     - icon: fa-github fa-lg
@@ -30,5 +30,3 @@ navbar:
 output:
   html_document:
     theme: yeti
-    includes:
-      in_header: "../site_libs/bootstrap-3.3.5/css/yeti.min.css"

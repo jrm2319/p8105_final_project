@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Kamiah Brown" />
+
+<meta name="date" content="2024-12-03" />
+
+<title>authors</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">To Be Read or Not To Be Read</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">About</a>
+</li>
+<li>
+  <a href="Report.html">Report - Hypothesis Testing Results</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Descriptive Analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="most_read_authors.html">Most Read Authors</a>
+    </li>
+    <li>
+      <a href="least_read_authors.html">Least Read Authors</a>
+    </li>
+    <li>
+      <a href="popular_authors.html">Popular Authors</a>
+    </li>
+    <li>
+      <a href="genres.html">Most to Least Read Genres</a>
+    </li>
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="reccomendations.html">Recommendations</a>
+</li>
+<li>
+  <a href="https://github.com/jrm2319/p8105_final_project.io.git">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:kab2310@cumc.columbia.edu">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">authors</h1>
+<h4 class="author">Kamiah Brown</h4>
+<h4 class="date">2024-12-03</h4>
+
+</div>
+
+
+<pre class="r"><code>#Read CSV file 
+books &lt;- read.csv(&quot;books.csv&quot;)
+str(books)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    10000 obs. of  23 variables:
+##  $ book_id                  : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ goodreads_book_id        : int  2767052 3 41865 2657 4671 11870085 5907 5107 960 1885 ...
+##  $ best_book_id             : int  2767052 3 41865 2657 4671 11870085 5907 5107 960 1885 ...
+##  $ work_id                  : int  2792775 4640799 3212258 3275794 245494 16827462 1540236 3036731 3338963 3060926 ...
+##  $ books_count              : int  272 491 226 487 1356 226 969 360 311 3455 ...
+##  $ isbn                     : chr  &quot;439023483&quot; &quot;439554934&quot; &quot;316015849&quot; &quot;61120081&quot; ...
+##  $ isbn13                   : num  9.78e+12 9.78e+12 9.78e+12 9.78e+12 9.78e+12 ...
+##  $ authors                  : chr  &quot;Suzanne Collins&quot; &quot;J.K. Rowling, Mary GrandPré&quot; &quot;Stephenie Meyer&quot; &quot;Harper Lee&quot; ...
+##  $ original_publication_year: num  2008 1997 2005 1960 1925 ...
+##  $ original_title           : chr  &quot;The Hunger Games&quot; &quot;Harry Potter and the Philosopher&#39;s Stone&quot; &quot;Twilight&quot; &quot;To Kill a Mockingbird&quot; ...
+##  $ title                    : chr  &quot;The Hunger Games (The Hunger Games, #1)&quot; &quot;Harry Potter and the Sorcerer&#39;s Stone (Harry Potter, #1)&quot; &quot;Twilight (Twilight, #1)&quot; &quot;To Kill a Mockingbird&quot; ...
+##  $ language_code            : chr  &quot;eng&quot; &quot;eng&quot; &quot;en-US&quot; &quot;eng&quot; ...
+##  $ average_rating           : num  4.34 4.44 3.57 4.25 3.89 4.26 4.25 3.79 3.85 4.24 ...
+##  $ ratings_count            : int  4780653 4602479 3866839 3198671 2683664 2346404 2071616 2044241 2001311 2035490 ...
+##  $ work_ratings_count       : int  4942365 4800065 3916824 3340896 2773745 2478609 2196809 2120637 2078754 2191465 ...
+##  $ work_text_reviews_count  : int  155254 75867 95009 72586 51992 140739 37653 44920 25112 49152 ...
+##  $ ratings_1                : int  66715 75504 456191 60427 86236 47994 46023 109383 77841 54700 ...
+##  $ ratings_2                : int  127936 101676 436802 117415 197621 92723 76784 185520 145740 86485 ...
+##  $ ratings_3                : int  560092 455024 793319 446835 606158 327550 288649 455042 458429 284852 ...
+##  $ ratings_4                : int  1481305 1156318 875073 1001952 936012 698471 665635 661516 716569 609755 ...
+##  $ ratings_5                : int  2706317 3011543 1355439 1714267 947718 1311871 1119718 709176 680175 1155673 ...
+##  $ image_url                : chr  &quot;https://images.gr-assets.com/books/1447303603m/2767052.jpg&quot; &quot;https://images.gr-assets.com/books/1474154022m/3.jpg&quot; &quot;https://images.gr-assets.com/books/1361039443m/41865.jpg&quot; &quot;https://images.gr-assets.com/books/1361975680m/2657.jpg&quot; ...
+##  $ small_image_url          : chr  &quot;https://images.gr-assets.com/books/1447303603s/2767052.jpg&quot; &quot;https://images.gr-assets.com/books/1474154022s/3.jpg&quot; &quot;https://images.gr-assets.com/books/1361039443s/41865.jpg&quot; &quot;https://images.gr-assets.com/books/1361975680s/2657.jpg&quot; ...</code></pre>
+<pre class="r"><code>summary(books)</code></pre>
+<pre><code>##     book_id      goodreads_book_id   best_book_id         work_id        
+##  Min.   :    1   Min.   :       1   Min.   :       1   Min.   :      87  
+##  1st Qu.: 2501   1st Qu.:   46276   1st Qu.:   47912   1st Qu.: 1008841  
+##  Median : 5000   Median :  394966   Median :  425124   Median : 2719524  
+##  Mean   : 5000   Mean   : 5264697   Mean   : 5471214   Mean   : 8646183  
+##  3rd Qu.: 7500   3rd Qu.: 9382225   3rd Qu.: 9636112   3rd Qu.:14517748  
+##  Max.   :10000   Max.   :33288638   Max.   :35534230   Max.   :56399597  
+##                                                                          
+##   books_count          isbn               isbn13            authors         
+##  Min.   :   1.00   Length:10000       Min.   :1.952e+08   Length:10000      
+##  1st Qu.:  23.00   Class :character   1st Qu.:9.780e+12   Class :character  
+##  Median :  40.00   Mode  :character   Median :9.780e+12   Mode  :character  
+##  Mean   :  75.71                      Mean   :9.755e+12                     
+##  3rd Qu.:  67.00                      3rd Qu.:9.781e+12                     
+##  Max.   :3455.00                      Max.   :9.790e+12                     
+##                                       NA&#39;s   :585                           
+##  original_publication_year original_title        title          
+##  Min.   :-1750             Length:10000       Length:10000      
+##  1st Qu.: 1990             Class :character   Class :character  
+##  Median : 2004             Mode  :character   Mode  :character  
+##  Mean   : 1982                                                  
+##  3rd Qu.: 2011                                                  
+##  Max.   : 2017                                                  
+##  NA&#39;s   :21                                                     
+##  language_code      average_rating  ratings_count     work_ratings_count
+##  Length:10000       Min.   :2.470   Min.   :   2716   Min.   :   5510   
+##  Class :character   1st Qu.:3.850   1st Qu.:  13569   1st Qu.:  15439   
+##  Mode  :character   Median :4.020   Median :  21156   Median :  23832   
+##                     Mean   :4.002   Mean   :  54001   Mean   :  59687   
+##                     3rd Qu.:4.180   3rd Qu.:  41054   3rd Qu.:  45915   
+##                     Max.   :4.820   Max.   :4780653   Max.   :4942365   
+##                                                                         
+##  work_text_reviews_count   ratings_1        ratings_2        ratings_3     
+##  Min.   :     3          Min.   :    11   Min.   :    30   Min.   :   323  
+##  1st Qu.:   694          1st Qu.:   196   1st Qu.:   656   1st Qu.:  3112  
+##  Median :  1402          Median :   391   Median :  1163   Median :  4894  
+##  Mean   :  2920          Mean   :  1345   Mean   :  3111   Mean   : 11476  
+##  3rd Qu.:  2744          3rd Qu.:   885   3rd Qu.:  2353   3rd Qu.:  9287  
+##  Max.   :155254          Max.   :456191   Max.   :436802   Max.   :793319  
+##                                                                            
+##    ratings_4         ratings_5        image_url         small_image_url   
+##  Min.   :    750   Min.   :    754   Length:10000       Length:10000      
+##  1st Qu.:   5406   1st Qu.:   5334   Class :character   Class :character  
+##  Median :   8270   Median :   8836   Mode  :character   Mode  :character  
+##  Mean   :  19966   Mean   :  23790                                        
+##  3rd Qu.:  16024   3rd Qu.:  17304                                        
+##  Max.   :1481305   Max.   :3011543                                        
+## </code></pre>
+<div id="summarizing-read-counts-by-author" class="section level2">
+<h2>Summarizing Read Counts by Author</h2>
+<pre class="r"><code>most_read_authors &lt;- books %&gt;%
+  group_by(authors) %&gt;%
+  summarize(
+    total_ratings = sum(work_ratings_count, na.rm = TRUE), 
+    num_books = n() #Count the number of books per author
+  ) %&gt;%
+  arrange(desc(total_ratings))
+
+head(most_read_authors, 50)</code></pre>
+<pre><code>## # A tibble: 50 × 3
+##    authors                     total_ratings num_books
+##    &lt;chr&gt;                               &lt;int&gt;     &lt;int&gt;
+##  1 J.K. Rowling, Mary GrandPré      14126791         8
+##  2 Suzanne Collins                   9161124         9
+##  3 Stephenie Meyer                   8631937        11
+##  4 Stephen King                      7297834        60
+##  5 Rick Riordan                      5717999        22
+##  6 J.R.R. Tolkien                    5602790         6
+##  7 Dan Brown                         5332589         7
+##  8 Cassandra Clare                   4631019        13
+##  9 Nicholas Sparks                   4501871        19
+## 10 John Green                        4312589         4
+## # ℹ 40 more rows</code></pre>
+<pre class="r"><code>ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
+  geom_bar(stat = &quot;identity&quot;, aes(fill = total_ratings), show.legend = FALSE) +
+  labs(
+    title = &quot;Top 10 Most Read Authors&quot;,
+    x = &quot;Total Ratings Count&quot;,
+    y = &quot;Authors&quot;
+  ) +
+  scale_fill_gradient(low = &quot;skyblue&quot;, high = &quot;steelblue&quot;) + # Gradient color
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5), # Center and bold title
+    axis.text.y = element_text(size = 10), # Adjust font size for 10 authors
+    axis.text.x = element_text(size = 12),
+    axis.title = element_text(size = 14, face = &quot;bold&quot;), # Bold axis labels
+    panel.grid.major.y = element_blank() # Remove y-axis gridlines
+  ) +
+  scale_x_continuous(labels = scales::comma)</code></pre>
+<p><img src="authors_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

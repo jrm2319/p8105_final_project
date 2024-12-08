@@ -17,7 +17,7 @@ library(knitr)
 ## Data Import
 ```{r books, echo=FALSE}
 #Read CSV file 
-books <- read.csv("../Data/books.csv")
+books <- read.csv("books.csv")
 ```
 
 ### *Summarizing Read Counts by Author*

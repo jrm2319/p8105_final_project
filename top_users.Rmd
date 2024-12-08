@@ -11,9 +11,9 @@ library(readr)
 library(knitr)
 library(tidyverse)
 library(ggplot2)
-ratings <- read_csv("../Data/ratings.csv")
-to_read <- read_csv("../Data/to_read.csv")
-books_with_tags <- read_csv("../Data/books_with_tags.csv")
+ratings <- read_csv("ratings.csv")
+to_read <- read_csv("to_read.csv")
+books_with_tags <- read_csv("books_with_tags.csv")
 ```
 
 ```{r data_1, echo=FALSE}

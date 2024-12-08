@@ -16,7 +16,7 @@ library(ggplot2)
 ## Data Import
 ```{r books, echo=FALSE}
 #Read CSV file 
-books <- read.csv("../Data/books.csv")
+books <- read.csv("books.csv")
 ```
 
 ```{r most read authors, echo=FALSE}

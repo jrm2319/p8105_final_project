@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>To Be Read or Not To Be Read</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">To Be Read or Not To Be Read</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">About</a>
+</li>
+<li>
+  <a href="Report.html">Report - Hypothesis Testing Results</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Descriptive Analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="most_read_authors.html">Most Read Authors</a>
+    </li>
+    <li>
+      <a href="least_read_authors.html">Least Read Authors</a>
+    </li>
+    <li>
+      <a href="popular_authors.html">Popular Authors</a>
+    </li>
+    <li>
+      <a href="genres.html">Most to Least Read Genres</a>
+    </li>
+    <li>
+      <a href="top_users.html">Top Users by Ratings</a>
+    </li>
+    <li>
+      <a href="top_users_to_read.html">Top Users by Most To-Read</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="reccomendations.html">Recommendations</a>
+</li>
+<li>
+  <a href="https://github.com/jrm2319/p8105_final_project.io.git">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="mailto:kab2310@cumc.columbia.edu">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><b>To Be Read or Not To Be Read</b></h1>
+
+</div>
+
+
+<div id="about-the-team" class="section level3">
+<h3><strong>About the Team</strong></h3>
+</div>
+<div id="motivation" class="section level3">
+<h3><strong>Motivation</strong></h3>
+<p>With the New Year right around the corner, countless sources are
+providing their list of the ‘Best Books’ of the year. These lists help
+inform readers while providing them with book recommendations that
+interest them. Our project aims to explore GoodReads data to understand
+the genre and author preferences of readers in the United States.</p>
+<p>We aim to identify the most and least read genres and authors to gain
+insight into trends of literary engagement. With this information,
+publishers, authors, and libraries can tailor their book selections to
+meet reader’s demands and promote lesser-known genres and authors.
+Understanding popular genres and authors can also help explore cultural
+trends that resonate with the public, while identifying lesser-read
+genres to create opportunities for re-engagement.</p>
+</div>
+<div id="project-inspiration" class="section level3">
+<h3><strong>Project Inspiration</strong></h3>
+<p>With the demanding workload of graduate school, there’s little time
+to sit down and enjoy a good book. However, with winter break
+approaching, we’re all looking forward to some much-needed rest and the
+chance to indulge in quality reading time! This project was inspired by
+a shared hobby among the team and our collective anticipation for the
+opportunity to relax on the couch, sip some coffee, and dive into a good
+book.</p>
+</div>
+<div id="initial-questions" class="section level3">
+<h3><strong>Initial Questions</strong></h3>
+<p>The initial research question of our project was: What are trends
+among readers? This initial research question aided us when exploring
+datasets. Once we found the <a
+href="https://github.com/zygmuntz/goodbooks-10k">GoodRead-10k</a>, an
+open data source hosted on GitHub with data from GoodReads, we were
+interested in exploring trends among readers using GoodReads. The team
+spent time understand what data was available and then created the
+following questions to guide this project:</p>
+<ul>
+<li>Who are the top fifteen GoodReads users, by Ratings and
+To-Read?<br />
+</li>
+<li>Are sequels worth reading?<br />
+</li>
+<li>What are the top 10 most popular genres? What are the 10 least
+popular genres?<br />
+</li>
+<li>Who are the top 10 most popular authors? Who are the 10 least
+popular authors?<br />
+</li>
+<li>How can we build a recommendations page based on the data
+provided?</li>
+</ul>
+</div>
+<div id="report" class="section level3">
+<h3><strong>Report</strong></h3>
+<div id="users" class="section level4">
+<h4><strong>Users</strong></h4>
+<p>The data used were the cleaned books data, books_with_tags.csv,
+ratings.csv, and to_read.csv. Separate dataframes were made to find the
+top 15 users by ratings and by number of to-read books.</p>
+<p>For general analysis, the average rating by each of the top 15 users
+was summarized. This distribution was visually compared to the average
+ratings of the entire GoodReads community and found that the Top 15
+ratings data was bimodal. The average rating among the Top 15 users was
+3.756 while among the community it was 3.929. The three most rated
+genres for the top 15 users were found–exploratory analysis showed that
+there were too many tags per book and too many ratings per user to have
+a clean descriptive analysis, so top three rated genres for each user
+were found. The visualized data looked at which of each user’s top three
+genres was most common among the group of fifteen. Among the top 15 by
+ratings, the most popular genres were fiction and classics, with all 15
+of the 15 users having fiction as one of their top three rating genres
+and 13 of the 15 users having classics.</p>
+<p>For the top 15 users by number of to-read, all of the books each of
+the selected users were compiled and then analyzed to find the top 15
+most popular books among the top 15 users. The first three most popular
+were “The Catcher in the Rye”, “The Fault in Our Stars” and “A Tale of
+Two Cities.” The top want-to-read genres were also analyzed among the
+selected 15. First they were analyzed by looking at which genres were
+most common and how many users had one of these genres as their top
+three. Fiction (13/15), young adult (9/15), and fantasy (8/15) were the
+most common genres among users’ top three genres. Then the next analysis
+was looking at all data as a whole rather than by user. The top genre
+tag for all distinct book titles were compiled to visualize in a bar
+graph the most popular genres the top 15 users wanted to read overall.
+The most popular genre was young adult, with 177 distinct titles to be
+read, while others included classics (151) and fiction (124).</p>
+</div>
+<div id="sequels" class="section level4">
+<h4><strong>Sequels</strong></h4>
+</div>
+<div id="genres" class="section level4">
+<h4><strong>Genres</strong></h4>
+<p>For the genre section of this analysis, I used the Books with Tags
+dataset. This dataset had a sample size of 9300 books and each book has
+five top tags. On GoodReads, tags are non-exclusive virtual shelves that
+users can organize their books on. In the raw data, books had between
+1-25 tags, we took the five most common tags for each book and kept
+those in the books_with_tags.csv dataset. The tags in this dataset are
+used as proxies for genres and will provide insight into the genres that
+users have characterized books as.</p>
+<p>For the most and least popular genre analysis I used the
+books_with_tags.csv dataset. I used the pivot_longer function from the
+tidyr package to create a single column/variable for tags. This allowed
+me to analyze the most and least popular genres based on tags.</p>
+<p>After some descriptive analysis, I found that the most popular tag is
+“fiction” and the third most popular tag is “non-fiction.” However, some
+would argue that in modern literature these tags are considered the
+broadest category of genre but do not provide information about the
+specific fiction or nonfiction genres readers are reading or interested
+in reading. Therefore, the decision to exclude these two categories was
+made. There are 1,348 distinct genre categories, based on tags.</p>
+<p>For the most and least popular to-be-read genre analysis I merged the
+to_read.csv and books_with_tags.csv datasets on book_id using an inner
+join, referred to as the to_read_with_tag.csv from here forward. I
+created a single column/variable for tags and removed fiction and
+non-fiction tags. After creating the single tag column, I grouped the
+data by tag value and then calculated the number of occurrences for each
+tag. I then sorted the tags by count in descending order and selected
+the top 10 most popular tags. A bar plot was created to display the top
+10 genres based on tags. The 10 most popular genres read, in order, are:
+Young Adult, Fantasy, Romance, Science Fiction, Children, Mystery,
+Classics, Historical Fiction, Contemporary, and Thriller.</p>
+<p>I followed a similar process as above but found that there was a
+substantial number of tags that were only used once, twice, or three
+times but this information was not useful when presented on a bar graph.
+Therefore, I decided to exclude all tags that have a tag count of less
+than 100. A cut off tag count of 100 was used because I wanted to focus
+on tags that have a moderate level of user engagement. By using a
+threshold of 100 for tag count, the analysis ensures that the least
+popular genres identified still have sufficient user recognition and can
+represent meaningful patterns in the data.</p>
+<p>The 10 least popular genres read, in order, are: Manga, Adult
+Fiction, Religion, Art, War, Memoirs, IGBTQ, Poetry, Drama, and Middle
+Grade</p>
+<p>For this analysis, I followed the same process outlined in “Most
+popular read genres” above, but using the to_read_with_tag.csv file. The
+10 most popular genres to-be-read, in order, are: Young Adult, Fantasy,
+Romance, Science Fiction, Children, Mystery, Classics, Historical
+Fiction, Contemporary, and Thriller.</p>
+<p>For this analysis, I followed the same process outlined in “Least
+popular read genres” above, but using the to_read_with_tag.csv file. The
+10 least popular genres read, in order, are: Manga, Adult Fiction,
+Religion, Art, War, Memoirs, IGBTQ, Poetry, Drama, and Middle Grade.</p>
+<p>The 10 most popular genres, in order, are: Young Adult, Fantasy,
+Romance, Science Fiction, Children, Mystery, Classics, Historical
+Fiction, Contemporary, and Thriller. The 10 least popular genres, in
+order, are: Manga, Adult Fiction, Religion, Art, War, Memoirs, IGBTQ,
+Poetry, Drama, and Middle Grade. The rankings were the same for books
+read and book to-be-read, this was expected since we expect the genres
+that users are reading should be the same/similar genres that other
+users are planning to-read. Due to book recommendation, social media,
+and book communities readers can easily find books to read that are of
+interest to them. Additionally, given that readers often have a genre
+that they enjoy, book recommendations or books to-read will likely be
+within that same genre further supporting the conclusion that rankings
+were the same for books read and book to-be-read.</p>
+</div>
+<div id="authors" class="section level4">
+<h4><strong>Authors</strong></h4>
+<p>To perform the exploratory analysis, the total number of ratings for
+each author was calculated using the book data. The book data was
+grouped by authors and then summarized by the total ratings using sum()
+function. This process identified the authors with the highest
+cumulative ratings. To analyze the least and most-read authors, the data
+was sorted in ascending order for least-read authors and descending
+order for the most-read authors based on the total ratings. The top 10
+entries from each sorted dataset were then extracted for analysis,
+representing the most-read and least-read authors, respectively, For
+popular authors, the percentage of total ratings contributed by each
+author was calculated to assess their relative popularity within the
+dataset. In order to do this, each of the author’s total ratings were
+divided by hr overall sum of ratings and then multiplied (the times) by
+100. The data was then sorted in descending order based on the
+percentages to display the top 10 popular authors.</p>
+<p>The visualization of the least-read, most-read, and popular authors
+were essential in displaying the descriptive analyses. Bar charts and
+tables were created using ggplot and knitr to display the data in an
+accessible format. Bar charts and tables complemented each other by
+providing both visual comparisons and detailed numerical information to
+highlight trends in engagement across authors. For the least-read,
+most-read and popular authors, bar charts were created to display the
+total ratings of the authors with the highest, lowest and most
+engagement. The least-read authors were sorted in ascending order,
+displaying minimal engagement, while the most-read authors were sorted
+in descending order to showcase those with the highest engagement. For
+popular authors, a percentage-based bar chart was created to display the
+relative contribution of each author’s ratings to the overall
+dataset.</p>
+<p>While there were no formal statistical test as the primary focus was
+to conduct an exploratory descriptive analysis, potential analyses could
+include a statistical comparison between groups of authors, such as the
+average ratings of least-read versus most-read authors to determine
+whether the differences in total ratings across groups are statistically
+significant. Similarly, for popular authors, further statistical
+analyses could focus on the relationship between percentage of total
+ratings and the number of books published.</p>
+<p>Moreover, the analysis displayed the most-read authors included J.K.
+Rowling and Suzanne Collins. These findings aligned with expectations,
+as these authors have written popular books such as the Harry Potter and
+The Hunger Games series. In contrast, the least-read authors were those
+with minimal engagement, often having only one book in the dataset. The
+exploration of popular authors based on their percentage of total
+ratings highlighted the relative impact of these authors in the overall
+dataset. Authors like J.K. Rowling not only dominated in overall total
+ratings but also in their percentage contributions, reflecting their
+popularity compared to others. The findings furthered underscored the
+visibility of published works and its impact in author’s readership.
+Authors with more books in the dataset tended to have higher total
+ratings, suggesting a cumulative effect of engagement. However, the
+percentage analysis revealed that some authors achieve high relative
+engagement even with fewer books, pointing to the quality of their
+work.</p>
+</div>
+<div id="recommendations-list" class="section level4">
+<h4><strong>Recommendations List</strong></h4>
+<p>Using the Shiny App, we created a data-based book recommendations
+page. Users can receive recommendations based on their favorite author,
+genre, and preferred book rating. Once users fill out their information,
+the app lists up to five books based on the user’s search criteria.
+Below is a screenshot of the book recommendation page.</p>
+<p>Starting with the books_with_tags.csv dataset, we restricted the
+dataset to the variables of interest and rounded the ‘average_rating’
+variable to the nearest half number. After creating the final dataset,
+we built the User Interface. We added conditions that allow users to
+select a genre or author to base their recommendations on. Because some
+books were classified under multiple genres, users can choose more than
+one genre to narrow their recommendations. We also allow users to limit
+to a specific book rating, no matter which search criteria they use. If
+no books match the criteria, we altered the interface so that they will
+receive book recommendations that still match their genre and author
+preference, but will have a lower rating than they specified. We
+indicate that the book listed is not based on their rating preference
+next to the book title. We restricted the resulting list to five
+books.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
