@@ -131,6 +131,5 @@ The 15 Top raters had a range of genres so we looked at the top 3 genres rated b
 # create a pie chart to show all genres
 genres_count %>%
   plot_ly(labels = ~tag, values = ~n, type = "pie", colors = "Pastel1")
-  
 ```
   
