@@ -4,23 +4,23 @@ navbar:
   title: "To Be Read or Not To Be Read"
   right: 
     - text: "About"
-      href: ./HTMLs/index.html
+      href: HTMLs/index.html
     - text: "Report - Hypothesis Testing Results"
-      href: ./HTMLs/Report.html
+      href: HTMLs/Report.html
     - text: "Descriptive Analyses"
       menu:
         - text: "Most Read Authors"
-          href: ./HTMLs/most_read_authors.html    
+          href: HTMLs/most_read_authors.html    
         - text: "Least Read Authors"
-          href: ./HTMLs/least_read_authors.html
+          href: HTMLs/least_read_authors.html
         - text: "Popular Authors"
-          href: ./HTMLs/popular_authors.html
+          href: HTMLs/popular_authors.html
         - text: "Most to Least Read Genres"
-          href: ./HTMLs/genres.html
+          href: HTMLs/genres.html
         - text: "Top Users by Ratings"
-          href: ./HTMLs/top_users.html
+          href: HTMLs/top_users.html
         - text: "Top Users by Most To-Read"
-          href: ./HTMLs/top_users_to_read.html
+          href: HTMLs/top_users_to_read.html
     - text: "Recommendations"
       href: reccomendations.html
     - icon: fa-github fa-lg
