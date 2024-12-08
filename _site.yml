@@ -1,5 +1,5 @@
 name: "To Be Read or Not To Be Read"
-output_dir: "./HTMLs"
+output_dir: "."
 navbar:
   title: "To Be Read or Not To Be Read"
   right: 
