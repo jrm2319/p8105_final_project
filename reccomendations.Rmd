@@ -2,7 +2,7 @@
 title: "Welcome to our Recommendations Page!"
 output: 
   html_document:
-    self_contained: false
+    self_contained: true
 runtime: shiny
 ---
 
@@ -11,14 +11,13 @@ Looking for a new romance book? Want to get into some classics? Looking to read 
 
 Have fun reading!
 
-```{r setup}
-
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(shiny)
 library(bslib)
 library(dplyr)
-
-knitr::opts_chunk$set(echo = TRUE)
+library(rmarkdown)
 
 ```
 
@@ -149,5 +148,10 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui = ui, server = server)
+
+output_path <- "./reccomendations.html"
+
+# Render the document with the specified output file path
+render("reccomendations.Rmd", output_file = output_path)
 
 ```

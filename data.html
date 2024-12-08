@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Erynne Jackson" />
 
+<meta name="date" content="2024-12-01" />
 
-<title>data</title>
+<title>DATA</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -32,6 +34,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -302,97 +306,89 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">DATA</h1>
+<h4 class="author">Erynne Jackson</h4>
+<h4 class="date">2024-12-01</h4>
 
 </div>
 
 
-<div id="data" class="section level1">
-<h1>DATA</h1>
-<p>Erynne Jackson 2024-12-01</p>
 <pre class="r"><code>library(readxl)
-library(tidyverse)
-library(readr)</code></pre>
-<p>Cleaning the Books file.</p>
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>library(readr)
+library(dplyr)</code></pre>
+<div id="importing-goodreads-dataset" class="section level2">
+<h2>IMPORTING GOODREADS DATASET</h2>
+<p>Our Goodreads dataset has five sub-datasets that we are interested in
+analyzing. Each dataset has to be imported separately from an existing
+GitHub repository. We first import all of the datasets.</p>
+<p>Importing Books file:</p>
 <pre class="r"><code>url = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/books.csv&quot;
-books = read_csv(url)</code></pre>
+book_data = read_csv(url)</code></pre>
 <pre><code>## Rows: 10000 Columns: 23
-## ── Column specification ──────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
 ## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Cleaning the Ratings file.</p>
+<p>Importing the Ratings file:</p>
 <pre class="r"><code>url2 = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/ratings.csv&quot;
 ratings = read_csv(url2)</code></pre>
 <pre><code>## Rows: 5976479 Columns: 3
-## ── Column specification ──────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (3): user_id, book_id, rating
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Cleaning the Book Tags file.</p>
+<p>Importing Book Tags file:</p>
 <pre class="r"><code>url3 = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/book_tags.csv&quot;
 book_tag = read_csv(url3)</code></pre>
 <pre><code>## Rows: 999912 Columns: 3
-## ── Column specification ──────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (3): goodreads_book_id, tag_id, count
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Cleaning the Tags file.</p>
+<p>Importing the Tags file:</p>
 <pre class="r"><code>url4 = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/tags.csv&quot;
 tags = read_csv(url4)</code></pre>
 <pre><code>## Rows: 34252 Columns: 2
-## ── Column specification ──────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (1): tag_name
 ## dbl (1): tag_id
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Cleaning the To Read file.</p>
+<p>Importing To Read file:</p>
 <pre class="r"><code>url5 = &quot;https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/refs/heads/master/to_read.csv&quot;
 to_read = read_csv(url5)</code></pre>
 <pre><code>## Rows: 912705 Columns: 2
-## ── Column specification ──────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (2): user_id, book_id
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<p>Set Up (KB):</p>
-<pre class="r"><code>library(readr)
-library(dplyr)</code></pre>
-<p>Import data (JM):</p>
-<pre class="r"><code>book_data = read_csv(&quot;Books.csv&quot;)</code></pre>
-<pre><code>## Rows: 10000 Columns: 23
-## ── Column specification ──────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr  (7): isbn, authors, original_title, title, language_code, image_url, sm...
-## dbl (16): book_id, goodreads_book_id, best_book_id, work_id, books_count, is...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>head(book_data)</code></pre>
-<pre><code>## # A tibble: 6 × 23
-##   book_id goodreads_book_id best_book_id  work_id books_count isbn        isbn13
-##     &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
-## 1       1           2767052      2767052  2792775         272 439023483  9.78e12
-## 2       2                 3            3  4640799         491 439554934  9.78e12
-## 3       3             41865        41865  3212258         226 316015849  9.78e12
-## 4       4              2657         2657  3275794         487 61120081   9.78e12
-## 5       5              4671         4671   245494        1356 743273567  9.78e12
-## 6       6          11870085     11870085 16827462         226 525478817  9.78e12
-## # ℹ 16 more variables: authors &lt;chr&gt;, original_publication_year &lt;dbl&gt;,
-## #   original_title &lt;chr&gt;, title &lt;chr&gt;, language_code &lt;chr&gt;,
-## #   average_rating &lt;dbl&gt;, ratings_count &lt;dbl&gt;, work_ratings_count &lt;dbl&gt;,
-## #   work_text_reviews_count &lt;dbl&gt;, ratings_1 &lt;dbl&gt;, ratings_2 &lt;dbl&gt;,
-## #   ratings_3 &lt;dbl&gt;, ratings_4 &lt;dbl&gt;, ratings_5 &lt;dbl&gt;, image_url &lt;chr&gt;,
-## #   small_image_url &lt;chr&gt;</code></pre>
+</div>
+<div id="data-cleaning" class="section level2">
+<h2>Data Cleaning</h2>
+<p>Next, we are doing further cleaning of the Books file for individual
+analyses:</p>
 <p>Remove unnecessary variables (JM):</p>
 <pre class="r"><code>book_data = book_data %&gt;%
   select(
@@ -430,7 +426,7 @@ print(missing_summary)</code></pre>
   filter(!is.na(isbn))</code></pre>
 <p>Creating new csv file for use (JM):</p>
 <pre class="r"><code>write.csv(book_data_complete, &quot;book_data_complete.csv&quot;, row.names = FALSE)</code></pre>
-<p>Creating merged tag file (SR)</p>
+<p>Creating merged Tags file (SR):</p>
 <pre class="r"><code>merged_tags = 
   left_join(book_tag, tags, by = c(&quot;tag_id&quot;)) %&gt;%
   group_by(goodreads_book_id) %&gt;%
@@ -438,7 +434,7 @@ print(missing_summary)</code></pre>
   filter(!tag_name %in% c(&quot;owned&quot;, &quot;to-read&quot;, &quot;favorites&quot;, &quot;owned&quot;, &quot;books-i-own&quot;, &quot;currently-reading&quot;, &quot;library&quot;, &quot;owned-books&quot;, &quot;to-buy&quot;, &quot;kindle&quot;, &quot;default&quot;, &quot;ebook&quot;, &quot;audiobook&quot;, &quot;ebooks&quot;, &quot;wish-list&quot;, &quot;my-library&quot;, &quot;audiobooks&quot;, &quot;i-own&quot;, &quot;book-club&quot;, &quot;discworld&quot;, &quot;harry-potter&quot;, &quot;tolkien&quot;, &quot;series&quot;,
 &quot;all-time-favorites&quot;, &quot;1001&quot;, &quot;1001-books&quot;, &quot;   
 1001-books-to-read&quot;, &quot;1001-books-to-read-before-you-die&quot;, &quot;1001-import&quot;, &quot;abandoned&quot;, &quot;pulitzer-prize&quot;, &quot;dune&quot;, &quot;unfinished&quot;, &quot;19th-century&quot;, &quot;novels&quot;, &quot;time-100&quot;, &quot;paul-auster&quot;, &quot;favourites&quot;, &quot;ayn-rand&quot;, &quot;anne-tyler&quot;, &quot;ux&quot;, &quot;dan-brown&quot;, &quot;john-grisham&quot;, &quot;grisham&quot;, &quot;books-about-books&quot;, &quot;shakespeare&quot;, &quot;read-for-school&quot;, &quot;nelson-demille&quot;, &quot;paulo-coelho&quot;, &quot;jane-austen&quot;, &quot;pulitzer&quot;, &quot;steve-martini&quot;, &quot; 
-terry-pratchett&quot;, &quot;middle-earth&quot;,&quot;stephen-king&quot;, &quot;lee-child&quot;, &quot;preston-child&quot;, &quot;NA&quot;, &quot;sophie-kinsella&quot;, &quot;read-in-2014&quot;, &quot;read-in-2012&quot;, &quot;nicholas-sparks&quot;, &quot;hunger-games&quot;, &quot;jodi-picoult&quot;, &quot;nora-roberts&quot;)) %&gt;%
+terry-pratchett&quot;, &quot;middle-earth&quot;,&quot;stephen-king&quot;, &quot;lee-child&quot;, &quot;preston-child&quot;, &quot;NA&quot;, &quot;sophie-kinsella&quot;, &quot;read-in-2014&quot;, &quot;read-in-2012&quot;, &quot;nicholas-sparks&quot;, &quot;hunger-games&quot;, &quot;jodi-picoult&quot;, &quot;nora-roberts&quot;, &quot;patricia-cornwell&quot;, &quot;pretty-little-liars&quot;)) %&gt;%
   drop_na(tag_name) %&gt;%
   slice_head(n = 5) %&gt;%
   ungroup()
@@ -468,29 +464,25 @@ genres &lt;- list(
   &quot;manga&quot; = c(&quot;mangá&quot;),
   &quot;food&quot; = c(&quot;food&quot;, &quot;cooking&quot;, &quot;cookbooks&quot;, &quot;cookbook&quot;), 
   &quot;lgbtq&quot; = c(&quot;lgbt&quot;, &quot;gay&quot;, &quot;queer&quot;, &quot;glbt&quot;),
-  &quot;christianity&quot; = c(&quot;christian-living&quot;, &quot;christian&quot;)
+  &quot;christianity&quot; = c(&quot;christian-living&quot;, &quot;christian&quot;, &quot;christian-literature&quot;, &quot;christian-fiction&quot;)
 )
 
-# Create a function to standardize tags
 standardize_tag &lt;- function(tag) {
-  # Check each genre list for a match
   for (genre in names(genres)) {
     if (tag %in% genres[[genre]]) {
       return(genre)
     }
   }
-  # If no match, return the original tag
   return(tag)
 }
 
-# Apply the function to the tag_name column
 rename_tags &lt;- merged_tags %&gt;%
   mutate(tag_name = sapply(tag_name, standardize_tag))
 
 
 
 pivoted_data &lt;- rename_tags %&gt;%
-  mutate(rank = row_number(), .by = goodreads_book_id) %&gt;% # Add rank for top tags
+  mutate(rank = row_number(), .by = goodreads_book_id) %&gt;% 
   pivot_wider(
     id_cols = goodreads_book_id, 
     names_from = rank, 
