@@ -10,9 +10,9 @@ library(plotly)
 library(readr)
 library(knitr)
 library(tidyverse)
-ratings <- read_csv("./Data/ratings.csv")
-to_read <- read_csv("./Data/to_read.csv")
-books_with_tags <- read_csv("./Data/books_with_tags.csv")
+ratings <- read_csv("../Data/ratings.csv")
+to_read <- read_csv("../Data/to_read.csv")
+books_with_tags <- read_csv("../Data/books_with_tags.csv")
 ```
 In this section, we'll be looking at the top users on GoodReads who have the most "to-read" books. 
 

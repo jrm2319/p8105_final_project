@@ -12,7 +12,7 @@ library(ggplot2)
 library(dplyr)
 library(knitr)
 library(broom)
-sequel = read.csv("book_data_complete.csv")
+sequel = read.csv("../Data/book_data_complete.csv")
 ```
 
 In this page, we explore the dynamics of book sequels and analyze whether they live up to their original works. First we begin by taking a look at the distribution of series lengths to show how many books typically make up a series. 
