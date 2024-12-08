@@ -32,7 +32,7 @@ series_length <- sequel |>
   count(max_series_number, name = "n_series")
 
 #Create barplot showing distribution of series lengths
-ggplot(series_length, aes(x = max_series_number, y = n_series, fill = n_series)) +
+series_distributions <- ggplot(series_length, aes(x = max_series_number, y = n_series, fill = n_series)) +
   geom_bar(stat = "identity", show.legend = FALSE) +
   labs(
     x = "Series Length (Number of Books)",
@@ -49,6 +49,10 @@ ggplot(series_length, aes(x = max_series_number, y = n_series, fill = n_series))
     axis.title = element_text(size = 14, face = "bold"), 
     panel.grid.major.y = element_blank() 
   )
+
+series_distributions
+
+ggsave("report visualizations/series_distributions_bargraph.png", series_distributions, width = 8, height = 5)
 ```
 
 + Based on the graph, we see that a majority of series consist of 1 book, with the next largest groups being sequels and triologies. 
@@ -66,7 +70,7 @@ sequel_data <- sequel |>
   filter(series_number %in% c(1, 2))
 
 #Boxplot of average ratings of first vs second book
-ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = factor(series_number))) +
+avg_rating_plot <- ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = factor(series_number))) +
   geom_boxplot(show.legend = FALSE) +
   coord_cartesian(ylim = c(3, 5)) +
   labs(title = "Average Ratings of First vs. Second Book", x = "Book in Series", y = "Average Rating") +
@@ -79,6 +83,10 @@ ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = f
     axis.title = element_text(size = 14, face = "bold"), 
     panel.grid.major.y = element_blank()
   ) 
+
+avg_rating_plot
+
+ggsave("report visualizations/avg_rating_boxplot.png", avg_rating_plot, width = 8, height = 5)
 ```
 
 - Based off of average ratings, good reads users generally rate the sequel higher than the original book.
@@ -88,15 +96,15 @@ ggplot(sequel_data, aes(x = factor(series_number), y = average_rating, color = f
 While the visualizations suggest that sequels may outperform the original book in terms of average ratings, let's apply statistical techniques to formally test this hypothesis. Given the relatively normal distribution of ratings for the first and second books, we move forward with a t-test. 
 
 ```{r, include = FALSE}
-sequel_data |>
+rating_distributions <- sequel_data |>
   ggplot(aes(x = average_rating, fill = factor(series_number))) +
   geom_histogram(alpha = 0.5, position = "identity") +
   facet_wrap(~ series_number) +
   labs(title = "Distribution of Ratings for First and Second Books")
 
-# Shapiro's test to formally check normality
-shapiro_test_first_book <- shapiro.test(subset(sequel_data, series_number == 1)$average_rating)
-shapiro_test_second_book <- shapiro.test(subset(sequel_data, series_number == 2)$average_rating)
+rating_distributions
+
+ggsave("report visualizations/rating_distributions_histogram.png", rating_distributions, width = 8, height = 5)
 ```
 
 
