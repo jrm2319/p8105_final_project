@@ -10,17 +10,17 @@ navbar:
     - text: "Descriptive Analyses"
       menu:
         - text: "Most Read Authors"
-          href: HTMLs/most_read_authors.html     
+          href: most_read_authors.html    
         - text: "Least Read Authors"
-          href: HTMLs/least_read_authors.html
+          href: least_read_authors.html
         - text: "Popular Authors"
-          href: HTMLs/popular_authors.html
+          href: popular_authors.html
         - text: "Most to Least Read Genres"
-          href: HTMLs/genres.html
+          href: genres.html
         - text: "Top Users by Ratings"
-          href: HTMLs/top_users.html
+          href: top_users.html
         - text: "Top Users by Most To-Read"
-          href: HTMLs/top_users_to_read.html
+          href: top_users_to_read.html
     - text: "Recommendations"
       href: reccomendations.html
     - icon: fa-github fa-lg
