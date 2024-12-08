@@ -1,0 +1,10 @@
+name: reccomendations
+title:
+username: sreza13-p8105
+account: sreza13-p8105
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 13549972
+bundleId: 9481406
+url: https://sreza13-p8105.shinyapps.io/reccomendations/
+version: 1
