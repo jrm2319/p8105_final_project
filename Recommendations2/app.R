@@ -5,6 +5,7 @@ library(bslib)
 library(dplyr)
 library(readr)
 library(rsconnect)
+library(shinythemes)
 
 books_rate <- read_csv("books_rate.csv")
 
@@ -12,7 +13,7 @@ authors <- unique(books_rate$authors)
 
 
 ui <- fluidPage(
-  
+  theme = shinytheme("yeti"),
   titlePanel("Welcome to Our Recommendations Page!"), 
   
   p("Looking for a new romance book? Want to get into some classics? Looking to read another book by your favorite author? Fear not! You can find book recommendations right here. Search by your favorite author or genre and your preferred rating.
