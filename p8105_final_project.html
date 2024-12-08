@@ -11,7 +11,7 @@
 
 
 
-<title>Welcome to our Recommendations Page!</title>
+<title>p8105_final_project</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -32,8 +32,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -300,180 +298,95 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div id="section-header">
+<div id="header">
 
 
 
-<h1 class="title toc-ignore">Welcome to our Recommendations Page!</h1>
 
 </div>
 
 
-<p>Looking for a new romance book? Want to get into some classics?
-Looking to read another book by your favorite author? Fear not! You can
-find book recommendations right here. Search by your favorite author or
-genre and your preferred rating.</p>
-<p>Have fun reading!</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ─────────────────
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
-## ── Conflicts ──────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(shiny)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;shiny&#39;
-## 
-## The following object is masked _by_ &#39;.GlobalEnv&#39;:
-## 
-##     tags</code></pre>
-<pre class="r"><code>library(bslib)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;bslib&#39;
-## 
-## The following object is masked from &#39;package:utils&#39;:
-## 
-##     page</code></pre>
-<pre class="r"><code>library(dplyr)
-
-knitr::opts_chunk$set(echo = TRUE)</code></pre>
-<pre class="r"><code>books = read_csv(&quot;./Data/books_with_tags.csv&quot;)</code></pre>
-<pre><code>## Rows: 9300 Columns: 20
-## ── Column specification ──────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr  (9): isbn, authors, title, image_url, top_1, top_2, top_3, top_4, top_5
-## dbl (11): book_id, goodreads_book_id, average_rating, ratings_count, work_ra...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>books_clean = books |&gt; 
-  select(-isbn,-ratings_count,-work_ratings_count,-work_text_reviews_count)
-
-books_rate &lt;- books_clean |&gt;
-  mutate(average_rating = round(average_rating*2)/2)</code></pre>
-<pre class="r"><code>authors &lt;- unique(books_rate$authors)
-
-ui &lt;- fluidPage(
-  
-  selectInput(&quot;search_by&quot;, 
-              label = &quot;Search by:&quot;, 
-              choices = c(&quot;Select&quot;, &quot;Author&quot;, &quot;Genre&quot;)),
-
-  conditionalPanel(
-    condition = &quot;input.search_by == &#39;Author&#39;&quot;,
-    selectizeInput(&quot;authors&quot;, 
-                   label = &quot;Start typing an author&#39;s name:&quot;, 
-                   choices = authors, 
-                   options = list(
-                     placeholder = &#39;Select an author...&#39;,
-                     create = FALSE, 
-                     maxItems = 1,
-                     highlight = TRUE))
-  ),
-
-  conditionalPanel(
-    condition = &quot;input.search_by == &#39;Genre&#39;&quot;,
-    selectInput(&quot;search_genre&quot;, 
-                label = &quot;Choose Genre(s):&quot;, 
-                choices = unique(c(books_rate$top_1, books_rate$top_2, books_rate$top_3, books_rate$top_4, books_rate$top_5)), 
-                multiple = TRUE)  
-  ),
-  
-  conditionalPanel( 
-    condition = &quot;input.search_by == &#39;Genre&#39; || input.search_by == &#39;Author&#39;&quot;,
-    selectInput(&quot;average_rating&quot;, 
-                label = &quot;Choose Rating:&quot;, 
-                choices = unique(books_rate$average_rating), 
-                selected = NULL)
-  ),
-  
-  actionButton(&quot;recommend&quot;, &quot;Get Recommendations&quot;),
-  
-  h3(&quot;Your Recommended Books:&quot;),
-  uiOutput(&quot;book_list&quot;)
-)</code></pre>
-<pre><code>## Warning: The select input &quot;authors&quot; contains a large number of options;
-## consider using server-side selectize for massively improved performance. See
-## the Details section of the ?selectizeInput help topic.</code></pre>
-<pre><code>## Warning: The select input &quot;search_genre&quot; contains a large number of options;
-## consider using server-side selectize for massively improved performance. See
-## the Details section of the ?selectizeInput help topic.</code></pre>
-<pre class="r"><code>server &lt;- function(input, output, session) {
-  
-  filtered_books &lt;- reactive({
-    booktok &lt;- books_rate
-    
-    if (length(input$search_genre) &gt; 0) {
-      booktok &lt;- booktok %&gt;%
-        filter(
-          top_1 %in% input$search_genre | 
-          top_2 %in% input$search_genre | 
-          top_3 %in% input$search_genre | 
-          top_4 %in% input$search_genre | 
-          top_5 %in% input$search_genre
-        )
-    }
-    
-    if (input$search_by == &quot;Author&quot; &amp;&amp; input$authors != &quot;&quot;) {
-      booktok &lt;- booktok %&gt;% filter(authors == input$authors)
-    }
-    
-    
-    if (!is.null(input$average_rating) &amp;&amp; input$average_rating != &quot;&quot;) {
-      booktok &lt;- booktok %&gt;% filter(average_rating == as.numeric(input$average_rating))
-    }
-    
-    booktok %&gt;% distinct(title, .keep_all = TRUE)
-  })
-  
-  observeEvent(input$recommend, {
-    output$book_list &lt;- renderUI({
-      booktok &lt;- filtered_books()
-       
-      if (nrow(booktok) &lt; 5 &amp;&amp; !is.null(input$average_rating)) { 
-        selected_rating &lt;- as.numeric(input$average_rating)
-        
-        lower_rating_books &lt;- books_rate %&gt;% 
-          filter(average_rating == (selected_rating - 1)) %&gt;% 
-          distinct(title, .keep_all = TRUE)
-        
-        # Only bind rows if there are books with lower rating
-        if (nrow(lower_rating_books) &gt; 0) {
-          booktok &lt;- bind_rows(booktok, lower_rating_books)
-        }
-      }
-      
-      books_to_show &lt;- head(booktok, 5)
-      
-        if (nrow(books_to_show) &gt; 0) {
-        tagList(
-          lapply(1:nrow(books_to_show), function(i) {
-            lower_rated &lt;- books_to_show$average_rating[i] &lt; as.numeric(input$average_rating)
-            
-            div(
-              img(src = books_to_show$image_url[i], width = &quot;250px&quot;, height = &quot;300px&quot;),  
-              strong(books_to_show$title[i]), 
-              if (lower_rated) {
-                span(style = &quot;color: brown; font-weight: bold;&quot;, &quot;(Rated Below Your Selection)&quot;)
-              },
-              p(paste(&quot;Rating:&quot;, books_to_show$average_rating[i]))
-            )
-          })
-        )
-      } else {
-        p(&quot;No books found based on your selection.&quot;)
-      }
-    })
-  })
-}
-
-shinyApp(ui = ui, server = server)</code></pre>
-<iframe data-deferred-src="app8b2faab51dc393fbee0cf3f14e453594/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe>
+<div id="p8105-final-project" class="section level1">
+<h1>P8105 Final Project</h1>
+<p>2024-11-04</p>
+<p>Authors: Jasmin Martinez (jrm2319), Samiha Reza (sr4081), Kamiah
+Brown (kab2310), Erynne Jackson (ej2520), Elliot Kim (ek3376)</p>
+<div id="tentative-project-title-to-be-read-or-not-to-be-read"
+class="section level2">
+<h2><strong>Tentative Project Title: To Be Read or Not To Be
+Read</strong></h2>
+<div id="the-motivation-for-this-project" class="section level3">
+<h3><strong>The motivation for this project</strong>:</h3>
+<p>For this project, we would like to better understand reader’s genre
+and author preferences in the United States. By identifying which genres
+and authors are most and less read, as well as frequently kept/unkept,
+we can gain insights into trends of literary engagement. This
+information could provide publishers, authors, and libraries insight
+into tailoring their offerings to meet reader’s demand and promoting
+less-read genres. Understanding popular genres and authors can also help
+explore cultural trends that resonate with the general public while
+identifying lesser-read genres to create opportunities for
+re-engagement.</p>
+</div>
+<div id="the-intended-final-products" class="section level3">
+<h3><strong>The intended final products</strong>:</h3>
+<p>Website with the following tabs: About Analysis Dashboard Report –
+Hypothesis Testing Results Recommendations page</p>
+<p><strong>The tentative project Title</strong>: To Be Read or Not To Be
+Read</p>
+<p><strong>The motivation for this project</strong>: For this project,
+we would like to better understand reader’s genre and author preferences
+in the United States. By identifying which genres and authors are most
+and less read, as well as frequently kept/unkept, we can gain insights
+into trends of literary engagement. This information could provide
+publishers, authors, and libraries insight into tailoring their
+offerings to meet reader’s demand and promoting less-read genres.
+Understanding popular genres and authors can also help explore cultural
+trends that resonate with the general public while identifying
+lesser-read genres to create opportunities for re-engagement.</p>
+<p><strong>The intended final products</strong>:</p>
+<p>A Website with:</p>
+<ul>
+<li><p>About</p></li>
+<li><p>Analysis</p></li>
+<li><p>Dashboard</p></li>
+<li><p>Report – Hypothesis Testing Results</p></li>
+<li><p>Recommendations page</p></li>
+</ul>
+</div>
+<div id="the-anticipated-data-sources" class="section level3">
+<h3><strong>The anticipated data sources</strong>:</h3>
+<p>We plan to use open source data from GoodReads: (<a
+href="https://github.com/zygmuntz/goodbooks-10k"
+class="uri">https://github.com/zygmuntz/goodbooks-10k</a>)</p>
+</div>
+<div id="the-planned-analysesvisualizations-coding-challenges"
+class="section level3">
+<h3><strong>The planned analyses/visualizations/ coding
+challenges</strong>:</h3>
+<p>Planned analyses include finding the most read/least read/most
+to-be-read genres, and statistics on the top ten users. Planned
+visualization on types of books, timelines for reading and adding books,
+book ratings, and top ten users. We will use analyses and visualizations
+to create a data-based recommendation list.</p>
+</div>
+<div id="planned-timeline" class="section level3">
+<h3><strong>Planned Timeline</strong>:</h3>
+<p><strong>Nov. 4</strong>: Initial Planning Meeting<br />
+<strong>Nov. 8, 1:00pm</strong>: Submit Proposal<br />
+<strong>Nov 11-18</strong>: Project Review Meeting<br />
+<strong>(Tentative) Nov 18</strong>: Group Check-In #1<br />
+<strong>(Tentative) Nov 25</strong>: Group Check-In #2<br />
+<strong>(Tentative) Dec 2</strong>: Group Check-In #3: Project Draft Due
+(Internal)<br />
+<strong>Dec 2-7</strong>: Edit and Finalize Project<br />
+<strong>Dec 7, 11:59pm</strong>: Submit Report<br />
+<strong>Dec 7, 11:59pm</strong>: Webpage and screencast due<br />
+<strong>Dec 7, 11:59pm</strong>: Peer Assessment due<br />
+<strong>Dec 12</strong>:In-Class Discussion of Projects</p>
+</div>
+</div>
+</div>
 
 
 
@@ -497,7 +410,7 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function () {
-  window.buildTabsets("section-TOC");
+  window.buildTabsets("TOC");
 });
 
 $(document).ready(function () {
