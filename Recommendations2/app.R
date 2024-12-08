@@ -13,6 +13,14 @@ authors <- unique(books_rate$authors)
 
 ui <- fluidPage(
   
+  titlePanel("Welcome to Our Recommendations Page!"), 
+  
+  p("Looking for a new romance book? Want to get into some classics? Looking to read another book by your favorite author? Fear not! You can find book recommendations right here. Search by your favorite author or genre and your preferred rating.
+         
+         
+         Have fun reading!"
+  ),
+  
   selectInput("search_by", 
               label = "Search by:", 
               choices = c("Select", "Author", "Genre")),

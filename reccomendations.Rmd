@@ -1,6 +1,12 @@
 ---
 title: "Welcome to our Recommendations Page!"
 output: 
+<<<<<<< HEAD
+=======
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+>>>>>>> 6d050b49407ae93a7450cbe575d0d2f27338b66e
 runtime: shiny
 ---
 
@@ -10,17 +16,27 @@ Looking for a new romance book? Want to get into some classics? Looking to read 
 Have fun reading!
 
 ```{r}
+
+
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(shiny)
 library(bslib)
 library(dplyr)
+<<<<<<< HEAD
 library(rsconnet)
 
 knitr::opts_chunk$set(echo = TRUE)
+=======
+library(rmarkdown)
+
+>>>>>>> 6d050b49407ae93a7450cbe575d0d2f27338b66e
 
 ```
 
+
+Column {data-width=650}
+-----------------------------------------------------------------------
 ```{r, warning=FALSE}
 
 books = read_csv("books_with_tags.csv")
@@ -149,6 +165,11 @@ server <- function(input, output, session) {
 
 shinyApp(ui = ui, server = server)
 
+<<<<<<< HEAD
 
 ```
 
+=======
+
+```
+>>>>>>> 6d050b49407ae93a7450cbe575d0d2f27338b66e
