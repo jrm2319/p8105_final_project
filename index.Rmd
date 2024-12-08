@@ -66,18 +66,16 @@ For the top 15 users by number of to-read, all of the books each of the selected
 
 To investigate whether sequels are worth the read, we start by assessing the distribution of series lengths with a bar plot. We utilized data from the *books_with_tags.csv* dataset and conducted a string extraction to identify information on the order of books within a series and series name, creating the variables **series_number** and **series_name**. We also created a series length variable by finding the maximum of the series_number variable. These variables were created in a new dataset called sequels. We plotted the distribution of series length on a barplot and found that the majority of series are one book, with the next largest groups being sequels and trilogies. 
 
-![Boxplot of Series Distributions](report visualizations/series_distributions_bargraph.png)
+![](report visualizations/series_distributions_bargraph.png)
 
-We then filtered the sequels dataset to look at the average ratings of the first two books of each series. To explore whether sequels are rated higher than their original books, we used a box plot to visualize the comparison between the average ratings of the first and second books in a series. This box plot showed that the median rating for sequels is slightly higher than that of the first book. 
+We then filtered the sequels dataset to look at the average ratings of the first two books of each series. To explore whether sequels are rated higher than their original books, we used a box plot to visualize the comparison between the average ratings of the first and second books in a series. This box plot showed that the median average rating for sequels is slightly higher than that of the first book. 
 
-![]
+![](report visualizations/avg_rating_boxplot.png)
 
 Next, to formally test whether sequels are rated higher than their original works using statistical methods, we conducted an independent two sample t-test comparing the average ratings of the first and second books. We assessed normality using the box plots and found that the distribution of average ratings appeared to be normal in both the first and second books. The null and alternative hypotheses for the test are as follows:
 
 - Null hypothesis: The mean average rating of first books is equal to the mean average rating of second books.
 - Alternative hypothesis: The mean average rating of first books is not equal to the mean average rating of second books.
-
-[insert t test table]
 
 The t-test results showed a p-value < 0.05, indicating a statistically significant difference between the two book groups. On average, the sequel is rated 0.094 stars higher than the first books (95% CI: 0.023, 0.165). These results support the hypothesis that on average, sequels are better well-received than their original works by good reads users. 
 
@@ -91,13 +89,24 @@ After some descriptive analysis, we found that the most popular tag is “fictio
 
 We grouped the data by tag value and then calculated the number of occurrences for each tag. We then sorted the tags by count in descending order and selected the top 10 most popular tags. A bar plot was created to display the top 10 genres based on tags. The 10 most popular genres read, in order, are: Young Adult, Fantasy, Romance, Science Fiction, Children, Mystery, Classics, Historical Fiction, Contemporary, and Thriller. 
 
+![](report visualizations/most_pop_genres.png)
+
 A similar process as above was used to identify the 10 least popular genres. We found there was a substantial number of tags that were only used once, twice, or three times but this information was not useful when presented on a bar graph. Therefore, we decided to exclude all tags that have a tag count of less than 100. A cut off tag count of 100 was used because we wanted to focus on tags that have a moderate level of user engagement. By using a threshold of 100 for tag count, the analysis ensures that the least popular genres identified still have sufficient user recognition and can represent meaningful patterns in the data.  The 10 least popular genres read, in order, are: Manga, Adult Fiction, Religion, Art, War, Memoirs, IGBTQ, Poetry, Drama, and Middle Grade.
+
+![](report visualizations/least_popular_genre.png)
 
 #### **What are the top 10 most and least popular genres, among to-be-read books?**
 
 For the most and least popular to-be-read genre analysis, we merged the *to_read.csv* and *books_with_tags.csv* datasets on **book_id** using an inner join, to create *to_read_with_tags.csv*. We created a single column/variable for tags and removed fiction and non-fiction tags, as done in the previous analysis. 
 
-The same process was followed, as described above, to identify the 10 most popular and 10 least popular genres, among to-be-read books. The 10 most popular genres to-be-read, in order, are: Young Adult, Fantasy, Romance, Science Fiction, Children, Mystery, Classics, Historical Fiction, Contemporary, and Thriller. The 10 least popular genres read, in order, are: Manga, Adult Fiction, Religion, Art, War, Memoirs, IGBTQ, Poetry, Drama, and Middle Grade. 
+The same process was followed, as described above, to identify the 10 most popular and 10 least popular genres, among to-be-read books. The 10 most popular genres to-be-read, in order, are: Young Adult, Fantasy, Romance, Science Fiction, Children, Mystery, Classics, Historical Fiction, Contemporary, and Thriller. 
+
+![](report visualizations/most_pop_genre_toread.png)
+
+
+The 10 least popular genres read, in order, are: Manga, Adult Fiction, Religion, Art, War, Memoirs, IGBTQ, Poetry, Drama, and Middle Grade. 
+
+![](report visualizations/least_pop_genre_toread.png)
 
 The rankings were the same for books read and book to-be-read, this was expected since we expect the genres that users are reading to be similar to genres that users are planning to-read.This consistency highlights a strong alignment between what users are reading and what they plan to read, reinforcing the persistence of genre preferences across user behavior.
 
