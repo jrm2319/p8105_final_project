@@ -6,7 +6,7 @@ output: html_document
 *Erynne Jackson (ej2520), Samiha Reza (sr4081), Jasmin Martinez (jrm2319), Kamiah Brown (kab2310), Elliot Kim (ek3376)*
 
 ```{r echo=FALSE}
-knitr::include_url("https://youtu.be/wL9OyhF8ms0")
+knitr::include_url("https://www.youtube.com/embed/wL9OyhF8ms0")
 ```
 
 ### **Motivation**
