@@ -30,3 +30,5 @@ navbar:
 output:
   html_document:
     theme: yeti
+    includes:
+      in_header: "site_libs/bootstrap-3.3.5/css/yeti.min.css"
