@@ -283,7 +283,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li>
-  <a href="https://erynnejackson16.shinyapps.io/Recommendations2">Recommendations</a>
+  <a href="https://erynnejackson16.shinyapps.io/Recommendations2/">Recommendations</a>
 </li>
 <li>
   <a href="https://github.com/jrm2319/p8105_final_project.io.git">
@@ -386,7 +386,7 @@ str(books)</code></pre>
 ##  1st Qu.:   5406   1st Qu.:   5334   Class :character   Class :character  
 ##  Median :   8270   Median :   8836   Mode  :character   Mode  :character  
 ##  Mean   :  19966   Mean   :  23790                                        
-##  3rd Qu.:  16024   3rd Qu.:  17305                                        
+##  3rd Qu.:  16024   3rd Qu.:  17304                                        
 ##  Max.   :1481305   Max.   :3011543                                        
 ## </code></pre>
 <div id="summarizing-read-counts-by-author" class="section level2">
@@ -414,14 +414,14 @@ head(most_read_authors, 50)</code></pre>
 ##  9 Nicholas Sparks                   4501871        19
 ## 10 John Green                        4312589         4
 ## # ℹ 40 more rows</code></pre>
-<pre class="r"><code>most_read_authors = ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
+<pre class="r"><code>ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = &quot;identity&quot;, aes(fill = total_ratings), show.legend = FALSE) +
   labs(
     title = &quot;Top 10 Most Read Authors&quot;,
     x = &quot;Total Ratings Count&quot;,
     y = &quot;Authors&quot;
   ) +
-  scale_fill_gradient(low = &quot;red&quot;, high = &quot;darkred&quot;) + # Gradient color
+  scale_fill_gradient(low = &quot;skyblue&quot;, high = &quot;steelblue&quot;) + # Gradient color
   theme_minimal() +
   theme(
     plot.title = element_text(size = 16, face = &quot;bold&quot;, hjust = 0.5), # Center and bold title
@@ -430,11 +430,8 @@ head(most_read_authors, 50)</code></pre>
     axis.title = element_text(size = 14, face = &quot;bold&quot;), # Bold axis labels
     panel.grid.major.y = element_blank() # Remove y-axis gridlines
   ) +
-  scale_x_continuous(labels = scales::comma)
-
-print(most_read_authors)</code></pre>
+  scale_x_continuous(labels = scales::comma)</code></pre>
 <p><img src="authors_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code>ggsave(&quot;report visualizations/most_read_authors.png&quot;, plot = most_read_authors, width = 10, height = 6)</code></pre>
 </div>
 
 
