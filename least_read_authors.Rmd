@@ -33,7 +33,7 @@ least_read_authors <- books %>%
 ### *Displaying  Top 10 Least Read Authors*
 
 ```{r Dislaying Top 10 Least Read Authors, echo=FALSE}
-ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
+least_read_authors_graph = ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = "identity", aes(fill = total_ratings), show.legend = FALSE) +
   labs(
     title = "Top 10 Least Read Authors by Ratings",
@@ -50,6 +50,10 @@ ggplot(head(least_read_authors, 10), aes(x = total_ratings, y = reorder(authors,
     panel.grid.major.y = element_blank() 
   ) +
   scale_x_continuous(labels = scales::comma)
+
+print(least_read_authors_graph)
+
+ggsave("report visualizations/least_read_authors.png", plot = least_read_authors_graph, width = 10, height = 6)
 ```
 
 **Top 10 Least Read Authors**

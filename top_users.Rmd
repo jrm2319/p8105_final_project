@@ -65,7 +65,7 @@ over_avg_rat <-ratings %>%
 
 # Overlay density plots
 
-ggplot() +
+density_lot_jm = ggplot() +
   geom_density(data = top_users, aes(x = `Average Rating`, fill = "Top 15 Raters"), alpha = 0.5) +
   geom_density(data = over_avg_rat, aes(x = `Average Rating`, fill = "All Raters"), alpha = 0.5) +
   labs(
@@ -96,6 +96,10 @@ overall_summary <- over_avg_rat %>%
 
 kable(top_15_summary, caption = "Descriptive Statistics for Top 15 Users' Ratings", align = "c")
 kable(overall_summary, caption = "Descriptive Statistics for Overall GoodReads Community's Ratings", align = "c")
+
+print(density_lot_jm)
+
+ggsave("report visualizations/density_lot_jm.png", plot = density_lot_jm, width = 10, height = 6)
 ```
 It looks like the Top 15 raters are on average a little less generous with their scores than the general GoodReads community.
 ```{r, echo = FALSE}

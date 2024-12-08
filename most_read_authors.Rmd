@@ -36,7 +36,7 @@ head(most_read_authors, 50)
 
 ### *Displaying  Top 10 Most Read Authors*
 ```{r Dislaying Top 10 Most Read Authors, echo=FALSE}
-ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
+most_read_authors = ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, total_ratings))) +
   geom_bar(stat = "identity", aes(fill = total_ratings), show.legend = FALSE) +
   labs(
     title = "Top 10 Most Read Authors by Ratings",
@@ -53,6 +53,10 @@ ggplot(head(most_read_authors, 10), aes(x = total_ratings, y = reorder(authors, 
     panel.grid.major.y = element_blank() 
   ) +
   scale_x_continuous(labels = scales::comma)
+
+print(most_read_authors)
+
+ggsave("report visualizations/most_read_authors.png", plot = most_read_authors, width = 10, height = 6)
 ```
 
 **Top 10 Most Read Authors**
