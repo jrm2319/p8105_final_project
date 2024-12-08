@@ -15,6 +15,7 @@ library(tidyverse)
 library(shiny)
 library(bslib)
 library(dplyr)
+library(rmarkdown)
 
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -37,7 +38,7 @@ books_rate <- books_clean |>
 authors <- unique(books_rate$authors)
 
 ui <- fluidPage(
-  
+
   selectInput("search_by", 
               label = "Search by:", 
               choices = c("Select", "Author", "Genre")),
@@ -147,4 +148,11 @@ server <- function(input, output, session) {
 
 shinyApp(ui = ui, server = server)
 
+```
+
+```{r}
+
+output_path <- "C:/Users/jacks/OneDrive/Documents/p8105_final_project/reccomendations.html"
+
+render("reccomendations.Rmd", output_file = output_path)
 ```
