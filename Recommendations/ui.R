@@ -1,49 +1,23 @@
----
-title: "Welcome to our Recommendations Page!"
-output: 
-runtime: shiny
----
-
-Looking for a new romance book? Want to get into some classics? Looking to read another book by your favorite author? Fear not! You can find book recommendations right here. Search by your favorite author or genre and your preferred rating.
 
 
-Have fun reading!
-
-```{r}
-knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
 library(shiny)
+library(tidyverse)
 library(bslib)
 library(dplyr)
-library(rsconnet)
+library(readr)
+library(rsconnect)
 
-knitr::opts_chunk$set(echo = TRUE)
+books_rate <- read_csv("books_rate.csv")
 
-```
-
-```{r, warning=FALSE}
-
-books = read_csv("books_with_tags.csv")
-
-books_clean = books |> 
-  select(-isbn,-ratings_count,-work_ratings_count,-work_text_reviews_count)
-
-books_rate <- books_clean |>
-  mutate(average_rating = round(average_rating*2)/2)
-
-```
-
-
-```{r}
 authors <- unique(books_rate$authors)
 
 
-ui <- fluidPage(
-
+fluidPage(
+  
   selectInput("search_by", 
               label = "Search by:", 
               choices = c("Select", "Author", "Genre")),
-
+  
   conditionalPanel(
     condition = "input.search_by == 'Author'",
     selectizeInput("authors", 
@@ -55,7 +29,7 @@ ui <- fluidPage(
                      maxItems = 1,
                      highlight = TRUE))
   ),
-
+  
   conditionalPanel(
     condition = "input.search_by == 'Genre'",
     selectInput("search_genre", 
@@ -87,10 +61,10 @@ server <- function(input, output, session) {
       booktok <- booktok %>%
         filter(
           top_1 %in% input$search_genre | 
-          top_2 %in% input$search_genre | 
-          top_3 %in% input$search_genre | 
-          top_4 %in% input$search_genre | 
-          top_5 %in% input$search_genre
+            top_2 %in% input$search_genre | 
+            top_3 %in% input$search_genre | 
+            top_4 %in% input$search_genre | 
+            top_5 %in% input$search_genre
         )
     }
     
@@ -109,7 +83,7 @@ server <- function(input, output, session) {
   observeEvent(input$recommend, {
     output$book_list <- renderUI({
       booktok <- filtered_books()
-       
+      
       if (nrow(booktok) < 5 && !is.null(input$average_rating)) { 
         selected_rating <- as.numeric(input$average_rating)
         
@@ -125,7 +99,7 @@ server <- function(input, output, session) {
       
       books_to_show <- head(booktok, 5)
       
-        if (nrow(books_to_show) > 0) {
+      if (nrow(books_to_show) > 0) {
         tagList(
           lapply(1:nrow(books_to_show), function(i) {
             lower_rated <- books_to_show$average_rating[i] < as.numeric(input$average_rating)
@@ -148,7 +122,4 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui = ui, server = server)
-
-
-```
 

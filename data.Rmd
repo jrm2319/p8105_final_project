@@ -175,3 +175,19 @@ books_with_tags <- left_join(book_data_complete, pivoted_data, by = c("goodreads
 
 write.csv(books_with_tags, "books_with_tags.csv", row.names = FALSE)
 ```
+
+
+```{r}
+
+
+books = read_csv("books_with_tags.csv")
+
+books_clean = books |> 
+  select(-isbn,-ratings_count,-work_ratings_count,-work_text_reviews_count)
+
+books_rate <- books_clean |>
+  mutate(average_rating = round(average_rating*2)/2)
+
+write.csv(books_rate, "books_rate.csv", row.names = FALSE)
+```
+```
