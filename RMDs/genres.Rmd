@@ -7,7 +7,7 @@ output: html_document
 Here is a sample of the data after cleaning: 
 ```{r include=FALSE}
 library(readr)
-genre_data = read_csv ("books_with_tags.csv", show_col_types = FALSE)
+genre_data = read_csv ("../Data/books_with_tags.csv", show_col_types = FALSE)
 ```
 
 ```{r include=FALSE}
@@ -33,7 +33,7 @@ genre_data_longer %>%
 ## DATA: Most and Least Popular Genres To-Be-Read  
 Here is the sample of the data, after cleaning: 
 ```{r include=FALSE}
-to_read = read_csv ("to_read.csv", show_col_types = FALSE)
+to_read = read_csv ("../Data/to_read.csv", show_col_types = FALSE)
 to_read %>% 
   head(10) %>% 
   knitr::kable(digits = 3)
